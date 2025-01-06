@@ -1903,6 +1903,33 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 					String m = intent.getStringExtra("update");
 					if (m.equals("on-prepared")) {
                         _CoreProgressLoading(false);
+                        zz.setPlaying(true);
+                    } else if (m.equals("on-tick")) {
+
+                    } else if (m.equals("on-completion")) {
+
+                    } else if (m.equals("on-error")) {
+
+                    } else if (m.equals("on-seekerror")) {
+
+                    } else if (m.equals("on-initialized")) {
+
+                    } else if (m.equals("on-bufferupdate")) {
+
+                    } else if (m.equals("request-play")) {
+
+                    } else if (m.equals("request-pause")) {
+
+                    } else if (m.equals("request-resume")) {
+
+                    } else if (m.equals("request-stop")) {
+
+                    } else if (m.equals("request-seek")) {
+
+                    } else if (m.equals("request-restart")) {
+
+                    } else if (m.equals("request-reset")) {
+                        
                     }
 				}
 			}
