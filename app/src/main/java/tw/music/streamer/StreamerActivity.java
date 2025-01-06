@@ -1905,29 +1905,28 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                         _CoreProgressLoading(false);
                         zz.setPlaying(true);
                     } else if (m.equals("on-tick")) {
-
+                        zz.setCurrentDuration(intent.getIntExtra("data"));
                     } else if (m.equals("on-completion")) {
-
+                        zz.setPlaying(false);
                     } else if (m.equals("on-error")) {
-
+                        zz.addError(intent.getStringExtra("data"));
                     } else if (m.equals("on-seekerror")) {
 
                     } else if (m.equals("on-initialized")) {
 
                     } else if (m.equals("on-bufferupdate")) {
-
+                        zz.setBufferingUpdate(intent.getIntExtra("data"));
                     } else if (m.equals("request-play")) {
-
                     } else if (m.equals("request-pause")) {
-
+                        zz.setPlaying(false);
                     } else if (m.equals("request-resume")) {
-
+                        zz.setPlaying(true);
                     } else if (m.equals("request-stop")) {
-
+                        zz.setPlaying(false);
                     } else if (m.equals("request-seek")) {
-
+                        zz.setCurrentDuration(intent.getIntExtra("data")/1000);
                     } else if (m.equals("request-restart")) {
-
+                        zz.setCurrentDuration(0);
                     } else if (m.equals("request-reset")) {
                         
                     }

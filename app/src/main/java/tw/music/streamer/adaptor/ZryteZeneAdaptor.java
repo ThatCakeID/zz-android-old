@@ -9,17 +9,29 @@ import tw.music.streamer.service.ZryteZenePlay;
 
 public class ZryteZeneAdaptor {
 
-    private boolean isr, isp;
-    private int cd, bu;
+    private boolean isr, isp, isi;
+    private int cd, bu, d;
     private ArrayList<String> e;
     private Context ctx;
+    private String sp, n;
 
     public ZryteZeneAdaptor(Context a) {
         isr = false;
         isp = false;
+        isi = false;
         cd = 0;
+        d = 0;
+        bu = 0;
         e = new ArrayList<>();
         ctx = a;
+    }
+
+    public void setInitialized(boolean a) {
+        isi = a;
+    }
+
+    public boolean isInitialized() {
+        return isi;
     }
 
     public void setRunning(boolean a) {
@@ -44,6 +56,14 @@ public class ZryteZeneAdaptor {
 
     public int getCurrentDuration() {
         return cd;
+    }
+
+    public void setDuration(int a) {
+        d = a;
+    }
+
+    public int getDuration() {
+        return d;
     }
 
     public void setBufferingUpdate(int a) {
@@ -80,5 +100,6 @@ public class ZryteZeneAdaptor {
         jof.putExtra("action", a);
         jof.putExtra("req-data", b);
         ctx.sendBroadcast(jof);
+        if (a.equals("play")) sp = b;
     }
 }
