@@ -814,12 +814,11 @@ public class StreamerActivity extends AppCompatActivity {
         image_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View _view) {
-                /*if (tmservice._isPlaying()) {
-                    tmservice._mpPause();
-                    tmservice._removeFocus();
+                if (zz.isPlaying()) {
+                    zz.requestAction("pause");
                 } else {
-                    tmservice._requestFocus();
-                }*/
+                    zz.requestAction("resume");
+                }
             }
         });
 
@@ -1904,16 +1903,21 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 					if (m.equals("on-prepared")) {
                         _CoreProgressLoading(false);
                         zz.setPlaying(true);
+                        zz.setCurrentDuration(0);
+                        zz.setDuration(intent.getIntExtra("data")/1000);
+                        seekbar1.setProgress(0);
+                        seekbar1.setMax(zz.getDuration());
+                        _showPlayer();
+                    } else if (m.equals("on-reqmedia")) {
                     } else if (m.equals("on-tick")) {
                         zz.setCurrentDuration(intent.getIntExtra("data"));
+                        seekbar1.setProgress(zz.getCurrentDuration());
                     } else if (m.equals("on-completion")) {
                         zz.setPlaying(false);
                     } else if (m.equals("on-error")) {
                         zz.addError(intent.getStringExtra("data"));
                     } else if (m.equals("on-seekerror")) {
-
                     } else if (m.equals("on-initialized")) {
-
                     } else if (m.equals("on-bufferupdate")) {
                         zz.setBufferingUpdate(intent.getIntExtra("data"));
                     } else if (m.equals("request-play")) {
@@ -1928,7 +1932,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     } else if (m.equals("request-restart")) {
                         zz.setCurrentDuration(0);
                     } else if (m.equals("request-reset")) {
-                        
                     }
 				}
 			}
