@@ -1824,38 +1824,29 @@ public class StreamerActivity extends AppCompatActivity {
         }
         text_playlist.setVisibility(View.GONE);
         edittext_search.setVisibility(View.GONE);
-        text_zryte.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_zene.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-        text_playlist.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_data.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_artist.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_current.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        text_duration.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        edittext_search.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        _drawer_text_zryte.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_zene.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-
-        _drawer_text_user.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_email.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_upload.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_theme.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_themesstr.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_info.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_logcat.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_discord.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_daedit.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-
-        _drawer_text_settings.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
+        Typeface tsans = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
+        Typeface tbold = Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf");
+        text_zryte.setTypeface(tsans, 0);
+        text_zene.setTypeface(tbold, 0);
+        text_playlist.setTypeface(tsans, 0);
+        text_data.setTypeface(tsans, 0);
+        text_title.setTypeface(tsans, 0);
+        text_artist.setTypeface(tsans, 0);
+        text_current.setTypeface(tsans, 0);
+        text_duration.setTypeface(tsans, 0);
+        edittext_search.setTypeface(tsans, 0);
+        _drawer_text_zryte.setTypeface(tsans, 0);
+        _drawer_text_zene.setTypeface(tbold, 0);
+        _drawer_text_user.setTypeface(tsans, 0);
+        _drawer_text_email.setTypeface(tsans, 0);
+        _drawer_text_upload.setTypeface(tsans, 0);
+        _drawer_text_theme.setTypeface(tsans, 0);
+        _drawer_text_themesstr.setTypeface(tsans, 0);
+        _drawer_text_info.setTypeface(tsans, 0);
+        _drawer_text_logcat.setTypeface(tsans, 0);
+        _drawer_text_discord.setTypeface(tsans, 0);
+        _drawer_text_daedit.setTypeface(tsans, 0);
+        _drawer_text_settings.setTypeface(tsans, 0);
         if (data.getString("taptarget", "").equals("1")) {
             _NewTapTarget(image_user, "Account", "Click here or by clicking account information on the drawer for accessing your account info & settings", "#2196F3");
         } else {
