@@ -1826,10 +1826,10 @@ public class StreamerActivity extends AppCompatActivity {
         _drawer_text_daedit.setTypeface(tsans, 0);
         _drawer_text_settings.setTypeface(tsans, 0);
         if (data.getString("taptarget", "").equals("1")) {
-            _NewTapTarget(image_user, "Account", "Click here or by clicking account information on the drawer for accessing your account info & settings", "#2196F3");
+            //_NewTapTarget(image_user, "Account", "Click here or by clicking account information on the drawer for accessing your account info & settings", "#2196F3");
         } else {
             if (!data.getString("taptarget", "").equals("2")) {
-                _NewTapTarget(image_drawer, "Menu", "Click here for accessing some extra menu", "#2196F3");
+                //_NewTapTarget(image_drawer, "Menu", "Click here for accessing some extra menu", "#2196F3");
             }
         }
         if (data.getString("nightcore", "").equals("1")) {
