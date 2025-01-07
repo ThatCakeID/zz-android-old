@@ -77,15 +77,17 @@ public class ZryteZeneNotification {
     	PendingIntent actionPendingIntent;
     	String actionTitle;
     	int actionIcon;
-    	if (isPlaying) {
+    	if (b) {
         	actionIntent = new Intent(a, ZryteZenePlay.class);
-        	actionIntent.setAction(ZryteZenePlay.ACTION_PAUSE);
+        	actionIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
+			actionIntent.putExtra("action","pause")
         	actionPendingIntent = PendingIntent.getService(a, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         	actionTitle = "Pause";
         	actionIcon = android.R.drawable.ic_media_pause;
     	} else {
         	actionIntent = new Intent(a, ZryteZenePlay.class);
-        	actionIntent.setAction(ZryteZenePlay.ACTION_RESUME);
+        	actionIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
+			actionIntent.putExtra("action","resume");
         	actionPendingIntent = PendingIntent.getService(a, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         	actionTitle = "Resume";
         	actionIcon = android.R.drawable.ic_media_play;
