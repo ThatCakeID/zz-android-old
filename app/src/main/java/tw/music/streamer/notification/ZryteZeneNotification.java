@@ -69,5 +69,38 @@ public class ZryteZeneNotification {
 		}
 		notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, notification);
 	}
+
+	public static void update(Context a, boolean b) {
+		NotificationManager notificationManager = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
+    	if (notificationManager == null) return;
+    	Intent actionIntent;
+    	PendingIntent actionPendingIntent;
+    	String actionTitle;
+    	int actionIcon;
+    	if (isPlaying) {
+        	actionIntent = new Intent(a, ZryteZenePlay.class);
+        	actionIntent.setAction(ZryteZenePlay.ACTION_PAUSE);
+        	actionPendingIntent = PendingIntent.getService(a, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        	actionTitle = "Pause";
+        	actionIcon = android.R.drawable.ic_media_pause;
+    	} else {
+        	actionIntent = new Intent(a, ZryteZenePlay.class);
+        	actionIntent.setAction(ZryteZenePlay.ACTION_RESUME);
+        	actionPendingIntent = PendingIntent.getService(a, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        	actionTitle = "Resume";
+        	actionIcon = android.R.drawable.ic_media_play;
+    	}
+    	Intent openAppIntent = new Intent(a, StreamerActivity.class);
+    	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    	Notification updatedNotification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
+            .setContentTitle("ZryteZene")
+            .setContentText(b ? "Music is playing" : "Paused")
+            .setSmallIcon(android.R.drawable.ic_media_play)
+            .setContentIntent(openAppPendingIntent)
+            .addAction(actionIcon, actionTitle, actionPendingIntent)
+            .setOngoing(isPlaying)
+            .build();
+    	notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, updatedNotification);
+	}
 	
 }
