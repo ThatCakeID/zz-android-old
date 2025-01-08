@@ -97,8 +97,8 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	public void onPrepared(MediaPlayer a) {
 		a.start();
 		pd = true;
-		//ZryteZeneNotification.update(getApplicationContext(), true);
-		//tellActivity("on-prepared",a.getDuration());
+		ZryteZeneNotification.update(getApplicationContext(), true);
+		tellActivity("on-prepared",a.getDuration());
 		ha.post(pr);
 	}
 	
