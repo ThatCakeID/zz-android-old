@@ -80,7 +80,7 @@ public class ZryteZeneNotification {
     	if (b) {
         	actionIntent = new Intent(a, ZryteZenePlay.class);
         	actionIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
-			actionIntent.putExtra("action","pause")
+			actionIntent.putExtra("action","pause");
         	actionPendingIntent = PendingIntent.getService(a, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         	actionTitle = "Pause";
         	actionIcon = android.R.drawable.ic_media_pause;
