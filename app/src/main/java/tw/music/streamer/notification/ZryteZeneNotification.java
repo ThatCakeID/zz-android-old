@@ -100,7 +100,7 @@ public class ZryteZeneNotification {
             .setSmallIcon(android.R.drawable.ic_media_play)
             .setContentIntent(openAppPendingIntent)
             .addAction(actionIcon, actionTitle, actionPendingIntent)
-            .setOngoing(isPlaying)
+            .setOngoing(true)
             .build();
     	notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, updatedNotification);
 	}
