@@ -1870,7 +1870,7 @@ public class StreamerActivity extends AppCompatActivity {
                         _CoreProgressLoading(false);
                         zz.setPlaying(true);
                         zz.setCurrentDuration(0);
-                        zz.setDuration(intent.getIntExtra("data")/1000,0);
+                        zz.setDuration(intent.getIntExtra("data",0)/1000);
                         seekbar1.setProgress(0);
                         seekbar1.setMax(zz.getDuration());
                         _showPlayer();
@@ -1894,7 +1894,7 @@ public class StreamerActivity extends AppCompatActivity {
                     } else if (m.equals("request-stop")) {
                         zz.setPlaying(false);
                     } else if (m.equals("request-seek")) {
-                        zz.setCurrentDuration(intent.getIntExtra("data")/1000,0);
+                        zz.setCurrentDuration(intent.getIntExtra("data",0)/1000);
                     } else if (m.equals("request-restart")) {
                         zz.setCurrentDuration(0);
                     } else if (m.equals("request-reset")) {
