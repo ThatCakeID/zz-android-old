@@ -1877,7 +1877,7 @@ public class StreamerActivity extends AppCompatActivity {
                     } else if (m.equals("on-reqmedia")) {
                     } else if (m.equals("on-tick")) {
                         zz.setCurrentDuration(intent.getIntExtra("data",0));
-                        seekbar1.setProgress(zz.getCurrentDuration());
+                        seekbar1.setProgress(zz.getCurrentDuration()/1000);
                     } else if (m.equals("on-completion")) {
                         zz.setPlaying(false);
                     } else if (m.equals("on-error")) {
