@@ -104,5 +104,38 @@ public class ZryteZeneNotification {
             .build();
     	notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, updatedNotification);
 	}
+
+	public static void updateWithControls(Context a, boolean b) {
+    	NotificationManager notificationManager = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
+    	if (notificationManager == null) return;
+
+    	Intent playPauseIntent = new Intent(a, ZryteZenePlay.class);
+    	playPauseIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
+    	playPauseIntent.putExtra("action", b ? "pause" : "resume");
+    	PendingIntent playPausePendingIntent = PendingIntent.getService(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+    	Intent previousIntent = new Intent(a, ZryteZenePlay.class);
+    	previousIntent.setAction(ZryteZenePlay.ACTION_PREVIOUS);
+    	PendingIntent previousPendingIntent = PendingIntent.getService(a, 1, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+    	Intent nextIntent = new Intent(a, ZryteZenePlay.class);
+    	nextIntent.setAction(ZryteZenePlay.ACTION_NEXT);
+    	PendingIntent nextPendingIntent = PendingIntent.getService(a, 2, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+    	Intent openAppIntent = new Intent(a, StreamerActivity.class);
+    	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+    	Notification updatedNotification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
+        	.setContentTitle("ZryteZene")
+        	.setContentText(b ? "Music is playing" : "Paused")
+        	.setSmallIcon(android.R.drawable.ic_media_play)
+        	.setContentIntent(openAppPendingIntent)
+        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
+        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, b ? "Pause" : "Play", playPausePendingIntent)
+        	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
+        	.setOngoing(true)
+        	.build();
+    	notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, updatedNotification);
+	}
 	
 }
