@@ -1,3 +1,6 @@
 <resources>
 
+    <style name="AppTheme.AppBarOverlay" parent="@android:style/Theme.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="@android:style/Theme.Light"/>
+
 </resources>
