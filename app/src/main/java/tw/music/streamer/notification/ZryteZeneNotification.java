@@ -115,7 +115,7 @@ public class ZryteZeneNotification {
     	PendingIntent playPausePendingIntent = PendingIntent.getService(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
     	Intent previousIntent = new Intent(a, ZryteZenePlay.class);
-    	previousIntent.setAction(ZryteZenePlay.ACTION_BROADCAST;
+    	previousIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
 		previousIntent.putExtra("action", "previous");
     	PendingIntent previousPendingIntent = PendingIntent.getService(a, 1, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
