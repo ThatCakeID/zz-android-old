@@ -3,7 +3,7 @@ package tw.music.streamer;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+public class MainActivity2 extends Activity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
