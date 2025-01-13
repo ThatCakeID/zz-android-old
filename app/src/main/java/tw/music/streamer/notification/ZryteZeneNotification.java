@@ -127,7 +127,7 @@ public class ZryteZeneNotification {
 		Intent stopIntent = new Intent(a, ZryteZenePlay.class);
     	stopIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
 		stopIntent.putExtra("action", "stop");
-    	PendingIntent nextPendingIntent = PendingIntent.getService(a, 2, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    	PendingIntent stopPendingIntent = PendingIntent.getService(a, 2, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
     	Intent openAppIntent = new Intent(a, StreamerActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -139,7 +139,7 @@ public class ZryteZeneNotification {
         	.setContentIntent(openAppPendingIntent)
         	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
         	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, b ? "Pause" : "Play", playPausePendingIntent)
-			.addAction(android.R.drawable.ic_media_stop, "Stop", stopIntent)
+			.addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", stopPendingIntent)
         	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
         	.setOngoing(true)
         	.build();
