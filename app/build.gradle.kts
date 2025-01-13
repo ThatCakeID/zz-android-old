@@ -35,10 +35,6 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
