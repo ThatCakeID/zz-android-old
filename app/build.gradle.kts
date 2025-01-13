@@ -1,57 +1,52 @@
+
 plugins {
-    alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")
+    id("com.android.application")
+    
 }
 
 android {
     namespace = "tw.music.streamer"
-    compileSdk = 34
-
+    compileSdk = 33
+    
     defaultConfig {
         applicationId = "tw.music.streamer"
         minSdk = 27
-        targetSdk = 34
-        versionCode = 28000
-        versionName = "2.8.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+        
+        vectorDrawables { 
+            useSupportLibrary = true
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+
     buildFeatures {
         viewBinding = true
+        
     }
+    
 }
 
 dependencies {
 
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
-    implementation(libs.glide)
-    implementation(libs.gson)
-    implementation(libs.okhttp)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+
+    implementation("androidx.lifecycle:lifecycle-livedata:2.5.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.navigation:navigation-ui:2.5.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.navigation:navigation-fragment:2.5.3")
 }
