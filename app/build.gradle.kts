@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -52,3 +53,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }
+
+apply(plugin = "com.google.gms.google-services")
