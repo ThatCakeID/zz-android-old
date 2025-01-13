@@ -13,7 +13,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        vectorDrawables { 
+        vectorDrawables {
             useSupportLibrary = true
         }
     }
@@ -35,6 +35,11 @@ android {
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -47,6 +52,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation("com.google.firebase:firebase-auth:22.1.1")
-    implementation("com.google.firebase:firebase-database:20.2.3")
+    implementation("com.google.firebase:firebase-database:20.3.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
 }
