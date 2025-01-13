@@ -120,12 +120,12 @@ public class ZryteZeneNotification {
     	PendingIntent previousPendingIntent = PendingIntent.getService(a, 1, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
     	Intent nextIntent = new Intent(a, ZryteZenePlay.class);
-    	nextIntent.setAction(ZryteZenePlay.ACTION_BROADCAST;
+    	nextIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
 		nextIntent.putExtra("action", "forward");
     	PendingIntent nextPendingIntent = PendingIntent.getService(a, 3, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 		Intent stopIntent = new Intent(a, ZryteZenePlay.class);
-    	stopIntent.setAction(ZryteZenePlay.ACTION_BROADCAST;
+    	stopIntent.setAction(ZryteZenePlay.ACTION_BROADCAST);
 		stopIntent.putExtra("action", "stop");
     	PendingIntent nextPendingIntent = PendingIntent.getService(a, 2, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
