@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textview3;
     private ImageView imageview2;
     private TextView textview4;
-
+/*
     private SharedPreferences data;
     private DatabaseReference update_db;// = FirebaseDatabase.getInstance().getReference("update/version");
     private ChildEventListener _update_db_child_listener;
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestNetwork.RequestListener _rn_request_listener;
     private android.content.pm.PackageInfo packageInfo;
     private boolean _isNoInternet = false;
-
+*/
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
