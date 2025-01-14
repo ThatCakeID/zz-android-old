@@ -126,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         //initializeLogic();
     }
 
+    /*
+
     private void initialize(Bundle _savedInstanceState) {
 
         linear1 = findViewById(R.id.linear1);
@@ -820,7 +822,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        _DarkMode();
+        //_DarkMode();
     }
 
     @Override
@@ -1027,6 +1029,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    */
 
     private void _shadow(final View _v, final double _n) {
         _v.setElevation((float) _n);
