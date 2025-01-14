@@ -90,14 +90,14 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		ief = new IntentFilter(ACTION_BROADCAST);
 		registerReceiver(br, ief);
 		applyMediaListener();
-		tellActivity("Initialization completed");
+		tellActivity("on-initialized");
 	}
 	
 	@Override
 	public void onPrepared(MediaPlayer a) {
 		a.start();
 		pd = true;
-		ZryteZeneNotification.update(getApplicationContext(), "Playing music...");
+		ZryteZeneNotification.update(getApplicationContext(), true);
 		tellActivity("on-prepared",a.getDuration());
 		ha.post(pr);
 	}
@@ -179,7 +179,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (mp.isPlaying()) {
 			mp.pause();
-			ZryteZeneNotification.update(getApplicationContext(), "Music paused");
+			ZryteZeneNotification.update(getApplicationContext(), false);
 			tellActivity("request-pause");
 		}
 	}
@@ -188,7 +188,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (isPrepared() && !mp.isPlaying()) {
 			mp.start();
-			ZryteZeneNotification.update(getApplicationContext(), "Playing music...");
+			ZryteZeneNotification.update(getApplicationContext(), true);
 			tellActivity("request-resume");
 		}
 	}

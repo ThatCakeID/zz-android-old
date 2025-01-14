@@ -54,7 +54,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private Timer _timer = new Timer();
-    private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
+    //private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 
     private HashMap<String, Object> map = new HashMap<>();
     private boolean isBanned = false;
@@ -92,25 +92,25 @@ public class MainActivity extends AppCompatActivity {
     private TextView textview4;
 
     private SharedPreferences data;
-    private DatabaseReference update_db = _firebase.getReference("update/version");
+    private DatabaseReference update_db;// = FirebaseDatabase.getInstance().getReference("update/version");
     private ChildEventListener _update_db_child_listener;
     private Intent intent = new Intent();
     private AlertDialog.Builder d;
-    private DatabaseReference profile = _firebase.getReference("profile/text");
+    private DatabaseReference profile;// = FirebaseDatabase.getInstance().getReference("profile/text");
     private ChildEventListener _profile_child_listener;
     private FirebaseAuth Auth;
     private OnCompleteListener<AuthResult> _Auth_create_user_listener;
     private OnCompleteListener<AuthResult> _Auth_sign_in_listener;
     private OnCompleteListener<Void> _Auth_reset_password_listener;
     private Intent activityChanger = new Intent();
-    private DatabaseReference prof_img = _firebase.getReference("profile/image");
+    private DatabaseReference prof_img;// = FirebaseDatabase.getInstance().getReference("profile/image");
     private ChildEventListener _prof_img_child_listener;
     private TimerTask timer;
     private ObjectAnimator objectanim3 = new ObjectAnimator();
     private RequestNetwork internetchecker;
     private RequestNetwork.RequestListener _internetchecker_request_listener;
     private TimerTask delaynointernet;
-    private DatabaseReference prof_bans = _firebase.getReference("profile/bans");
+    private DatabaseReference prof_bans;// = FirebaseDatabase.getInstance().getReference("profile/bans");
     private ChildEventListener _prof_bans_child_listener;
     private RequestNetwork rn;
     private RequestNetwork.RequestListener _rn_request_listener;
@@ -121,10 +121,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.main);
-        com.google.firebase.FirebaseApp.initializeApp(this);
-        initialize(_savedInstanceState);
-        initializeLogic();
+        //com.google.firebase.FirebaseApp.initializeApp(this);
+        //initialize(_savedInstanceState);
+        //initializeLogic();
     }
+
+    /*
 
     private void initialize(Bundle _savedInstanceState) {
 
@@ -791,9 +793,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         _checkCookie();
-		/*
-Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
-*/
     }
 
     private boolean _checkPermission() {
@@ -823,7 +822,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
     @Override
     public void onStart() {
         super.onStart();
-        _DarkMode();
+        //_DarkMode();
     }
 
     @Override
@@ -845,7 +844,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
     }
 
     private void _customNav(final String _color) {
-        //Code From StackOverFlow.com And Converted By TeamWorks DEV
         if (Build.VERSION.SDK_INT >= 21) {
             Window w = this.getWindow();
             w.setNavigationBarColor(Color.parseColor(_color));
@@ -854,15 +852,10 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
 
 
     private void _customSnack(final String _txt, final double _icon) {
-        // Create the Snackbar
         ViewGroup containerLayout = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-
         com.google.android.material.snackbar.Snackbar snackbar = com.google.android.material.snackbar.Snackbar.make(containerLayout, "", com.google.android.material.snackbar.Snackbar.LENGTH_LONG);
-        // Get the Snackbar's layout view
         com.google.android.material.snackbar.Snackbar.SnackbarLayout layout = (com.google.android.material.snackbar.Snackbar.SnackbarLayout) snackbar.getView();
-        // Inflate our custom view
         View snackview = getLayoutInflater().inflate(R.layout.custom_snack, null);
-        // Configure the view
         ImageView image = snackview.findViewById(R.id.imageview);
         if (_icon == 0) {
             image.setImageResource(R.drawable.ic_info_outline_white);
@@ -883,9 +876,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
         text.setTextColor(Color.WHITE);
         text.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
         layout.setPadding(0, 0, 0, 0);
-        // Add the view to the Snackbar's layout
         layout.addView(snackview, 0);
-        // Show the Snackbar
         snackbar.show();
     }
 
@@ -1038,29 +1029,10 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
         }
     }
 
+    */
 
     private void _shadow(final View _v, final double _n) {
         _v.setElevation((float) _n);
-    }
-
-
-    @Deprecated
-    public void showMessage(String _s) {
-        Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_SHORT).show();
-    }
-
-    @Deprecated
-    public int getLocationX(View _v) {
-        int[] _location = new int[2];
-        _v.getLocationInWindow(_location);
-        return _location[0];
-    }
-
-    @Deprecated
-    public int getLocationY(View _v) {
-        int[] _location = new int[2];
-        _v.getLocationInWindow(_location);
-        return _location[1];
     }
 
     @Deprecated
@@ -1070,29 +1042,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
     }
 
     @Deprecated
-    public ArrayList<Double> getCheckedItemPositionsToArray(ListView _list) {
-        ArrayList<Double> _result = new ArrayList<Double>();
-        SparseBooleanArray _arr = _list.getCheckedItemPositions();
-        for (int _iIdx = 0; _iIdx < _arr.size(); _iIdx++) {
-            if (_arr.valueAt(_iIdx))
-                _result.add((double) _arr.keyAt(_iIdx));
-        }
-        return _result;
-    }
-
-    @Deprecated
     public float getDip(int _input) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, _input, getResources().getDisplayMetrics());
-    }
-
-    @Deprecated
-    public int getDisplayWidthPixels() {
-        return getResources().getDisplayMetrics().widthPixels;
-    }
-
-    @Deprecated
-    public int getDisplayHeightPixels() {
-        return getResources().getDisplayMetrics().heightPixels;
     }
 
 }
