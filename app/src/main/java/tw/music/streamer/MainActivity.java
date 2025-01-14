@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.main);
+        //setContentView(R.layout.main);
         //com.google.firebase.FirebaseApp.initializeApp(this);
         //initialize(_savedInstanceState);
         //initializeLogic();
