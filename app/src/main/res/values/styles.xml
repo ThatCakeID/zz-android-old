@@ -3,4 +3,45 @@
     <style name="AppTheme.AppBarOverlay" parent="@android:style/Theme.Light"/>
     <style name="AppTheme.PopupOverlay" parent="@android:style/Theme.Light"/>
 
+    <style name="AppTheme.Light.ActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+    </style>
+
+    <style name="AppTheme.Light.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+    </style>
+
+    <style name="AppTheme.Light.FullScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+    </style>
+
+    <style name="AppTheme.Dark.ActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkVariant</item>
+        <item name="colorOnPrimary">@color/onPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.Dark.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkVariant</item>
+        <item name="colorOnPrimary">@color/onPrimaryDark</item>
+    </style>
+
 </resources>

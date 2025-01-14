@@ -17,7 +17,7 @@
         android:largeHeap="true">
 
         <activity
-            android:name=".MainActivity2"
+            android:name=".MainActivity"
             android:exported="true">
 
             <intent-filter>

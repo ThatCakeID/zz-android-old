@@ -4,4 +4,12 @@
     <color name="colorAccent">#F50057</color>
     <color name="colorControlHighlight">#000000</color>
     <color name="colorControlNormal">#F50057</color>
+
+    <color name="primaryColor">#6200EE</color>
+    <color name="primaryVariant">#3700B3</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryDarkColor">#121212</color>
+    <color name="primaryDarkVariant">#3700B3</color>
+    <color name="onPrimaryDark">#FFFFFF</color>
+
 </resources>

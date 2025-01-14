@@ -791,9 +791,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         _checkCookie();
-		/*
-Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
-*/
     }
 
     private boolean _checkPermission() {
@@ -845,7 +842,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
     }
 
     private void _customNav(final String _color) {
-        //Code From StackOverFlow.com And Converted By TeamWorks DEV
         if (Build.VERSION.SDK_INT >= 21) {
             Window w = this.getWindow();
             w.setNavigationBarColor(Color.parseColor(_color));
@@ -854,15 +850,10 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
 
 
     private void _customSnack(final String _txt, final double _icon) {
-        // Create the Snackbar
         ViewGroup containerLayout = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-
         com.google.android.material.snackbar.Snackbar snackbar = com.google.android.material.snackbar.Snackbar.make(containerLayout, "", com.google.android.material.snackbar.Snackbar.LENGTH_LONG);
-        // Get the Snackbar's layout view
         com.google.android.material.snackbar.Snackbar.SnackbarLayout layout = (com.google.android.material.snackbar.Snackbar.SnackbarLayout) snackbar.getView();
-        // Inflate our custom view
         View snackview = getLayoutInflater().inflate(R.layout.custom_snack, null);
-        // Configure the view
         ImageView image = snackview.findViewById(R.id.imageview);
         if (_icon == 0) {
             image.setImageResource(R.drawable.ic_info_outline_white);
@@ -883,9 +874,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
         text.setTextColor(Color.WHITE);
         text.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
         layout.setPadding(0, 0, 0, 0);
-        // Add the view to the Snackbar's layout
         layout.addView(snackview, 0);
-        // Show the Snackbar
         snackbar.show();
     }
 
