@@ -14,6 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="ZryteZene"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         android:largeHeap="true">
 
         <activity
