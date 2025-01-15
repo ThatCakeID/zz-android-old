@@ -92,25 +92,25 @@ public class MainActivity extends AppCompatActivity {
     private TextView textview4;
 
     private SharedPreferences data;
-    private DatabaseReference update_db;// = FirebaseDatabase.getInstance().getReference("update/version");
+    private DatabaseReference update_db;
     private ChildEventListener _update_db_child_listener;
     private Intent intent = new Intent();
     private AlertDialog.Builder d;
-    private DatabaseReference profile;// = FirebaseDatabase.getInstance().getReference("profile/text");
+    private DatabaseReference profile;
     private ChildEventListener _profile_child_listener;
     private FirebaseAuth Auth;
     private OnCompleteListener<AuthResult> _Auth_create_user_listener;
     private OnCompleteListener<AuthResult> _Auth_sign_in_listener;
     private OnCompleteListener<Void> _Auth_reset_password_listener;
     private Intent activityChanger = new Intent();
-    private DatabaseReference prof_img;// = FirebaseDatabase.getInstance().getReference("profile/image");
+    private DatabaseReference prof_img;
     private ChildEventListener _prof_img_child_listener;
     private TimerTask timer;
     private ObjectAnimator objectanim3 = new ObjectAnimator();
     private RequestNetwork internetchecker;
     private RequestNetwork.RequestListener _internetchecker_request_listener;
     private TimerTask delaynointernet;
-    private DatabaseReference prof_bans;// = FirebaseDatabase.getInstance().getReference("profile/bans");
+    private DatabaseReference prof_bans;
     private ChildEventListener _prof_bans_child_listener;
     private RequestNetwork rn;
     private RequestNetwork.RequestListener _rn_request_listener;
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
         prof_bans = FirebaseDatabase.getInstance().getReference("profile/bans");
         //com.google.firebase.FirebaseApp.initializeApp(this);
-        //initialize(_savedInstanceState);
-        //initializeLogic();
+        initialize(_savedInstanceState);
+        initializeLogic();
     }
 
     private void initialize(Bundle _savedInstanceState) {
