@@ -121,12 +121,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.main);
+        update_db = FirebaseDatabase.getInstance().getReference("update/version");
+        profile = FirebaseDatabase.getInstance().getReference("profile/text");
+        prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
+        prof_bans = FirebaseDatabase.getInstance().getReference("profile/bans");
         //com.google.firebase.FirebaseApp.initializeApp(this);
         //initialize(_savedInstanceState);
         //initializeLogic();
     }
-
-    /*
 
     private void initialize(Bundle _savedInstanceState) {
 
@@ -1028,8 +1030,6 @@ public class MainActivity extends AppCompatActivity {
             linear7.setVisibility(View.VISIBLE);
         }
     }
-
-    */
 
     private void _shadow(final View _v, final double _n) {
         _v.setElevation((float) _n);
