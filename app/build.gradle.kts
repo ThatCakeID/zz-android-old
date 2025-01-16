@@ -60,9 +60,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
-    implementation("androidx.media3:media3-bom:1.5.1")
-    implementation("androidx.media3:media3-session")
-    implementation("androidx.media3:media3-ui")
+    //implementation("androidx.media3:media3-bom:1.5.1")
+    //implementation("androidx.media3:media3-session")
+    //implementation("androidx.media3:media3-ui")
 }
 
 apply(plugin = "com.google.gms.google-services")
