@@ -40,7 +40,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.5.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.media:media:1.5.1")
+    implementation("androidx.media:media:1.7.0")
     implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -53,15 +53,6 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
-    implementation(platform("androidx.media3:media3-bom:1.0.3"))
-    implementation("androidx.media3:media3-session")
-    implementation("androidx.media3:media3-ui")
 }
 
 apply(plugin = "com.google.gms.google-services")
-
-repositories {
-    google()
-    mavenCentral()
-}
