@@ -1900,17 +1900,6 @@ public class StreamerActivity extends AppCompatActivity {
 	};
 
     @Override
-    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-        super.onActivityResult(_requestCode, _resultCode, _data);
-
-        switch (_requestCode) {
-
-            default:
-                break;
-        }
-    }
-
-    @Override
     public void onBackPressed() {
         if (_drawer.isDrawerOpen(GravityCompat.START)) {
             _drawer.closeDrawer(GravityCompat.START);
@@ -1953,7 +1942,7 @@ public class StreamerActivity extends AppCompatActivity {
         super.onStart();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(0);
-        }
+        }/*
         _loadTheme();
         if (!(openNum == 0)) {
             _customNav(theme_map.get(0).get("colorPrimary").toString());
@@ -1962,7 +1951,7 @@ public class StreamerActivity extends AppCompatActivity {
             image_user.clearColorFilter();
             _drawer_image_user.clearColorFilter();
         }
-        /*if (tmservice != null) {
+        if (tmservice != null) {
             if (!currentlyPlaying.equals("") && !tmservice._isMpNull()) {
                 if (currentlyMap.get(currentlyChild.indexOf(currentlyPlaying)).containsKey("img")) {
                     image_album.clearColorFilter();
@@ -1973,8 +1962,8 @@ public class StreamerActivity extends AppCompatActivity {
                     text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
                 }
             }
-        }*/
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+        }
+        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();*/
     }
 
     @Override
