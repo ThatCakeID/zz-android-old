@@ -323,16 +323,8 @@ public class StreamerActivity extends AppCompatActivity {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.streamer);
         com.google.firebase.FirebaseApp.initializeApp(this);
-        initialize(_savedInstanceState);
+        //initialize(_savedInstanceState);
         //initializeLogic();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1000) {
-            initializeLogic();
-        }
     }
 
     private void initialize(Bundle _savedInstanceState) {
