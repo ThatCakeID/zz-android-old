@@ -42,7 +42,7 @@ public class ZryteZeneNotification {
 		return notification;
 	}
 	
-	public static void update(Context a, String b) {
+	public static void updateOld(Context a, String b) {
 		Intent openAppIntent = new Intent(a, StreamerActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		NotificationManager notificationManager = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -105,7 +105,7 @@ public class ZryteZeneNotification {
     	notificationManager.notify(ZryteZenePlay.NOTIFICATION_ID, updatedNotification);
 	}
 
-	public static void updateWithControls(Context a, boolean b) {
+	public static void update(Context a, boolean b) {
     	NotificationManager notificationManager = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
     	if (notificationManager == null) return;
 
