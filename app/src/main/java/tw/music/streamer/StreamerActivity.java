@@ -320,11 +320,12 @@ public class StreamerActivity extends AppCompatActivity {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.streamer);
         initFirebase();
-        //initialize(_savedInstanceState);
-        //initializeLogic();
+        initialize(_savedInstanceState);
+        initializeLogic();
     }
 
     private void initFirebase() {
+        Auth = FirebaseAuth.getInstance();
         upload_text = FirebaseDatabase.getInstance().getReference("upload/text");
         profile_admins = FirebaseDatabase.getInstance().getReference("profile/admins");
         comments_db = FirebaseDatabase.getInstance().getReference("upload/msg");
@@ -443,7 +444,6 @@ public class StreamerActivity extends AppCompatActivity {
         _drawer_text_user = _nav_view.findViewById(R.id.text_user);
         _drawer_text_email = _nav_view.findViewById(R.id.text_email);
         data = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
-        Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
         zz = new ZryteZeneAdaptor(this);
         Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
@@ -1984,7 +1984,7 @@ public class StreamerActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        _unbindSvc();
+        //_unbindSvc();
     }
 
     private void _shadow(final View _v, final double _n) {
