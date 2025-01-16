@@ -1849,7 +1849,7 @@ public class StreamerActivity extends AppCompatActivity {
                 }
             }
         }
-        _firebase_storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
+        FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
         IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
 		registerReceiver(listenerReceiver, filr);
         zz.requestAction("request-media");
@@ -3200,9 +3200,9 @@ public class StreamerActivity extends AppCompatActivity {
                                                 d.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface _dialog, int _which) {
-                                                        _firebase_storage.getReferenceFromUrl(upload_list.get(_position).get("url").toString()).delete().addOnSuccessListener(_upload_storage_delete_success_listener).addOnFailureListener(_upload_storage_failure_listener);
+                                                        FirebaseStorage.getInstance().getReferenceFromUrl(upload_list.get(_position).get("url").toString()).delete().addOnSuccessListener(_upload_storage_delete_success_listener).addOnFailureListener(_upload_storage_failure_listener);
                                                         if (upload_list.get(_position).containsKey("img")) {
-                                                            _firebase_storage.getReferenceFromUrl(upload_list.get(_position).get("img").toString()).delete().addOnSuccessListener(_music_image_delete_success_listener).addOnFailureListener(_music_image_failure_listener);
+                                                            FirebaseStorage.getInstance().getReferenceFromUrl(upload_list.get(_position).get("img").toString()).delete().addOnSuccessListener(_music_image_delete_success_listener).addOnFailureListener(_music_image_failure_listener);
                                                         }
                                                         upload_text.child(childkey.get(_position)).removeValue();
                                                         _customSnack("Delete success!", 1);
