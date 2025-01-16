@@ -142,6 +142,7 @@ public class StreamerActivity extends AppCompatActivity {
     private boolean isSearching = false;
     private boolean hasPic = false;
     private HashMap<String, Object> img_maps = new HashMap<>();
+    private HashMap<String, Object> tempMap;
 
     private ArrayList<String> usrname_list = new ArrayList<>();
     private ArrayList<HashMap<String, Object>> upload_list = new ArrayList<>();
@@ -2610,27 +2611,28 @@ public class StreamerActivity extends AppCompatActivity {
 
     private void _play(final String _key) {
         _CoreProgressLoading(true);
-        final double _position = currentlyChild.indexOf(_key);
+        final int _pos = (int) currentlyChild.indexOf(_key);
+        tempMap = currentlyPlaying.get(_pos);
         currentlyPlaying = _key;
-        text_title.setText(currentlyMap.get((int) _position).get("name").toString());
-        if (usrname_list.contains(currentlyMap.get((int) _position).get("uid").toString())) {
-            text_artist.setText(profile_map.get(usrname_list.indexOf(currentlyMap.get((int) _position).get("uid").toString())).get("username").toString());
+        text_title.setText(tempMap.get("name").toString());
+        if (usrname_list.contains(tempMap.get("uid").toString())) {
+            text_artist.setText(profile_map.get(usrname_list.indexOf(tempMap.get("uid").toString())).get("username").toString());
         } else {
-            text_artist.setText(currentlyMap.get((int) _position).get("uid").toString());
+            text_artist.setText(tempMap.get("uid").toString());
         }
-        if (adminsList.contains(currentlyMap.get((int) _position).get("uid").toString())) {
+        if (adminsList.contains(tempMap.get("uid").toString())) {
             text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorButton").toString()));
         } else {
             text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
         }
-        if (currentlyMap.get((int) _position).containsKey("img")) {
+        if (tempMap.containsKey("img")) {
             image_album.clearColorFilter();
-            Glide.with(getApplicationContext()).load(currentlyMap.get((int) _position).get("img").toString()).centerCrop().into(image_album);
+            Glide.with(getApplicationContext()).load(tempMap.get("img").toString()).centerCrop().into(image_album);
         } else {
             image_album.setImageResource(R.drawable.ic_album_white);
             image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
         }
-        zz.requestAction("play", currentlyMap.get((int) _position).get("url").toString());
+        zz.play(tempMap.get("url").toString(), tempMap.get("name").toString(), "ZryteZene", tempMap.containsKey("img") ? tempMap.get("img").toString() : "-");
     }
 
     private void _shape(final double _tl, final double _tr, final double _bl, final double _br, final String _BGcolor, final String _Scolor, final double _Swidth, final View _view) {

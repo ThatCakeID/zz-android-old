@@ -102,4 +102,14 @@ public class ZryteZeneAdaptor {
         ctx.sendBroadcast(jof);
         if (a.equals("play")) sp = b;
     }
+
+    public void play(String a, String b, String c, String d) {
+        Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
+        jof.putExtra("action", "play");
+        jof.putExtra("path", a);
+        jof.putExtra("title", b);
+        jof.putExtra("artist", c);
+        jof.putExtra("cover", d);
+        ctx.sendBroadcast(jof);
+    }
 }
