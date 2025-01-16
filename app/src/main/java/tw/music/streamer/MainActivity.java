@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         profile = FirebaseDatabase.getInstance().getReference("profile/text");
         prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
         prof_bans = FirebaseDatabase.getInstance().getReference("profile/bans");
-        //com.google.firebase.FirebaseApp.initializeApp(this);
         initialize(_savedInstanceState);
         initializeLogic();
     }

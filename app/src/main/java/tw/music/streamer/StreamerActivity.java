@@ -259,21 +259,21 @@ public class StreamerActivity extends AppCompatActivity {
     private ObjectAnimator obj2 = new ObjectAnimator();
     private ObjectAnimator obj3 = new ObjectAnimator();
     private SharedPreferences data;
-    private DatabaseReference upload_text = _firebase.getReference("upload/text");
+    private DatabaseReference upload_text;
     private ChildEventListener _upload_text_child_listener;
-    private DatabaseReference profile_admins = _firebase.getReference("profile/admins");
+    private DatabaseReference profile_admins;
     private ChildEventListener _profile_admins_child_listener;
-    private DatabaseReference comments_db = _firebase.getReference("upload/msg");
+    private DatabaseReference comments_db;
     private ChildEventListener _comments_db_child_listener;
     private FirebaseAuth Auth;
     private OnCompleteListener<AuthResult> _Auth_create_user_listener;
     private OnCompleteListener<AuthResult> _Auth_sign_in_listener;
     private OnCompleteListener<Void> _Auth_reset_password_listener;
-    private DatabaseReference profile = _firebase.getReference("profile/text");
+    private DatabaseReference profile;
     private ChildEventListener _profile_child_listener;
-    private DatabaseReference fb_likes = _firebase.getReference("upload/likes");
+    private DatabaseReference fb_likes;
     private ChildEventListener _fb_likes_child_listener;
-    private DatabaseReference prof_img = _firebase.getReference("profile/image");
+    private DatabaseReference prof_img;
     private ChildEventListener _prof_img_child_listener;
     private Intent intent = new Intent();
     private AlertDialog.Builder d;
@@ -322,13 +322,21 @@ public class StreamerActivity extends AppCompatActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.streamer);
-        com.google.firebase.FirebaseApp.initializeApp(this);
+        initFirebase();
         //initialize(_savedInstanceState);
         //initializeLogic();
     }
 
-    private void initialize(Bundle _savedInstanceState) {
+    private void initFirebase() {
+        upload_text = FirebaseDatabase.getInstance().getReference("upload/text");
+        profile_admins = FirebaseDatabase.getInstance().getReference("profile/admins");
+        comments_db = FirebaseDatabase.getInstance().getReference("upload/msg");
+        profile = FirebaseDatabase.getInstance().getReference("profile/text");
+        fb_likes = FirebaseDatabase.getInstance().getReference("upload/likes");
+        prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
+    }
 
+    private void initialize(Bundle _savedInstanceState) {
         _toolbar = findViewById(R.id._toolbar);
         setSupportActionBar(_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
