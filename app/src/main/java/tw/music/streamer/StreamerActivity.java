@@ -215,7 +215,6 @@ public class StreamerActivity extends AppCompatActivity {
     private ScrollView _drawer_vscroll1;
     private LinearLayout _drawer_linear10;
     private LinearLayout _drawer_linear_usr;
-    private LinearLayout _drawer_linear5;
     private LinearLayout _drawer_linear2;
     private LinearLayout _drawer_linear6;
     private LinearLayout _drawer_linear_upload;
@@ -407,7 +406,6 @@ public class StreamerActivity extends AppCompatActivity {
         _drawer_vscroll1 = _nav_view.findViewById(R.id.vscroll1);
         _drawer_linear10 = _nav_view.findViewById(R.id.linear10);
         _drawer_linear_usr = _nav_view.findViewById(R.id.linear_usr);
-        _drawer_linear5 = _nav_view.findViewById(R.id.linear5);
         _drawer_linear2 = _nav_view.findViewById(R.id.linear2);
         _drawer_linear6 = _nav_view.findViewById(R.id.linear6);
         _drawer_linear_upload = _nav_view.findViewById(R.id.linear_upload);
