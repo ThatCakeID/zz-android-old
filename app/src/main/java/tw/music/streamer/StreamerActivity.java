@@ -128,9 +128,6 @@ import tw.music.streamer.service.ZryteZenePlay;
 
 public class StreamerActivity extends AppCompatActivity {
 
-    private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
-    private FirebaseStorage _firebase_storage = FirebaseStorage.getInstance();
-
     private Toolbar _toolbar;
     private DrawerLayout _drawer;
     private HashMap<String, Object> likes_map = new HashMap<>();
@@ -278,21 +275,21 @@ public class StreamerActivity extends AppCompatActivity {
     private Intent intent = new Intent();
     private AlertDialog.Builder d;
     private Intent i2 = new Intent();
-    private StorageReference check_quota = _firebase_storage.getReference("/");
+    private StorageReference check_quota;
     private OnCompleteListener<Uri> _check_quota_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _check_quota_download_success_listener;
     private OnSuccessListener _check_quota_delete_success_listener;
     private OnProgressListener _check_quota_upload_progress_listener;
     private OnProgressListener _check_quota_download_progress_listener;
     private OnFailureListener _check_quota_failure_listener;
-    private StorageReference upload_storage = _firebase_storage.getReference("upload/music");
+    private StorageReference upload_storage;
     private OnCompleteListener<Uri> _upload_storage_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _upload_storage_download_success_listener;
     private OnSuccessListener _upload_storage_delete_success_listener;
     private OnProgressListener _upload_storage_upload_progress_listener;
     private OnProgressListener _upload_storage_download_progress_listener;
     private OnFailureListener _upload_storage_failure_listener;
-    private StorageReference music_image = _firebase_storage.getReference("upload/image");
+    private StorageReference music_image;
     private OnCompleteListener<Uri> _music_image_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _music_image_download_success_listener;
     private OnSuccessListener _music_image_delete_success_listener;
@@ -334,6 +331,9 @@ public class StreamerActivity extends AppCompatActivity {
         profile = FirebaseDatabase.getInstance().getReference("profile/text");
         fb_likes = FirebaseDatabase.getInstance().getReference("upload/likes");
         prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
+        check_quota = FirebaseStorage.getInstance().getReference("/");
+        upload_storage = FirebaseStorage.getInstance().getReference("upload/music");
+        music_image = FirebaseStorage.getInstance().getReference("upload/image");
     }
 
     private void initialize(Bundle _savedInstanceState) {
