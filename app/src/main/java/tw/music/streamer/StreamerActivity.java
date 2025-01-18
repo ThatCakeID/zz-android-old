@@ -2610,7 +2610,7 @@ public class StreamerActivity extends AppCompatActivity {
     private void _play(final String _key) {
         _CoreProgressLoading(true);
         final int _pos = (int) currentlyChild.indexOf(_key);
-        tempMap = currentlyPlaying.get(_pos);
+        tempMap = currentlyMap.get(_pos);
         currentlyPlaying = _key;
         text_title.setText(tempMap.get("name").toString());
         if (usrname_list.contains(tempMap.get("uid").toString())) {
