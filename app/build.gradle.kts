@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -21,8 +20,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildTypes {
@@ -60,9 +59,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
-    implementation("androidx.media3:media3-bom:1.5.1")
-    implementation("androidx.media3:media3-session")
-    implementation("androidx.media3:media3-ui")
 }
 
 apply(plugin = "com.google.gms.google-services")
