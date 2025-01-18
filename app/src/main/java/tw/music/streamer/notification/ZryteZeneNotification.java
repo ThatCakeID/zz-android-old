@@ -1,5 +1,7 @@
 package tw.music.streamer.notification;
 
+import tw.music.streamer.R;
+
 import android.os.Build;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -62,11 +64,11 @@ public class ZryteZeneNotification {
 		} else {
 			Glide.with(a)
         		.asBitmap()
-        		.load(g)
+        		.load(f)
         		.into(new CustomTarget<Bitmap>() {
             		@Override
             		public void onResourceReady(@NonNull Bitmap g, @NonNull Transition<? super Bitmap> h) {
-                		update(a,b,c,d,e,f,g);
+                		update(a,b,c,d,e,g);
             		}
             		@Override
             		public void onLoadCleared(@Nullable Drawable i) {
@@ -75,7 +77,7 @@ public class ZryteZeneNotification {
 		}
 	}
 
-	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f, Bitmap g) {
+	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         	NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
         	NotificationManager manager = getSystemService(NotificationManager.class);
@@ -92,7 +94,7 @@ public class ZryteZeneNotification {
     	PendingIntent nextPendingIntent = PendingIntent.getBroadcast(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
     	Notification nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID);
-		if (g != null) nf.setLargeIcon(g);
+		if (f != null) nf.setLargeIcon(f);
         nf.setContentTitle(d)
         .setContentText(e)
         .setSmallIcon(R.drawable.ic_launcher)
