@@ -60,7 +60,7 @@ public class ZryteZeneNotification {
 
 	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f) {
 		if (f.equals("-")) {
-			update(a,b,c,d,e,null);
+			updateWithMedia(a,b,c,d,e,null);
 		} else {
 			Glide.with(a)
         		.asBitmap()
@@ -68,7 +68,7 @@ public class ZryteZeneNotification {
         		.into(new CustomTarget<Bitmap>() {
             		@Override
             		public void onResourceReady(@NonNull Bitmap g, @NonNull Transition<? super Bitmap> h) {
-                		update(a,b,c,d,e,g);
+                		updateWithMedia(a,b,c,d,e,g);
             		}
             		@Override
             		public void onLoadCleared(@Nullable Drawable i) {
@@ -77,7 +77,7 @@ public class ZryteZeneNotification {
 		}
 	}
 
-	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
+	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         	NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
         	NotificationManager manager = a.getSystemService(NotificationManager.class);
@@ -102,9 +102,9 @@ public class ZryteZeneNotification {
         	.setStyle(new MediaStyle()
             	.setMediaSession(c.getSessionToken())
             	.setShowActionsInCompactView(0, 1, 2))
-        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousIntent)
-        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPauseIntent)
-        	.addAction(android.R.drawable.ic_media_next, "Next", nextIntent)
+        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
+        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPausePendingIntent)
+        	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
         	.build();
@@ -117,9 +117,9 @@ public class ZryteZeneNotification {
         	.setStyle(new MediaStyle()
             	.setMediaSession(c.getSessionToken())
             	.setShowActionsInCompactView(0, 1, 2))
-        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousIntent)
-        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPauseIntent)
-        	.addAction(android.R.drawable.ic_media_next, "Next", nextIntent)
+        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
+        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPausePendingIntent)
+        	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
         	.build();
