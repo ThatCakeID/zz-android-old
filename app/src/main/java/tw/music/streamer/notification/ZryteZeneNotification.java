@@ -58,9 +58,9 @@ public class ZryteZeneNotification {
 		return notification;
 	}
 
-	public void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f) {
+	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f) {
 		if (f.equals("-")) {
-			update(a,b,c,d,e,f,null);
+			update(a,b,c,d,e,null);
 		} else {
 			Glide.with(a)
         		.asBitmap()
@@ -80,7 +80,7 @@ public class ZryteZeneNotification {
 	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         	NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
-        	NotificationManager manager = getSystemService(NotificationManager.class);
+        	NotificationManager manager = a.getSystemService(NotificationManager.class);
         	if (manager != null) {
            		manager.createNotificationChannel(channel);
         	}
@@ -93,20 +93,37 @@ public class ZryteZeneNotification {
 		PendingIntent previousPendingIntent = PendingIntent.getBroadcast(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     	PendingIntent nextPendingIntent = PendingIntent.getBroadcast(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-    	Notification nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID);
-		if (f != null) nf.setLargeIcon(f);
-        nf.setContentTitle(d)
-        .setContentText(e)
-        .setSmallIcon(R.drawable.ic_launcher)
-        .setStyle(new MediaStyle()
-            .setMediaSession(c.getSessionToken())
-            .setShowActionsInCompactView(0, 1, 2))
-        .addAction(android.R.drawable.ic_media_previous, "Previous", previousIntent)
-        .addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPauseIntent)
-        .addAction(android.R.drawable.ic_media_next, "Next", nextIntent)
-        .setPriority(NotificationCompat.PRIORITY_LOW)
-        .setOngoing(true)
-        .build();
+		Notification nf;
+		if (f == null) {
+    		nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID)
+        	.setContentTitle(d)
+        	.setContentText(e)
+        	.setSmallIcon(R.drawable.ic_launcher)
+        	.setStyle(new MediaStyle()
+            	.setMediaSession(c.getSessionToken())
+            	.setShowActionsInCompactView(0, 1, 2))
+        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousIntent)
+        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPauseIntent)
+        	.addAction(android.R.drawable.ic_media_next, "Next", nextIntent)
+        	.setPriority(NotificationCompat.PRIORITY_LOW)
+        	.setOngoing(true)
+        	.build();
+		} else {
+			nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID)
+        	.setContentTitle(d)
+        	.setContentText(e)
+        	.setSmallIcon(R.drawable.ic_launcher)
+			.setLargeIcon(f)
+        	.setStyle(new MediaStyle()
+            	.setMediaSession(c.getSessionToken())
+            	.setShowActionsInCompactView(0, 1, 2))
+        	.addAction(android.R.drawable.ic_media_previous, "Previous", previousIntent)
+        	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPauseIntent)
+        	.addAction(android.R.drawable.ic_media_next, "Next", nextIntent)
+        	.setPriority(NotificationCompat.PRIORITY_LOW)
+        	.setOngoing(true)
+        	.build();
+		}
 		NotificationManager m = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
         if (m != null) {
             m.notify(ZryteZenePlay.NOTIFICATION_ID, nf);
