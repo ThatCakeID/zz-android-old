@@ -39,7 +39,7 @@ public class ZryteZeneBroadcastReceiver extends BroadcastReceiver {
                 break;
 
             default:
-                Log.w("MusicBroadcastReceiver", "Unknown action: " + action);
+                Log.w("MusicBroadcastReceiver", "Unknown action: " + c);
                 return;
         }
 
