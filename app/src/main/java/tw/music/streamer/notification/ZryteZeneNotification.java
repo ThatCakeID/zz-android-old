@@ -89,9 +89,9 @@ public class ZryteZeneNotification {
     	Intent playPauseIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", b ? "pause" : "resume");
     	Intent previousIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", "previous");
     	Intent nextIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", "forward");
-		PendingIntent playPausePendingIntent = PendingIntent.getBroadcast(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-		PendingIntent previousPendingIntent = PendingIntent.getBroadcast(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-    	PendingIntent nextPendingIntent = PendingIntent.getBroadcast(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent playPausePendingIntent = PendingIntent.getService(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent previousPendingIntent = PendingIntent.getService(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    	PendingIntent nextPendingIntent = PendingIntent.getService(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 		Notification nf;
 		if (f == null) {
