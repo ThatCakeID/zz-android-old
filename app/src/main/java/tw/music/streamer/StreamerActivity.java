@@ -1941,7 +1941,7 @@ public class StreamerActivity extends AppCompatActivity {
         super.onStart();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(0);
-        }/*
+        }
         _loadTheme();
         if (!(openNum == 0)) {
             _customNav(theme_map.get(0).get("colorPrimary").toString());
@@ -1950,6 +1950,7 @@ public class StreamerActivity extends AppCompatActivity {
             image_user.clearColorFilter();
             _drawer_image_user.clearColorFilter();
         }
+        /*
         if (tmservice != null) {
             if (!currentlyPlaying.equals("") && !tmservice._isMpNull()) {
                 if (currentlyMap.get(currentlyChild.indexOf(currentlyPlaying)).containsKey("img")) {
@@ -2136,8 +2137,8 @@ public class StreamerActivity extends AppCompatActivity {
         text_zene.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         text_playlist.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         edittext_search.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        //x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
-        //x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
+        x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
+        x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
 
         {
             ViewGroup _vg = (ViewGroup) x_tab.getChildAt(0);
