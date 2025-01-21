@@ -51,9 +51,9 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
 
         public ZZViewHolder(@NonNull View i) {
             super(i);
-            title = i.findViewById(R.id.sli1_title);
-            cover = i.findViewById(R.id.sli1_cover);
-            line = i.findViewById(R.id.sli1_bottom_line);
+            title = i.findViewById(R.id.sli2_title);
+            cover = i.findViewById(R.id.sli2_cover);
+            line = i.findViewById(R.id.sli2_bottom_line);
         }
     }
 }
