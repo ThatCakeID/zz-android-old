@@ -60,8 +60,8 @@
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="40dp"
-				android:layout_height="40dp"
+                android:layout_width="30dp"
+				android:layout_height="30dp"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -81,8 +81,8 @@
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="40dp"
-				android:layout_height="40dp"
+                android:layout_width="30dp"
+				android:layout_height="30dp"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -102,8 +102,8 @@
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="40dp"
-				android:layout_height="40dp"
+                android:layout_width="30dp"
+				android:layout_height="30dp"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -123,8 +123,8 @@
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="40dp"
-				android:layout_height="40dp"
+                android:layout_width="30dp"
+				android:layout_height="30dp"
                 android:scaleType="centerCrop"
 				android:id="@+id/profile_icon"/>
             <TextView
