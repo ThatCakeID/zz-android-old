@@ -2,17 +2,20 @@ package tw.music.streamer;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.BaseAdapter;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.core.widget.NestedScrollView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,10 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import tw.music.streamer.adaptor.ZZSong;
 import tw.music.streamer.adaptor.ZryteZeneAdaptor;
@@ -49,6 +50,7 @@ public class StreamingActivity extends AppCompatActivity {
     private GridLayoutManager lm2;
     private TextView user_welcome;
     private ImageView user_icon;
+    private LinearLayout menu_bar;
 
     private ArrayList<ZZSong> zz_songs;
     private ArrayList<ZZSong> zz_songs2;
@@ -124,7 +126,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
-                    Glide.with(z).load(b.child("url").getValue(String.class)).into(user_icon);
+                    Glide.with(z).load(b.child("url").getValue(String.class)).apply(RequestOptions.circleCropTransform()).into(user_icon);
                 } else {
                     // error: photo profile not found
                 }
@@ -152,9 +154,12 @@ public class StreamingActivity extends AppCompatActivity {
         user_icon = findViewById(R.id.profile_icon);
         rv_random_songs = findViewById(R.id.random_music_container);
         rv_songs = findViewById(R.id.uploaded_music_container);
+        menu_bar = findViewById(R.id.sb_bottom_menu_bar);
     }
 
     private void initLogic(Context a) {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        menu_bar.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.argb(90,255,255,255),Color.argb(200,255,255,255)}));
 		rv_random_songs.setLayoutManager(lm1);
         rv_random_songs.setAdapter(ra_songs);
         rv_songs.setLayoutManager(lm2);
