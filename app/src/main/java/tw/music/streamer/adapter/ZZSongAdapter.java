@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import tw.music.streamer.R;
 import tw.music.streamer.adaptor.ZZSong;
 
+import com.bumptech.glide.Glide;
+
 public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHolder> {
 
     private ArrayList<ZZSong> data;
