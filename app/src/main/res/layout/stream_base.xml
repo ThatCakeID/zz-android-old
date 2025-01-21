@@ -56,6 +56,7 @@
             <ImageView
                 android:layout_width="40dp"
 				android:layout_height="40dp"
+				android:src="@drawable/ic_launcher"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -77,6 +78,7 @@
             <ImageView
                 android:layout_width="40dp"
 				android:layout_height="40dp"
+				android:src="@drawable/ic_launcher"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -98,6 +100,7 @@
             <ImageView
                 android:layout_width="40dp"
 				android:layout_height="40dp"
+				android:src="@drawable/ic_launcher"
                 android:scaleType="fitXY"/>
             <TextView
                 android:layout_width="match_parent"
@@ -120,6 +123,7 @@
                 android:layout_width="40dp"
 				android:layout_height="40dp"
                 android:scaleType="fitXY"
+				android:src="@drawable/ic_launcher"
 				android:id="@+id/profile_icon"/>
             <TextView
                 android:layout_width="match_parent"
