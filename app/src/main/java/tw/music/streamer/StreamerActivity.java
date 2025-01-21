@@ -303,12 +303,6 @@ public class StreamerActivity extends AppCompatActivity {
     private double _t;
     private ArrayAdapter<String> Listview2Adapter;
     private GridView listview2;
-    private Handler dataHandlerReceiverZero;
-    private Handler dataHandlerReceiverOne;
-    private Handler dataHandlerReceiverTwo;
-    private Handler dataHandlerReceiverThree;
-    private Handler dataHandlerReceiverFour;
-    private Handler dataHandlerReceiverFive;
     private com.google.android.material.tabs.TabLayout x_tab;
     private androidx.viewpager.widget.ViewPager viewPager;
     private android.graphics.drawable.AnimationDrawable rocketAnimation;
