@@ -128,9 +128,6 @@ import tw.music.streamer.service.ZryteZenePlay;
 
 public class StreamerActivity extends AppCompatActivity {
 
-    private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
-    private FirebaseStorage _firebase_storage = FirebaseStorage.getInstance();
-
     private Toolbar _toolbar;
     private DrawerLayout _drawer;
     private HashMap<String, Object> likes_map = new HashMap<>();
@@ -145,6 +142,7 @@ public class StreamerActivity extends AppCompatActivity {
     private boolean isSearching = false;
     private boolean hasPic = false;
     private HashMap<String, Object> img_maps = new HashMap<>();
+    private HashMap<String, Object> tempMap;
 
     private ArrayList<String> usrname_list = new ArrayList<>();
     private ArrayList<HashMap<String, Object>> upload_list = new ArrayList<>();
@@ -217,7 +215,6 @@ public class StreamerActivity extends AppCompatActivity {
     private ScrollView _drawer_vscroll1;
     private LinearLayout _drawer_linear10;
     private LinearLayout _drawer_linear_usr;
-    private LinearLayout _drawer_linear5;
     private LinearLayout _drawer_linear2;
     private LinearLayout _drawer_linear6;
     private LinearLayout _drawer_linear_upload;
@@ -259,40 +256,40 @@ public class StreamerActivity extends AppCompatActivity {
     private ObjectAnimator obj2 = new ObjectAnimator();
     private ObjectAnimator obj3 = new ObjectAnimator();
     private SharedPreferences data;
-    private DatabaseReference upload_text = _firebase.getReference("upload/text");
+    private DatabaseReference upload_text;
     private ChildEventListener _upload_text_child_listener;
-    private DatabaseReference profile_admins = _firebase.getReference("profile/admins");
+    private DatabaseReference profile_admins;
     private ChildEventListener _profile_admins_child_listener;
-    private DatabaseReference comments_db = _firebase.getReference("upload/msg");
+    private DatabaseReference comments_db;
     private ChildEventListener _comments_db_child_listener;
     private FirebaseAuth Auth;
     private OnCompleteListener<AuthResult> _Auth_create_user_listener;
     private OnCompleteListener<AuthResult> _Auth_sign_in_listener;
     private OnCompleteListener<Void> _Auth_reset_password_listener;
-    private DatabaseReference profile = _firebase.getReference("profile/text");
+    private DatabaseReference profile;
     private ChildEventListener _profile_child_listener;
-    private DatabaseReference fb_likes = _firebase.getReference("upload/likes");
+    private DatabaseReference fb_likes;
     private ChildEventListener _fb_likes_child_listener;
-    private DatabaseReference prof_img = _firebase.getReference("profile/image");
+    private DatabaseReference prof_img;
     private ChildEventListener _prof_img_child_listener;
     private Intent intent = new Intent();
     private AlertDialog.Builder d;
     private Intent i2 = new Intent();
-    private StorageReference check_quota = _firebase_storage.getReference("/");
+    private StorageReference check_quota;
     private OnCompleteListener<Uri> _check_quota_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _check_quota_download_success_listener;
     private OnSuccessListener _check_quota_delete_success_listener;
     private OnProgressListener _check_quota_upload_progress_listener;
     private OnProgressListener _check_quota_download_progress_listener;
     private OnFailureListener _check_quota_failure_listener;
-    private StorageReference upload_storage = _firebase_storage.getReference("upload/music");
+    private StorageReference upload_storage;
     private OnCompleteListener<Uri> _upload_storage_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _upload_storage_download_success_listener;
     private OnSuccessListener _upload_storage_delete_success_listener;
     private OnProgressListener _upload_storage_upload_progress_listener;
     private OnProgressListener _upload_storage_download_progress_listener;
     private OnFailureListener _upload_storage_failure_listener;
-    private StorageReference music_image = _firebase_storage.getReference("upload/image");
+    private StorageReference music_image;
     private OnCompleteListener<Uri> _music_image_upload_success_listener;
     private OnSuccessListener<FileDownloadTask.TaskSnapshot> _music_image_download_success_listener;
     private OnSuccessListener _music_image_delete_success_listener;
@@ -306,12 +303,6 @@ public class StreamerActivity extends AppCompatActivity {
     private double _t;
     private ArrayAdapter<String> Listview2Adapter;
     private GridView listview2;
-    private Handler dataHandlerReceiverZero;
-    private Handler dataHandlerReceiverOne;
-    private Handler dataHandlerReceiverTwo;
-    private Handler dataHandlerReceiverThree;
-    private Handler dataHandlerReceiverFour;
-    private Handler dataHandlerReceiverFive;
     private com.google.android.material.tabs.TabLayout x_tab;
     private androidx.viewpager.widget.ViewPager viewPager;
     private android.graphics.drawable.AnimationDrawable rocketAnimation;
@@ -322,26 +313,25 @@ public class StreamerActivity extends AppCompatActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.streamer);
-        com.google.firebase.FirebaseApp.initializeApp(this);
+        initFirebase();
         initialize(_savedInstanceState);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
-        } else {
-            initializeLogic();
-        }
+        initializeLogic();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1000) {
-            initializeLogic();
-        }
+    private void initFirebase() {
+        Auth = FirebaseAuth.getInstance();
+        upload_text = FirebaseDatabase.getInstance().getReference("upload/text");
+        profile_admins = FirebaseDatabase.getInstance().getReference("profile/admins");
+        comments_db = FirebaseDatabase.getInstance().getReference("upload/msg");
+        profile = FirebaseDatabase.getInstance().getReference("profile/text");
+        fb_likes = FirebaseDatabase.getInstance().getReference("upload/likes");
+        prof_img = FirebaseDatabase.getInstance().getReference("profile/image");
+        check_quota = FirebaseStorage.getInstance().getReference("/");
+        upload_storage = FirebaseStorage.getInstance().getReference("upload/music");
+        music_image = FirebaseStorage.getInstance().getReference("upload/image");
     }
 
     private void initialize(Bundle _savedInstanceState) {
-
         _toolbar = findViewById(R.id._toolbar);
         setSupportActionBar(_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -410,7 +400,6 @@ public class StreamerActivity extends AppCompatActivity {
         _drawer_vscroll1 = _nav_view.findViewById(R.id.vscroll1);
         _drawer_linear10 = _nav_view.findViewById(R.id.linear10);
         _drawer_linear_usr = _nav_view.findViewById(R.id.linear_usr);
-        _drawer_linear5 = _nav_view.findViewById(R.id.linear5);
         _drawer_linear2 = _nav_view.findViewById(R.id.linear2);
         _drawer_linear6 = _nav_view.findViewById(R.id.linear6);
         _drawer_linear_upload = _nav_view.findViewById(R.id.linear_upload);
@@ -448,7 +437,6 @@ public class StreamerActivity extends AppCompatActivity {
         _drawer_text_user = _nav_view.findViewById(R.id.text_user);
         _drawer_text_email = _nav_view.findViewById(R.id.text_email);
         data = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
-        Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
         zz = new ZryteZeneAdaptor(this);
         Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
@@ -1854,7 +1842,7 @@ public class StreamerActivity extends AppCompatActivity {
                 }
             }
         }
-        _firebase_storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
+        FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
         IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
 		registerReceiver(listenerReceiver, filr);
         zz.requestAction("request-media");
@@ -1903,17 +1891,6 @@ public class StreamerActivity extends AppCompatActivity {
 			}
 		}
 	};
-
-    @Override
-    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-        super.onActivityResult(_requestCode, _resultCode, _data);
-
-        switch (_requestCode) {
-
-            default:
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -1967,7 +1944,8 @@ public class StreamerActivity extends AppCompatActivity {
             image_user.clearColorFilter();
             _drawer_image_user.clearColorFilter();
         }
-        /*if (tmservice != null) {
+        /*
+        if (tmservice != null) {
             if (!currentlyPlaying.equals("") && !tmservice._isMpNull()) {
                 if (currentlyMap.get(currentlyChild.indexOf(currentlyPlaying)).containsKey("img")) {
                     image_album.clearColorFilter();
@@ -1978,8 +1956,8 @@ public class StreamerActivity extends AppCompatActivity {
                     text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
                 }
             }
-        }*/
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+        }
+        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();*/
     }
 
     @Override
@@ -2000,7 +1978,7 @@ public class StreamerActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        _unbindSvc();
+        //_unbindSvc();
     }
 
     private void _shadow(final View _v, final double _n) {
@@ -2153,8 +2131,8 @@ public class StreamerActivity extends AppCompatActivity {
         text_zene.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         text_playlist.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         edittext_search.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        //x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
-        //x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
+        x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
+        x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
 
         {
             ViewGroup _vg = (ViewGroup) x_tab.getChildAt(0);
@@ -2626,27 +2604,28 @@ public class StreamerActivity extends AppCompatActivity {
 
     private void _play(final String _key) {
         _CoreProgressLoading(true);
-        final double _position = currentlyChild.indexOf(_key);
+        final int _pos = (int) currentlyChild.indexOf(_key);
+        tempMap = currentlyMap.get(_pos);
         currentlyPlaying = _key;
-        text_title.setText(currentlyMap.get((int) _position).get("name").toString());
-        if (usrname_list.contains(currentlyMap.get((int) _position).get("uid").toString())) {
-            text_artist.setText(profile_map.get(usrname_list.indexOf(currentlyMap.get((int) _position).get("uid").toString())).get("username").toString());
+        text_title.setText(tempMap.get("name").toString());
+        if (usrname_list.contains(tempMap.get("uid").toString())) {
+            text_artist.setText(profile_map.get(usrname_list.indexOf(tempMap.get("uid").toString())).get("username").toString());
         } else {
-            text_artist.setText(currentlyMap.get((int) _position).get("uid").toString());
+            text_artist.setText(tempMap.get("uid").toString());
         }
-        if (adminsList.contains(currentlyMap.get((int) _position).get("uid").toString())) {
+        if (adminsList.contains(tempMap.get("uid").toString())) {
             text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorButton").toString()));
         } else {
             text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
         }
-        if (currentlyMap.get((int) _position).containsKey("img")) {
+        if (tempMap.containsKey("img")) {
             image_album.clearColorFilter();
-            Glide.with(getApplicationContext()).load(currentlyMap.get((int) _position).get("img").toString()).centerCrop().into(image_album);
+            Glide.with(getApplicationContext()).load(tempMap.get("img").toString()).centerCrop().into(image_album);
         } else {
             image_album.setImageResource(R.drawable.ic_album_white);
             image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
         }
-        zz.requestAction("play", currentlyMap.get((int) _position).get("url").toString());
+        zz.play(tempMap.get("url").toString(), tempMap.get("name").toString(), "ZryteZene", tempMap.containsKey("img") ? tempMap.get("img").toString() : "-");
     }
 
     private void _shape(final double _tl, final double _tr, final double _bl, final double _br, final String _BGcolor, final String _Scolor, final double _Swidth, final View _view) {
@@ -3205,9 +3184,9 @@ public class StreamerActivity extends AppCompatActivity {
                                                 d.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface _dialog, int _which) {
-                                                        _firebase_storage.getReferenceFromUrl(upload_list.get(_position).get("url").toString()).delete().addOnSuccessListener(_upload_storage_delete_success_listener).addOnFailureListener(_upload_storage_failure_listener);
+                                                        FirebaseStorage.getInstance().getReferenceFromUrl(upload_list.get(_position).get("url").toString()).delete().addOnSuccessListener(_upload_storage_delete_success_listener).addOnFailureListener(_upload_storage_failure_listener);
                                                         if (upload_list.get(_position).containsKey("img")) {
-                                                            _firebase_storage.getReferenceFromUrl(upload_list.get(_position).get("img").toString()).delete().addOnSuccessListener(_music_image_delete_success_listener).addOnFailureListener(_music_image_failure_listener);
+                                                            FirebaseStorage.getInstance().getReferenceFromUrl(upload_list.get(_position).get("img").toString()).delete().addOnSuccessListener(_music_image_delete_success_listener).addOnFailureListener(_music_image_failure_listener);
                                                         }
                                                         upload_text.child(childkey.get(_position)).removeValue();
                                                         _customSnack("Delete success!", 1);

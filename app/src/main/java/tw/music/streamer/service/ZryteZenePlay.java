@@ -16,6 +16,9 @@ import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
+//import androidx.media.session.MediaSessionCompat;
+
+import android.support.v4.media.session.MediaSessionCompat;
 
 import tw.music.streamer.notification.ZryteZeneNotification;
 
@@ -24,22 +27,23 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	public static final String ACTION_BROADCAST = "tw.music.streamer.ACTION";
 	public static final String ACTION_UPDATE = "tw.music.streamer.ACTION_UPDATE";
 	
-	public static final String CHANNEL_ID = "music_channel";
+	public static final String CHANNEL_ID = "zrytezene_channel";
 	public static final int NOTIFICATION_ID = 2;
 	
 	private BroadcastReceiver br;
 	private MediaPlayer mp;
 	private IntentFilter ief;
 	private SharedPreferences sp;
-	private String lm, act, csp;
+	private String lm, act, csp, sn, sa, sc;
 	private Intent ita;
 	private Handler ha = new Handler();
 	private boolean pd = false;
+	private MediaSessionCompat msc;
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		initializePlayer();
+		if (ief == null) initializePlayer();
 	}
 	
 	@Override
@@ -55,6 +59,10 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp!=null) {
 			mp.release();
 			mp = null;
+		}
+		if (msc!=null) {
+			msc.release();
+			msc = null;
 		}
 		super.onDestroy();
 	}
@@ -80,6 +88,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
 		sp = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
 		lm = sp.getString("fvsAsc", "");
+		msc = new MediaSessionCompat(getApplicationContext(), "ZryteZenePlay");
 		mp = new MediaPlayer();
 		br = new BroadcastReceiver() {
 			@Override
@@ -97,7 +106,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	public void onPrepared(MediaPlayer a) {
 		a.start();
 		pd = true;
-		ZryteZeneNotification.update(getApplicationContext(), true);
+		ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc);
 		tellActivity("on-prepared",a.getDuration());
 		ha.post(pr);
 	}
@@ -109,13 +118,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	@Override
 	public void onCompletion(MediaPlayer a) {
-		ZryteZeneNotification.update(getApplicationContext(), "Idle...");
+		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
 		tellActivity("on-completion","1");
 	}
 	
 	@Override
 	public boolean onError(MediaPlayer a, int b, int c) {
-		ZryteZeneNotification.update(getApplicationContext(), "Idle...");
+		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
 		tellActivity("on-error", String.format("Error(%s%s)", b, c));
 		return true;
 	}
@@ -158,7 +167,10 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	}
 	
 	private void playSong(Intent a) {
-		csp = a.getStringExtra("req-data");
+		csp = a.getStringExtra("path");
+		sn = a.getStringExtra("title");
+		sa = a.getStringExtra("artist");
+		sc = a.getStringExtra("cover");
 		if (mp != null) {
 			mp.reset();
 		} else {
@@ -179,7 +191,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (mp.isPlaying()) {
 			mp.pause();
-			ZryteZeneNotification.update(getApplicationContext(), false);
+			ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
 			tellActivity("request-pause");
 		}
 	}
@@ -188,7 +200,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (isPrepared() && !mp.isPlaying()) {
 			mp.start();
-			ZryteZeneNotification.update(getApplicationContext(), true);
+			ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc);
 			tellActivity("request-resume");
 		}
 	}
