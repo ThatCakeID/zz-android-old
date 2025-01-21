@@ -71,6 +71,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     private void initVariables(Context a) {
         zz_songs = new ArrayList<>();
+        zz_songs2 = new ArrayList<>();
         ra_songs = new ZZRandomSongAdapter(zz_songs2);
         ar_songs = new ZZSongAdapter(zz_songs);
         lm1 = new LinearLayoutManager(a, LinearLayoutManager.HORIZONTAL, false);
