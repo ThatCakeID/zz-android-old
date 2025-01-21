@@ -2,7 +2,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="#FFFFFF">
+	android:background="#000000">
 	<androidx.core.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -24,17 +24,24 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:padding="8dp"
+				android:padding="12dp"
 				android:text="Random Picks"
-				android:textSize="15sp"
+				android:textSize="17sp"
 				android:textStyle="bold"
-				android:textColor="#000000"
-				android:layout_marginBottom="8dp"/>
+				android:textColor="#000000"/>
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/random_music_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="8dp"/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="12dp"
+				android:text="Uploaded by Users"
+				android:textSize="17sp"
+				android:textStyle="bold"
+				android:textColor="#000000"/>
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/uploaded_music_container"
 				android:layout_width="match_parent"
@@ -55,16 +62,20 @@
 		android:background="#4D000000"
 	    android:orientation="horizontal">
         <LinearLayout
+			android:id="@+id/sbmb1"
             android:layout_width="0dp"
 		    android:layout_height="match_parent"
             android:layout_weight="1"
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
+				android:id="@+id/sbmi1"
                 android:layout_width="30dp"
 				android:layout_height="30dp"
+				android:src="@drawable/ic_headset"
                 android:scaleType="fitXY"/>
             <TextView
+				android:id="@+id/sbmt1"
                 android:layout_width="match_parent"
 				android:layout_height="wrap_content"
                 android:gravity="center"
@@ -76,16 +87,20 @@
                 android:padding="2dp"/>
         </LinearLayout>
 		<LinearLayout
+			android:id="@+id/sbmb2"
             android:layout_width="0dp"
 		    android:layout_height="match_parent"
             android:layout_weight="1"
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
+				android:id="@+id/sbmi2"
                 android:layout_width="30dp"
 				android:layout_height="30dp"
+				android:src="@drawable/ic_search_white"
                 android:scaleType="fitXY"/>
             <TextView
+				android:id="@+id/sbmt2"
                 android:layout_width="match_parent"
 				android:layout_height="wrap_content"
                 android:gravity="center"
@@ -97,16 +112,20 @@
                 android:padding="2dp"/>
         </LinearLayout>
 		<LinearLayout
+			android:id="@+id/sbmb3"
             android:layout_width="0dp"
 		    android:layout_height="match_parent"
             android:layout_weight="1"
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
+				android:id="@+id/sbmi3"
                 android:layout_width="30dp"
 				android:layout_height="30dp"
+				android:src="@drawable/ic_book"
                 android:scaleType="fitXY"/>
             <TextView
+				android:id="@+id/sbmt3"
                 android:layout_width="match_parent"
 				android:layout_height="wrap_content"
                 android:gravity="center"
@@ -118,17 +137,20 @@
                 android:padding="2dp"/>
         </LinearLayout>
 		<LinearLayout
+			android:id="@+id/sbmb4"
             android:layout_width="0dp"
 		    android:layout_height="match_parent"
             android:layout_weight="1"
 		    android:orientation="vertical"
             android:gravity="center">
             <ImageView
+				android:id="@+id/sbmi4"
                 android:layout_width="30dp"
 				android:layout_height="30dp"
                 android:scaleType="centerCrop"
 				android:id="@+id/profile_icon"/>
             <TextView
+				android:id="@+id/sbmt4"
                 android:layout_width="match_parent"
 				android:layout_height="wrap_content"
                 android:gravity="center"
