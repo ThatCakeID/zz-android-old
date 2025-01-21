@@ -6,7 +6,7 @@ public class ZZSong {
 
     public static final String PATH = "https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/zrytezene%2Fsongs%2F";
 
-    public String key, url_song, url_icon, url_cover, uploader_uid, uploader_name, song_name, song_artist;
+    public String key, url_song, url_icon, url_cover, uploader_uid, uploader_name, song_name, song_artist, color1;
     public boolean playing;
 
     public ZZSong(DataSnapshot a) {
@@ -19,5 +19,6 @@ public class ZZSong {
         uploader_name = a.child("uploader").getValue(String.class);
         song_name = a.child("title").getValue(String.class);
         song_artist = a.child("artist").getValue(String.class);
+        color1 = a.child("color-bline").getValue(String.class);
     }
 }
