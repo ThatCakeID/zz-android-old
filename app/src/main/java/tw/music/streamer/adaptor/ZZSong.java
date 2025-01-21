@@ -4,7 +4,7 @@ import com.google.firebase.database.DataSnapshot;
 
 public class ZZSong {
 
-    public static String PATH = "https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/zrytezene%2Fsongs%2F";
+    public static final String PATH = "https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/zrytezene%2Fsongs%2F";
 
     public String key, url_song, url_icon, url_cover, uploader_uid, uploader_name, song_name, song_artist;
     public boolean playing;
