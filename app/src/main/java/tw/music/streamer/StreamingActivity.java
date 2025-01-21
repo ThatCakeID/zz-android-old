@@ -87,7 +87,7 @@ public class StreamingActivity extends AppCompatActivity {
                 if (b.exists()) {
                     //String musicData = b.getValue(String.class);
                     for (DataSnapshot c : b.getChildren()) {
-                        zz_songs.add(new ZZSong(c.getKey(), c.getValue()));
+                        zz_songs.add(new ZZSong(c));
                     }
                     ar_songs.notifyDataSetChanged();
                 } else {
