@@ -127,7 +127,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     private void initLayout() {
         user_welcome = findViewById(R.id.profile_name);
-        user_icon = findViewById(R.id.profile_icon)
+        user_icon = findViewById(R.id.profile_icon);
         rv_random_songs = findViewById(R.id.random_music_container);
         rv_songs = findViewById(R.id.uploaded_music_container);
     }
