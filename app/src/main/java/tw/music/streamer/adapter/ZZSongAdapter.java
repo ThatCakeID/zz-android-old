@@ -35,7 +35,7 @@ public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHold
     public void onBindViewHolder(@NonNull ZZViewHolder h, int p) {
         h.title.setText(data.get(p).song_name);
         h.artist.setText(data.get(p).song_artist);
-        Glide.with(getApplicationContext()).load(data.get(p).url_cover).into(h.cover);
+        Glide.with(h.title.getContext()).load(data.get(p).url_cover).into(h.cover);
     }
 
     @Override
