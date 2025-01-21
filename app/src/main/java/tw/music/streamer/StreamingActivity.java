@@ -160,6 +160,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     private void initLogic(Context a) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.WHITE);
         menu_bar.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.argb(90,255,255,255),Color.argb(200,255,255,255)}));
 		rv_random_songs.setLayoutManager(lm1);
         rv_random_songs.setAdapter(ra_songs);
