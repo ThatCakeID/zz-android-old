@@ -136,7 +136,7 @@ public class StreamingActivity extends AppCompatActivity {
     }
 
     private void initLogic(Context a) {
-		rv_random_songs.setLayoutManager(lm2);
+		rv_random_songs.setLayoutManager(lm1);
         rv_songs.setLayoutManager(lm2);
         rv_songs.setAdapter(ar_songs);
     }
