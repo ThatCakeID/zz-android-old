@@ -50,7 +50,8 @@
 	<LinearLayout
 		android:id="@+id/sb_bottom_menu_bar"
         android:layout_width="match_parent"
-	    android:layout_height="60dp"
+	    android:layout_height="90dp"
+		android:paddingTop="30dp"
 		android:background="#4D000000"
 	    android:orientation="horizontal">
         <LinearLayout
