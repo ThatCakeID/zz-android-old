@@ -12,9 +12,9 @@ public class ZZSong {
     public ZZSong(DataSnapshot a) {
         playing = false;
         key = a.getKey();
-        url_song = a.child("song").getValue(String.class);
-        url_icon = a.child("icon").getValue(String.class);
-        url_cover = a.child("cover").getValue(String.class);
+        url_song = PATH + a.child("song").getValue(String.class);
+        url_icon = PATH + a.child("icon").getValue(String.class);
+        url_cover = PATH + a.child("cover").getValue(String.class);
         uploader_uid = a.child("uid").getValue(String.class);
         uploader_name = a.child("uploader").getValue(String.class);
         song_name = a.child("title").getValue(String.class);
