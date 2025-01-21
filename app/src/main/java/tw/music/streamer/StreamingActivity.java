@@ -50,17 +50,17 @@ public class StreamingActivity extends AppCompatActivity {
 
     private ArrayList<ZZSong> zz_songs;
 
-    private ZZSongAdapter ar_songs;
+    //private ZZSongAdapter ar_songs;
 
     @Override
     protected void onCreate(Bundle a) {
         super.onCreate(a);
         setContentView(R.layout.stream_base);
-        initVariables(getApplicationContext());
-        initFirebase();
-        initLayout();
-        initLogic(getApplicationContext());
-        initFirebaseListener(getApplicationContext());
+        //initVariables(getApplicationContext());
+        //initFirebase();
+        //initLayout();
+        //initLogic(getApplicationContext());
+        //initFirebaseListener(getApplicationContext());
     }
 
     private void initVariables(Context a) {
