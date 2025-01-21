@@ -45,8 +45,11 @@ public class StreamingActivity extends AppCompatActivity {
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
     private TextView user_welcome;
+    private ImageView user_icon;
 
     private ArrayList<ZZSong> zz_songs;
+
+    private ZZSongAdapter ar_songs;
 
     @Override
     protected void onCreate(Bundle a) {
@@ -102,7 +105,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
-                    Glide.with(z).load(b.child("url").getValue(String.class)).into(profile_icon);
+                    Glide.with(z).load(b.child("url").getValue(String.class)).into(user_icon);
                 } else {
                     // error: photo profile not found
                 }
