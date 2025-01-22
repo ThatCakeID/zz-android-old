@@ -113,7 +113,7 @@ public class ZryteZeneAdaptor {
             jof.putExtra("cover", d);
             ctx.sendBroadcast(jof);
         } else {
-            Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
+            Intent siop = new Intent(ctx, ZryteZenePlay.class);
             siop.putExtra("action", "play");
             siop.putExtra("path", a);
             siop.putExtra("title", b);
