@@ -49,7 +49,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	@Override
 	public int onStartCommand(Intent a, int b, int c) {
 		if (ief == null) initializePlayer();
-		if (a != null) onReceived2(a);
+		if (a != null) onReceived(a);
 		return START_STICKY;
 	}
 	
@@ -134,32 +134,6 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	}
 	
 	private void onReceived(Context a, Intent b) {
-		if (b.getAction() == null) return;
-		if (!b.getAction().equals(ACTION_BROADCAST)) return;
-		if (!b.hasExtra("action")) return;
-		act = b.getStringExtra("action");
-		if (act.equals("seek")) {
-			seekSong(b);
-		} else if (act.equals("play")) {
-			playSong(b);
-		} else if (act.equals("pause")) {
-			pauseSong();
-		} else if (act.equals("resume")) {
-			resumeSong();
-		} else if (act.equals("stop")) {
-			stopSong();
-		} else if (act.equals("update-sp")) {
-			updateSP(b);
-		} else if (act.equals("restart-song")) {
-			restartSong();
-		} else if (act.equals("reset")) {
-			resetMedia();
-		} else if (act.equals("request-media")) {
-			requestMedia();
-		}
-	}
-
-	private void onReceived2(Intent b) {
 		if (!b.hasExtra("action")) return;
 		act = b.getStringExtra("action");
 		if (act.equals("seek")) {
