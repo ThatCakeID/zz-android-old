@@ -273,17 +273,8 @@ public class StreamingActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).transform(new RoundedCorners(dip(5))).into(mp_icon);
         mp_base.setVisibility(View.VISIBLE);
         bg_drop.setAlpha(0);
-        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(GlideException b, Object c, Target<Drawable> d, boolean e) {
-                return false;
-            }
-            @Override
-            public boolean onResourceReady(Drawable f, Object g, Target<Drawable> h, DataSource i, boolean j) {
-                bg_drop.animate().setDuration(1000).alpha(1f).start();
-                return false;
-            }
-        }).into(bg_drop);
+        bg_drop.animate().setDuration(1000).alpha(1f).start();
+        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).into(bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
         zz.play(zz_songs.get(a).url_song, zz_songs.get(a).song_name, zz_songs.get(a).song_artist, zz_songs.get(a).url_cover);
     }
