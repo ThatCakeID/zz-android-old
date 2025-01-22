@@ -104,12 +104,22 @@ public class ZryteZeneAdaptor {
     }
 
     public void play(String a, String b, String c, String d) {
-        Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
-        jof.putExtra("action", "play");
-        jof.putExtra("path", a);
-        jof.putExtra("title", b);
-        jof.putExtra("artist", c);
-        jof.putExtra("cover", d);
-        ctx.sendBroadcast(jof);
+        if (isr) {
+            Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
+            jof.putExtra("action", "play");
+            jof.putExtra("path", a);
+            jof.putExtra("title", b);
+            jof.putExtra("artist", c);
+            jof.putExtra("cover", d);
+            ctx.sendBroadcast(jof);
+        } else {
+            Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
+            siop.putExtra("action", "play");
+            siop.putExtra("path", a);
+            siop.putExtra("title", b);
+            siop.putExtra("artist", c);
+            siop.putExtra("cover", d);
+            startForegroundService(siop);
+        }
     }
 }
