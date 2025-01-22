@@ -36,36 +36,19 @@ import tw.music.streamer.service.ZryteZenePlay;
 public class StreamingActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private DatabaseReference db_song;
-    private DatabaseReference db_drsong;
-    private StorageReference fs_quota;
+    private DatabaseReference db_song, db_drsong;
     private StorageReference fs_music;
-    private StorageReference fs_icon;
-    private StorageReference fs_cover;
 
     private ZryteZeneAdaptor zz;
 
-    private RecyclerView rv_random_songs;
-    private RecyclerView rv_songs;
+    private RecyclerView rv_random_songs, rv_songs;
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
-    private TextView user_welcome;
-    private TextView taptext1;
-    private TextView taptext2;
-    private TextView taptext3;
-    private TextView taptext4;
-    private ImageView user_icon;
-    private ImageView tapicon1;
-    private ImageView tapicon2;
-    private ImageView tapicon3;
-    private LinearLayout menu_bar;
-    private LinearLayout tapbar1;
-    private LinearLayout tapbar2;
-    private LinearLayout tapbar3;
-    private LinearLayout tapbar4;
+    private TextView user_welcome, taptext1, taptext2, taptext3, taptext4;
+    private ImageView user_icon, tapicon1, tapicon2, tapicon3;
+    private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4;
 
-    private ArrayList<ZZSong> zz_songs;
-    private ArrayList<ZZSong> zz_songs2;
+    private ArrayList<ZZSong> zz_songs, zz_songs2;
 
     private ZZRandomSongAdapter ra_songs;
     private ZZSongAdapter ar_songs;
@@ -97,15 +80,6 @@ public class StreamingActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db_song = FirebaseDatabase.getInstance().getReference("zrytezene/songs");
         db_drsong = FirebaseDatabase.getInstance().getReference("zrytezene/daily-random-songs");
-        //db_admin = FirebaseDatabase.getInstance().getReference("profile/admins");
-        //db_comment = FirebaseDatabase.getInstance().getReference("zrytezene/comments");
-        //db_profile = FirebaseDatabase.getInstance().getReference("profile/text");
-        //db_like = FirebaseDatabase.getInstance().getReference("zrytezene/likes");
-        //db_profileimg = FirebaseDatabase.getInstance().getReference("profile/image");
-        fs_quota = FirebaseStorage.getInstance().getReference("/");
-        fs_music = FirebaseStorage.getInstance().getReference("zrytezene/songs");
-        fs_icon = FirebaseStorage.getInstance().getReference("zrytezene/icons");
-        fs_cover = FirebaseStorage.getInstance().getReference("zrytezene/covers");
     }
 
     private void initFirebaseListener(final Context z) {
@@ -113,7 +87,6 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists()) {
-                    //String musicData = b.getValue(String.class);
                     for (DataSnapshot c : b.getChildren()) {
                         zz_songs.add(new ZZSong(c));
                     }
@@ -143,11 +116,7 @@ public class StreamingActivity extends AppCompatActivity {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
                     Glide.with(z).load(b.child("url").getValue(String.class)).apply(RequestOptions.circleCropTransform()).into(user_icon);
-                } else {
-                    // error: photo profile not found
                 }
-            } else {
-                // error: task.getException().getMessage()
             }
         });
 
@@ -156,11 +125,7 @@ public class StreamingActivity extends AppCompatActivity {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("username")) {
                     user_welcome.setText("Hello, " + b.child("username").getValue(String.class) + "!");
-                } else {
-                    // error: name not found
                 }
-            } else {
-                // error: task.getException().getMessage()
             }
         });
     }
