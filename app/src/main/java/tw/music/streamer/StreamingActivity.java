@@ -268,8 +268,6 @@ public class StreamingActivity extends AppCompatActivity {
         mp_play.setImageResource(R.drawable.ic_pause_white);
         Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).transform(new RoundedCorners(dip(5))).into(mp_icon);
         mp_base.setVisibility(View.VISIBLE);
-        bg_drop.setAlpha(0);
-        bg_drop.animate().setDuration(1000).alpha(1f).start();
         Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).into(bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
         zz.play(zz_songs.get(a).url_song, zz_songs.get(a).song_name, zz_songs.get(a).song_artist, zz_songs.get(a).url_cover);
