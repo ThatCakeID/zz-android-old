@@ -49,8 +49,20 @@ public class StreamingActivity extends AppCompatActivity {
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
     private TextView user_welcome;
+    private TextView taptext1;
+    private TextView taptext2;
+    private TextView taptext3;
+    private TextView taptext4;
     private ImageView user_icon;
+    private ImageView tapicon1;
+    private ImageView tapicon2;
+    private ImageView tapicon3;
+    private ImageView tapicon4;
     private LinearLayout menu_bar;
+    private LinearLayout tapbar1;
+    private LinearLayout tapbar2;
+    private LinearLayout tapbar3;
+    private LinearLayout tapbar4;
 
     private ArrayList<ZZSong> zz_songs;
     private ArrayList<ZZSong> zz_songs2;
@@ -65,6 +77,7 @@ public class StreamingActivity extends AppCompatActivity {
         initVariables(getApplicationContext());
         initFirebase();
         initLayout();
+        initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
         initFirebaseListener(getApplicationContext());
     }
@@ -156,16 +169,79 @@ public class StreamingActivity extends AppCompatActivity {
         rv_random_songs = findViewById(R.id.random_music_container);
         rv_songs = findViewById(R.id.uploaded_music_container);
         menu_bar = findViewById(R.id.sb_bottom_menu_bar);
+        tapbar1 = findViewById(R.id.sbmb1);
+        tapbar2 = findViewById(R.id.sbmb2);
+        tapbar3 = findViewById(R.id.sbmb3);
+        tapbar4 = findViewById(R.id.sbmb4);
+        tapicon1 = findViewById(R.id.sbmi1);
+        tapicon2 = findViewById(R.id.sbmi2);
+        tapicon3 = findViewById(R.id.sbmi3);
+        tapicon4 = findViewById(R.id.sbmi4);
+        taptext1 = findViewById(R.id.sbmt1);
+        taptext2 = findViewById(R.id.sbmt2);
+        taptext3 = findViewById(R.id.sbmt3);
+        taptext4 = findViewById(R.id.sbmt4);
     }
 
-    private void initLogic(Context a) {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(Color.WHITE);
-        menu_bar.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.argb(90,255,255,255),Color.argb(200,255,255,255)}));
+    private void initOnClick(final Context a) {
+        tapbar1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                openMenuBar(1);
+            }
+        });
+        tapbar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                openMenuBar(2);
+            }
+        });
+        tapbar3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                openMenuBar(3);
+            }
+        });
+        tapbar4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                openMenuBar(4);
+            }
+        });
+    }
+
+    private void initLogic(final Context a) {
+        openMenuBar(1);
+        getWindow().setStatusBarColor(0xFF000000);
+        menu_bar.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.argb(90,0,0,0),Color.argb(150,0,0,0)}));
 		rv_random_songs.setLayoutManager(lm1);
         rv_random_songs.setAdapter(ra_songs);
         rv_songs.setLayoutManager(lm2);
         rv_songs.setAdapter(ar_songs);
+    }
+
+    private void openMenuBar(int a) {
+        tapicon1.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
+        tapicon2.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
+        tapicon3.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
+        tapicon4.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
+        taptext1.setTextColor(0xFFE0E0E0);
+        taptext2.setTextColor(0xFFE0E0E0);
+        taptext3.setTextColor(0xFFE0E0E0);
+        taptext4.setTextColor(0xFFE0E0E0);
+        if (a == 1) {
+            tapicon1.clearColorFilter();
+            taptext1.setTextColor(0xFFFFFFFF);
+        } else if (a == 2) {
+            tapicon2.clearColorFilter();
+            taptext2.setTextColor(0xFFFFFFFF);
+        } else if (a == 3) {
+            tapicon3.clearColorFilter();
+            taptext3.setTextColor(0xFFFFFFFF);
+        } else if (a == 4) {
+            tapicon4.clearColorFilter();
+            taptext4.setTextColor(0xFFFFFFFF);
+        }
     }
 
 }
