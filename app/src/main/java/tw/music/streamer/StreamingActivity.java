@@ -57,7 +57,6 @@ public class StreamingActivity extends AppCompatActivity {
     private ImageView tapicon1;
     private ImageView tapicon2;
     private ImageView tapicon3;
-    private ImageView tapicon4;
     private LinearLayout menu_bar;
     private LinearLayout tapbar1;
     private LinearLayout tapbar2;
@@ -176,7 +175,6 @@ public class StreamingActivity extends AppCompatActivity {
         tapicon1 = findViewById(R.id.sbmi1);
         tapicon2 = findViewById(R.id.sbmi2);
         tapicon3 = findViewById(R.id.sbmi3);
-        tapicon4 = findViewById(R.id.sbmi4);
         taptext1 = findViewById(R.id.sbmt1);
         taptext2 = findViewById(R.id.sbmt2);
         taptext3 = findViewById(R.id.sbmt3);
@@ -224,7 +222,6 @@ public class StreamingActivity extends AppCompatActivity {
         tapicon1.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
         tapicon2.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
         tapicon3.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
-        tapicon4.setColorFilter(0xFFE0E0E0, PorterDuff.Mode.MULTIPLY);
         taptext1.setTextColor(0xFFE0E0E0);
         taptext2.setTextColor(0xFFE0E0E0);
         taptext3.setTextColor(0xFFE0E0E0);
@@ -239,7 +236,6 @@ public class StreamingActivity extends AppCompatActivity {
             tapicon3.clearColorFilter();
             taptext3.setTextColor(0xFFFFFFFF);
         } else if (a == 4) {
-            tapicon4.clearColorFilter();
             taptext4.setTextColor(0xFFFFFFFF);
         }
     }
