@@ -286,6 +286,7 @@ public class StreamingActivity extends AppCompatActivity {
             }
         }).into(bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
+        zz.play(zz_songs.get(a).url_song, zz_songs.get(a).song_name, zz_songs.get(a).song_artist, zz_songs.get(a).url_cover);
     }
 
     private void openMenuBar(int a, boolean b) {
