@@ -104,12 +104,46 @@ public class ZryteZeneAdaptor {
     }
 
     public void play(String a, String b, String c, String d) {
-        Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
-        jof.putExtra("action", "play");
-        jof.putExtra("path", a);
-        jof.putExtra("title", b);
-        jof.putExtra("artist", c);
-        jof.putExtra("cover", d);
-        ctx.sendBroadcast(jof);
+        if (isr) {
+            Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
+            jof.putExtra("action", "play");
+            jof.putExtra("path", a);
+            jof.putExtra("title", b);
+            jof.putExtra("artist", c);
+            jof.putExtra("cover", d);
+            ctx.sendBroadcast(jof);
+        } else {
+            Intent siop = new Intent(ctx, ZryteZenePlay.class);
+            siop.putExtra("action", "play");
+            siop.putExtra("path", a);
+            siop.putExtra("title", b);
+            siop.putExtra("artist", c);
+            siop.putExtra("cover", d);
+            ctx.startForegroundService(siop);
+            isr = true;
+        }
+    }
+
+    public void play(ZZSong a) {
+        if (isr) {
+            Intent jof = new Intent(ZryteZenePlay.ACTION_BROADCAST);
+            jof.putExtra("action", "play");
+            jof.putExtra("path", a.url_song);
+            jof.putExtra("title", a.song_name);
+            jof.putExtra("artist", a.song_artist);
+            jof.putExtra("cover", a.url_cover);
+            jof.putExtra("key", a.key);
+            ctx.sendBroadcast(jof);
+        } else {
+            Intent siop = new Intent(ctx, ZryteZenePlay.class);
+            siop.putExtra("action", "play");
+            siop.putExtra("path", a.url_song);
+            siop.putExtra("title", a.song_name);
+            siop.putExtra("artist", a.song_artist);
+            siop.putExtra("cover", a.url_cover);
+            siop.putExtra("key", a.key);
+            ctx.startForegroundService(siop);
+            isr = true;
+        }
     }
 }

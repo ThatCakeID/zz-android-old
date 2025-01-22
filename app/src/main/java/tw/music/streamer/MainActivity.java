@@ -994,7 +994,7 @@ public class MainActivity extends AppCompatActivity {
             if ((double) packageInfo.versionCode > Double.parseDouble(data.getString("lastVersion", ""))) {
                 _dispChglog();
             } else {
-                activityChanger.setClass(getApplicationContext(), StreamerActivity.class);
+                activityChanger.setClass(getApplicationContext(), StreamingActivity.class);
                 startActivity(activityChanger);
                 finish();
             }
@@ -1010,7 +1010,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface _dialog, int _which) {
                 data.edit().putString("lastVersion", String.valueOf((long) ((double) packageInfo.versionCode))).commit();
-                activityChanger.setClass(getApplicationContext(), StreamerActivity.class);
+                activityChanger.setClass(getApplicationContext(), StreamingActivity.class);
                 startActivity(activityChanger);
                 finish();
             }

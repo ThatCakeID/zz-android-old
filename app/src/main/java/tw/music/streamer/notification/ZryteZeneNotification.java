@@ -30,19 +30,17 @@ import tw.music.streamer.StreamerActivity;
 public class ZryteZeneNotification {
 	
 	public static Notification setup(Context a) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NotificationChannel ch = new NotificationChannel(
-			ZryteZenePlay.CHANNEL_ID,
-			"ZryteZene Player",
-			NotificationManager.IMPORTANCE_LOW
-			);
-			ch.setSound(null, null);
-			ch.enableLights(false);
-			ch.enableVibration(false);
-			NotificationManager mr = a.getSystemService(NotificationManager.class);
-			if (mr != null) {
-				mr.createNotificationChannel(ch);
-			}
+		NotificationChannel ch = new NotificationChannel(
+		ZryteZenePlay.CHANNEL_ID,
+		"ZryteZene Player",
+		NotificationManager.IMPORTANCE_LOW
+		);
+		ch.setSound(null, null);
+		ch.enableLights(false);
+		ch.enableVibration(false);
+		NotificationManager mr = a.getSystemService(NotificationManager.class);
+		if (mr != null) {
+			mr.createNotificationChannel(ch);
 		}
 
 		Intent openAppIntent = new Intent(a, StreamerActivity.class);
@@ -78,17 +76,15 @@ public class ZryteZeneNotification {
 	}
 
 	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        	NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
-        	NotificationManager manager = a.getSystemService(NotificationManager.class);
-        	if (manager != null) {
-           		manager.createNotificationChannel(channel);
-        	}
-    	}
+        NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
+        NotificationManager manager = a.getSystemService(NotificationManager.class);
+        if (manager != null) {
+           	manager.createNotificationChannel(channel);
+        }
 
-    	Intent playPauseIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", b ? "pause" : "resume");
-    	Intent previousIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", "previous");
-    	Intent nextIntent = new Intent(a, ZryteZenePlay.class).setAction(ZryteZenePlay.ACTION_BROADCAST).putExtra("action", "forward");
+    	Intent playPauseIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", b ? "pause" : "resume"); //setAction(ZryteZenePlay.ACTION_BROADCAST).
+    	Intent previousIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", "previous");
+    	Intent nextIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", "forward");
 		PendingIntent playPausePendingIntent = PendingIntent.getService(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		PendingIntent previousPendingIntent = PendingIntent.getService(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     	PendingIntent nextPendingIntent = PendingIntent.getService(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
