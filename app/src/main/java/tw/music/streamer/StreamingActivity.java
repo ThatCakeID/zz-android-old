@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.LinearLayout;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +57,7 @@ public class StreamingActivity extends AppCompatActivity {
     private TextView user_welcome, taptext1, taptext2, taptext3, taptext4, mp_title, mp_artist;
     private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, bg_drop;
     private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4, mp_base;
+    private ProgressBar mp_bar;
 
     private ArrayList<ZZSong> zz_songs, zz_songs2;
 
@@ -154,6 +156,7 @@ public class StreamingActivity extends AppCompatActivity {
         rv_songs = findViewById(R.id.uploaded_music_container);
         bg_drop = findViewById(R.id.sbbg);
         menu_bar = findViewById(R.id.sb_bottom_menu_bar);
+        mp_bar = findViewById(R.id.zzmp1_progress);
         mp_base = findViewById(R.id.zzmp1_base);
         mp_play = findViewById(R.id.zzmp1_play);
         mp_icon = findViewById(R.id.zzmp1_icon);
@@ -226,13 +229,12 @@ public class StreamingActivity extends AppCompatActivity {
                             zz.setPlaying(true);
                             zz.setCurrentDuration(0);
                             zz.setDuration(intent.getIntExtra("data",0)/1000);
-                            //seekbar1.setProgress(0);
-                            //seekbar1.setMax(zz.getDuration());
-                            //_showPlayer();
+                            mp_bar.setProgress(0);
+                            mp_bar.setMax(zz.getDuration());
                         } else if (m.equals("on-reqmedia")) {
                         } else if (m.equals("on-tick")) {
                             zz.setCurrentDuration(intent.getIntExtra("data",0));
-                            //seekbar1.setProgress(zz.getCurrentDuration()/1000);
+                            mp_bar.setProgress(zz.getCurrentDuration()/1000);
                         } else if (m.equals("on-completion")) {
                             zz.setPlaying(false);
                         } else if (m.equals("on-error")) {
@@ -279,10 +281,11 @@ public class StreamingActivity extends AppCompatActivity {
             }
             @Override
             public boolean onResourceReady(Drawable f, Object g, Target<Drawable> h, DataSource i, boolean j) {
-                bg_drop.animate().setDuration(1000).alpha(1f);
+                bg_drop.animate().setDuration(1000).alpha(1f).start();
                 return false;
             }
         }).into(bg_drop);
+        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
     }
 
     private void openMenuBar(int a, boolean b) {
