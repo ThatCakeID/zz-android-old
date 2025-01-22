@@ -229,6 +229,16 @@ public class StreamingActivity extends AppCompatActivity {
                             mp_bar.setProgress(0);
                             mp_bar.setMax(zz.getDuration());
                         } else if (m.equals("on-reqmedia")) {
+                            int b = intent.getIntExtra("status",0);
+                            if (b > 0) {
+                                if (b==1) mp_play.setImageResource(R.drawable.ic_pause_white);
+                                zz.setPlaying(b == 1);
+                                zz.setCurrentDuration(intent.getIntExtra("currentDuration",0)/1000);
+                                zz.setDuration(intent.getIntExtra("duration",0)/1000);
+                                mp_bar.setMax(zz.getDuration());
+                                mp_bar.setProgress(zz.getCurrentDuration());
+                                loadSongFromKey(intent.getStringExtra("key"));
+                            }
                         } else if (m.equals("on-tick")) {
                             zz.setCurrentDuration(intent.getIntExtra("data",0));
                             mp_bar.setProgress(zz.getCurrentDuration()/1000);
@@ -270,7 +280,23 @@ public class StreamingActivity extends AppCompatActivity {
         mp_base.setVisibility(View.VISIBLE);
         Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).into(bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
-        zz.play(zz_songs.get(a).url_song, zz_songs.get(a).song_name, zz_songs.get(a).song_artist, zz_songs.get(a).url_cover);
+        zz.play(zz_songs.get(a));
+    }
+
+    private void loadSongFromKey(String a) {
+        FirebaseDatabase.getInstance().getReference("zrytezene/songs/" + a).get().addOnCompleteListener(b -> {
+            if (b.isSuccessful()) {
+                DataSnapshot c = b.getResult();
+                if (c.exists()) {
+                    mp_artist.setText(c.child("artist").getValue(String.class));
+                    mp_title.setText(c.child("title").getValue(String.class));
+                    Glide.with(getApplicationContext()).load(c.child("icon").getValue(String.class)).transform(new RoundedCorners(dip(5))).into(mp_icon);
+                    mp_base.setVisibility(View.VISIBLE);
+                    Glide.with(getApplicationContext()).load(c.child("cover").getValue(String.class)).into(bg_drop);
+                    mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(c.child("color-bline").getValue(String.class))));
+                }
+            }
+        });
     }
 
     private void openMenuBar(int a, boolean b) {
