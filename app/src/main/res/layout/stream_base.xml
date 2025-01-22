@@ -55,8 +55,6 @@
 	    android:orientation="vertical"
         android:gravity="bottom">
 		<include
-			layout="@layout/zzminiplayer1"/>
-		<include
 			layout="@layout/zzbottomappbar1"/>
     </LinearLayout>
 
