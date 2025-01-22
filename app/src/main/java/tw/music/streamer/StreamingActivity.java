@@ -1,6 +1,9 @@
 package tw.music.streamer;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,8 +41,7 @@ public class StreamingActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference db_song, db_drsong;
     private StorageReference fs_music;
-
-    private ZryteZeneAdaptor zz;
+    private BroadcastReceiver zzreceiver;
 
     private RecyclerView rv_random_songs, rv_songs;
     private LinearLayoutManager lm1;
@@ -50,6 +52,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     private ArrayList<ZZSong> zz_songs, zz_songs2;
 
+    private ZryteZeneAdaptor zz;
     private ZZRandomSongAdapter ra_songs;
     private ZZSongAdapter ar_songs;
 
@@ -65,6 +68,7 @@ public class StreamingActivity extends AppCompatActivity {
         initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
         initFirebaseListener(getApplicationContext());
+        initBackgroundServices(getApplicationContext());
     }
 
     private void initVariables(Context a) {
@@ -188,6 +192,57 @@ public class StreamingActivity extends AppCompatActivity {
         rv_random_songs.setAdapter(ra_songs);
         rv_songs.setLayoutManager(lm2);
         rv_songs.setAdapter(ar_songs);
+    }
+
+    private void initBackgroundServices(final Context a) {
+        zz = new ZryteZeneAdaptor(a);
+        zzreceiver = new BroadcastReceiver() {
+		    @Override
+		    public void onReceive(Context context, Intent intent) {
+			    if (intent != null && intent.getAction() != null) {
+				    if (intent.getAction().equals(ZryteZenePlay.ACTION_UPDATE)) {
+					    String m = intent.getStringExtra("update");
+					    if (m.equals("on-prepared")) {
+                            zz.setPlaying(true);
+                            zz.setCurrentDuration(0);
+                            zz.setDuration(intent.getIntExtra("data",0)/1000);
+                            //seekbar1.setProgress(0);
+                            //seekbar1.setMax(zz.getDuration());
+                            //_showPlayer();
+                        } else if (m.equals("on-reqmedia")) {
+                        } else if (m.equals("on-tick")) {
+                            zz.setCurrentDuration(intent.getIntExtra("data",0));
+                            //seekbar1.setProgress(zz.getCurrentDuration()/1000);
+                        } else if (m.equals("on-completion")) {
+                            zz.setPlaying(false);
+                        } else if (m.equals("on-error")) {
+                            zz.addError(intent.getStringExtra("data"));
+                        } else if (m.equals("on-seekerror")) {
+                        } else if (m.equals("on-initialized")) {
+                        } else if (m.equals("on-bufferupdate")) {
+                            zz.setBufferingUpdate(intent.getIntExtra("data",0));
+                        } else if (m.equals("request-play")) {
+                        } else if (m.equals("request-pause")) {
+                            zz.setPlaying(false);
+                        } else if (m.equals("request-resume")) {
+                            zz.setPlaying(true);
+                        } else if (m.equals("request-stop")) {
+                            zz.setPlaying(false);
+                        } else if (m.equals("request-seek")) {
+                            zz.setCurrentDuration(intent.getIntExtra("data",0)/1000);
+                        } else if (m.equals("request-restart")) {
+                            zz.setCurrentDuration(0);
+                        } else if (m.equals("request-reset")) {
+                        }
+				    }
+			    }
+		    }
+	    };
+        //Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        //startForegroundService(siop);
+        IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
+		registerReceiver(zzreceiver, filr);
+        zz.requestAction("request-media");
     }
 
     private void openMenuBar(int a, boolean b) {
