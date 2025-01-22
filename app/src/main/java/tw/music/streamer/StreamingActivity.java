@@ -188,25 +188,25 @@ public class StreamingActivity extends AppCompatActivity {
         tapbar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View b) {
-                openMenuBar(1);
+                openMenuBar(1,true);
             }
         });
         tapbar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View b) {
-                openMenuBar(2);
+                openMenuBar(2,true);
             }
         });
         tapbar3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View b) {
-                openMenuBar(3);
+                openMenuBar(3,true);
             }
         });
         tapbar4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View b) {
-                openMenuBar(4);
+                openMenuBar(4,true);
             }
         });
     }
@@ -278,6 +278,11 @@ public class StreamingActivity extends AppCompatActivity {
     private void scaleLower(View a) {
         a.setScaleX(0.8f);
         a.setScaleY(0.8f);
+    }
+
+    private void scaleBigger(View a) {
+        a.setScaleX(1f);
+        a.setScaleY(1f);
     }
 
     private void animateScaleUp(View a) {
