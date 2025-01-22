@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -260,8 +261,6 @@ public class StreamingActivity extends AppCompatActivity {
 			    }
 		    }
 	    };
-        //Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
-        //startForegroundService(siop);
         IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
 		registerReceiver(zzreceiver, filr);
         zz.requestAction("request-media");
