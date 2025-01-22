@@ -1,14 +1,14 @@
 package tw.music.streamer;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
@@ -46,9 +46,9 @@ public class StreamingActivity extends AppCompatActivity {
     private RecyclerView rv_random_songs, rv_songs;
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
-    private TextView user_welcome, taptext1, taptext2, taptext3, taptext4;
-    private ImageView user_icon, tapicon1, tapicon2, tapicon3;
-    private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4;
+    private TextView user_welcome, taptext1, taptext2, taptext3, taptext4, mp_title, mp_artist;
+    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon;
+    private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4, mp_base;
 
     private ArrayList<ZZSong> zz_songs, zz_songs2;
 
@@ -140,6 +140,11 @@ public class StreamingActivity extends AppCompatActivity {
         rv_random_songs = findViewById(R.id.random_music_container);
         rv_songs = findViewById(R.id.uploaded_music_container);
         menu_bar = findViewById(R.id.sb_bottom_menu_bar);
+        mp_base = findViewById(R.id.zzmp1_base);
+        mp_play = findViewById(R.id.zzmp1_play);
+        mp_icon = findViewById(R.id.zzmp1_icon);
+        mp_title = findViewById(R.id.zzmp1_title);
+        mp_artist = findViewById(R.id.zzmp1_artist);
         tapbar1 = findViewById(R.id.sbmb1);
         tapbar2 = findViewById(R.id.sbmb2);
         tapbar3 = findViewById(R.id.sbmb3);
@@ -151,6 +156,7 @@ public class StreamingActivity extends AppCompatActivity {
         taptext2 = findViewById(R.id.sbmt2);
         taptext3 = findViewById(R.id.sbmt3);
         taptext4 = findViewById(R.id.sbmt4);
+        mp_base.setVisibility(View.GONE);
     }
 
     private void initOnClick(final Context a) {

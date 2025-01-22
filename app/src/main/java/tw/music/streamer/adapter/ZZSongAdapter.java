@@ -19,9 +19,11 @@ import com.bumptech.glide.Glide;
 public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHolder> {
 
     private ArrayList<ZZSong> data;
+    private ZZOnClickListener listener;
 
-    public ZZSongAdapter(ArrayList<ZZSong> a) {
+    public ZZSongAdapter(ArrayList<ZZSong> a, ZZOnClickListener b) {
         data = a;
+        listener = b;
     }
 
     @NonNull
@@ -32,10 +34,16 @@ public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ZZViewHolder h, int p) {
+    public void onBindViewHolder(@NonNull ZZViewHolder h, final int p) {
         h.title.setText(data.get(p).song_name);
         h.artist.setText(data.get(p).song_artist);
         Glide.with(h.title.getContext()).load(data.get(p).url_cover).into(h.cover);
+        h.cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View a) {
+                callListener(p);
+            }
+        });
     }
 
     @Override
@@ -53,6 +61,12 @@ public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHold
             title = i.findViewById(R.id.sli1_title);
             artist = i.findViewById(R.id.sli1_artist);
             cover = i.findViewById(R.id.sli1_cover);
+        }
+    }
+
+    public void callListener(int a) {
+        if (listener!=null) {
+            listener.onItemClicked(a);
         }
     }
 }
