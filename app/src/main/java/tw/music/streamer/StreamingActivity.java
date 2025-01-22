@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +54,7 @@ public class StreamingActivity extends AppCompatActivity {
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
     private TextView user_welcome, taptext1, taptext2, taptext3, taptext4, mp_title, mp_artist;
-    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon;
+    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, bg_drop;
     private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4, mp_base;
 
     private ArrayList<ZZSong> zz_songs, zz_songs2;
@@ -147,6 +152,7 @@ public class StreamingActivity extends AppCompatActivity {
         user_icon = findViewById(R.id.profile_icon);
         rv_random_songs = findViewById(R.id.random_music_container);
         rv_songs = findViewById(R.id.uploaded_music_container);
+        bg_drop = findViewById(R.id.sbbg);
         menu_bar = findViewById(R.id.sb_bottom_menu_bar);
         mp_base = findViewById(R.id.zzmp1_base);
         mp_play = findViewById(R.id.zzmp1_play);
@@ -265,6 +271,18 @@ public class StreamingActivity extends AppCompatActivity {
         mp_play.setImageResource(R.drawable.ic_pause_white);
         Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).transform(new RoundedCorners(dip(5))).into(mp_icon);
         mp_base.setVisibility(View.VISIBLE);
+        bg_drop.setAlpha(0);
+        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(GlideException b, Object c, Target<Drawable> d, boolean e) {
+                return false;
+            }
+            @Override
+            public boolean onResourceReady(Drawable f, Object g, Target<Drawable> h, DataSource i, boolean j) {
+                bg_drop.animate().setDuration(1000).alpha(1f);
+                return false;
+            }
+        }).into(bg_drop);
     }
 
     private void openMenuBar(int a, boolean b) {
