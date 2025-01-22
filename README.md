@@ -10,6 +10,7 @@
 <img src="./.screenshots/zz2.jpg" width="120"/>
 <img src="./.screenshots/zz3.jpg" width="120"/>
 </p>
+
 > Currently under development by limited persons, so it may take longer to finish, its hard to implement the run-in-background system where since Android 14 or newer restricted the background services the most. Estimated time to finish: 6 weeks - 7 months, hehe.
 
 # Requirements
