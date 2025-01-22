@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import tw.music.streamer.adaptor.ZZSong;
 import tw.music.streamer.adaptor.ZryteZeneAdaptor;
 import tw.music.streamer.adapter.ZZSongAdapter;
+import tw.music.streamer.adapter.ZZOnClickListener;
 import tw.music.streamer.adapter.ZZRandomSongAdapter;
 import tw.music.streamer.service.ZryteZenePlay;
 
@@ -55,6 +57,7 @@ public class StreamingActivity extends AppCompatActivity {
     private ZryteZeneAdaptor zz;
     private ZZRandomSongAdapter ra_songs;
     private ZZSongAdapter ar_songs;
+    private ZZOnClickListener zz_click1;
 
     private int openMenu = 0;
 
@@ -74,8 +77,13 @@ public class StreamingActivity extends AppCompatActivity {
     private void initVariables(Context a) {
         zz_songs = new ArrayList<>();
         zz_songs2 = new ArrayList<>();
+        zz_click1 = new ZZOnClickListener() {
+            public void onItemClicked(int a) {
+                playFromZZSongs(a);
+            }
+        };
         ra_songs = new ZZRandomSongAdapter(zz_songs2);
-        ar_songs = new ZZSongAdapter(zz_songs);
+        ar_songs = new ZZSongAdapter(zz_songs, zz_click1);
         lm1 = new LinearLayoutManager(a, LinearLayoutManager.HORIZONTAL, false);
         lm2 = new GridLayoutManager(a, 2);
     }
@@ -251,6 +259,14 @@ public class StreamingActivity extends AppCompatActivity {
         zz.requestAction("request-media");
     }
 
+    private void playFromZZSongs(int a) {
+        mp_artist.setText(zz_songs.get(a).song_artist);
+        mp_title.setText(zz_songs.get(a).song_name);
+        mp_play.setImageResource(R.drawable.ic_pause_white);
+        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).transform(new RoundedCorners(dip(5))).into(mp_icon);
+        mp_base.setVisibility(View.VISIBLE);
+    }
+
     private void openMenuBar(int a, boolean b) {
         if (a==openMenu) return;
         tapicon1.setColorFilter(0xFF757575, PorterDuff.Mode.MULTIPLY);
@@ -317,6 +333,10 @@ public class StreamingActivity extends AppCompatActivity {
 
     private void animateScaleDown(View a) {
         a.animate().setDuration(300).scaleX(0.8f).scaleY(0.8f);
+    }
+
+    private int dip(int a) {
+        return (int) (a * getApplicationContext().getResources().getDisplayMetrics().density);
     }
 
 }
