@@ -1,6 +1,7 @@
 # ZryteZene Mobile - Java
 > [!NOTE]
 > **ZryteZene** is a multi-platform app to allow users to stream musics across various devices seamlessly, such as Android, desktop and web platform. Its completely free and ad-free too.
+
 **ZryteZene Mobile** is an ad-free, background-enabled music streaming app designed to provide a seamless and uninterrupted music experience for Android users. Unlike traditional streaming services, Zryte prioritizes user freedom and simplicity while delivering essential features for music enthusiasts. Whether you're at home, on the go, or working out, Zryte ensures your favorite tracks are always just a tap away.
 
 # Development
