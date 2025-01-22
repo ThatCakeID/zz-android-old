@@ -34,7 +34,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	private MediaPlayer mp;
 	private IntentFilter ief;
 	private SharedPreferences sp;
-	private String lm, act, csp, sn, sa, sc;
+	private String lm, act, csp, sn, sa, sc, sk;
 	private Intent ita;
 	private Handler ha = new Handler();
 	private boolean pd = false;
@@ -169,6 +169,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		sn = a.getStringExtra("title");
 		sa = a.getStringExtra("artist");
 		sc = a.getStringExtra("cover");
+		sk = a.getStringExtra("key");
 		if (mp != null) {
 			mp.reset();
 		} else {
@@ -276,6 +277,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp != null && isPrepared()) {
 			ita.putExtra("duration", mp.getDuration());
 			ita.putExtra("currentDuration", mp.getCurrentPosition());
+			ita.putExtra("key", sk);
 		}
 		sendBroadcast(ita);
 	}
