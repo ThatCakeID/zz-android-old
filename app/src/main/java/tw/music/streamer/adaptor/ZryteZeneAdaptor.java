@@ -119,7 +119,7 @@ public class ZryteZeneAdaptor {
             siop.putExtra("title", b);
             siop.putExtra("artist", c);
             siop.putExtra("cover", d);
-            startForegroundService(siop);
+            ctx.startForegroundService(siop);
         }
     }
 }
