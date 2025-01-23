@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity {
         };
         prof_img.addChildEventListener(_prof_img_child_listener);
 
-        objectanim3.addListener(new Animator.AnimatorListener() {
+        /*objectanim3.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator _param1) {
 
@@ -484,7 +484,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationRepeat(Animator _param1) {
 
             }
-        });
+        });*/
 
         _internetchecker_request_listener = new RequestNetwork.RequestListener() {
             @Override
@@ -500,12 +500,13 @@ public class MainActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    objectanim3.setTarget(linear4);
+                                    /*objectanim3.setTarget(linear4);
                                     objectanim3.setPropertyName("translationY");
                                     objectanim3.setFloatValues(SketchwareUtil.getDip(getApplicationContext(), -75), (float) (0));
                                     objectanim3.setDuration(500);
                                     objectanim3.setInterpolator(new DecelerateInterpolator());
-                                    objectanim3.start();
+                                    objectanim3.start();*/
+                                    internetchecker.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "A", _internetchecker_request_listener);
                                 }
                             });
                         }
@@ -526,12 +527,13 @@ public class MainActivity extends AppCompatActivity {
                     _isNoInternet = true;
                     textview4.setText("Please enable your internet!");
                     _randomEmoteUwU();
-                    objectanim3.setTarget(linear4);
+                    /*objectanim3.setTarget(linear4);
                     objectanim3.setPropertyName("translationY");
                     objectanim3.setFloatValues((float) (0), SketchwareUtil.getDip(getApplicationContext(), -75));
                     objectanim3.setDuration(500);
                     objectanim3.setInterpolator(new DecelerateInterpolator());
-                    objectanim3.start();
+                    objectanim3.start();*/
+                    internetchecker.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "A", _internetchecker_request_listener);
                 }
             }
         };
@@ -633,7 +635,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeLogic() {
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         try {
             packageInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
             textview6.setText(" " + packageInfo.versionName);
@@ -781,36 +783,14 @@ public class MainActivity extends AppCompatActivity {
             imageview1.setImageResource(R.drawable.no_network_emote02);
             textview11.setText("GIVE ME BACK MY COOKIES!");
         }
-        if (_checkPermission()) {
-            if (FileUtil.isExistFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tmp.png"))) {
-                FileUtil.deleteFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tmp.png"));
-            }
-            if (FileUtil.isExistFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tmp_user.png"))) {
-                FileUtil.deleteFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tmp_user.png"));
-            }
-            if (FileUtil.isExistFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))) {
-                FileUtil.deleteFile(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"));
-            }
-        }
         _checkCookie();
     }
 
     private boolean _checkPermission() {
         if (Build.VERSION.SDK_INT < 33) {
-            return !(androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED || androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED);
+            return !(androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED);
         } else {
             return true;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-        super.onActivityResult(_requestCode, _resultCode, _data);
-
-        switch (_requestCode) {
-
-            default:
-                break;
         }
     }
 
