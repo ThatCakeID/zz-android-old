@@ -97,7 +97,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 			}
 		};
 		ief = new IntentFilter(ACTION_BROADCAST);
-		registerReceiver(br, ief);
+		registerReceiver(br, ief, Context.RECEIVER_EXPORTED);
 		applyMediaListener();
 		tellActivity("on-initialized");
 	}
