@@ -207,7 +207,7 @@ public class StreamingActivity extends AppCompatActivity {
                     zz.requestAction("resume");
                 }
             }
-        })
+        });
     }
 
     private void initLogic(final Context a) {
