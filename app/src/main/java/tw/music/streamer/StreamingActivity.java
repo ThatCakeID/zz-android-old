@@ -283,7 +283,7 @@ public class StreamingActivity extends AppCompatActivity {
 		    }
 	    };
         IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
-		registerReceiver(zzreceiver, filr, Context.RECEIVER_EXPORTED);
+		registerReceiver(zzreceiver, filr, Context.RECEIVER_NOT_EXPORTED);
         zz.requestAction("request-media");
     }
 

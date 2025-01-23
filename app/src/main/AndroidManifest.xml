@@ -91,7 +91,7 @@
 
         <activity
             android:name=".StreamingActivity"
-            android:exported="true"/>
+            android:exported="false"/>
 
         <activity
             android:name=".SwthomeActivity"
@@ -127,11 +127,11 @@
             android:foregroundServiceType="mediaPlayback"
             android:icon="@drawable/ic_launcher"
             android:label="ZryteZene Background Service"
-            android:exported="true"/>
+            android:exported="false"/>
 
         <receiver
             android:name="tw.music.streamer.receiver.ZryteZeneBroadcastReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="ZZ_PLAY" />
                 <action android:name="ZZ_PAUSE" />
