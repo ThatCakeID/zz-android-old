@@ -198,6 +198,16 @@ public class StreamingActivity extends AppCompatActivity {
                 openMenuBar(4,true);
             }
         });
+        mp_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                if (zz.isPlaying()) {
+                    zz.requestAction("pause");
+                } else {
+                    zz.requestAction("resume");
+                }
+            }
+        })
     }
 
     private void initLogic(final Context a) {
@@ -244,8 +254,10 @@ public class StreamingActivity extends AppCompatActivity {
                             mp_bar.setProgress(zz.getCurrentDuration()/1000);
                         } else if (m.equals("on-completion")) {
                             zz.setPlaying(false);
+                            mp_play.setImageResource(R.drawable.ic_play_arrow_white);
                         } else if (m.equals("on-error")) {
                             zz.addError(intent.getStringExtra("data"));
+                            mp_play.setImageResource(R.drawable.ic_play_arrow_white);
                         } else if (m.equals("on-seekerror")) {
                         } else if (m.equals("on-initialized")) {
                         } else if (m.equals("on-bufferupdate")) {
@@ -253,10 +265,13 @@ public class StreamingActivity extends AppCompatActivity {
                         } else if (m.equals("request-play")) {
                         } else if (m.equals("request-pause")) {
                             zz.setPlaying(false);
+                            mp_play.setImageResource(R.drawable.ic_play_arrow_white);
                         } else if (m.equals("request-resume")) {
                             zz.setPlaying(true);
+                            mp_play.setImageResource(R.drawable.ic_pause_white);
                         } else if (m.equals("request-stop")) {
                             zz.setPlaying(false);
+                            mp_play.setImageResource(R.drawable.ic_play_arrow_white);
                         } else if (m.equals("request-seek")) {
                             zz.setCurrentDuration(intent.getIntExtra("data",0)/1000);
                         } else if (m.equals("request-restart")) {
