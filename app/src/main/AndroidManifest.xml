@@ -118,7 +118,9 @@
             android:label="ZryteZene Background Service"
             android:exported="true"/>
 
-        <receiver android:name="tw.music.streamer.receiver.ZryteZeneBroadcastReceiver">
+        <receiver
+            android:name="tw.music.streamer.receiver.ZryteZeneBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="ZZ_PLAY" />
                 <action android:name="ZZ_PAUSE" />
