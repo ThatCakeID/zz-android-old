@@ -3,12 +3,14 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
 
     <application
         android:allowBackup="true"
@@ -115,6 +117,17 @@
             android:icon="@drawable/ic_launcher"
             android:label="ZryteZene Background Service"
             android:exported="true"/>
+
+        <receiver
+            android:name="tw.music.streamer.receiver.ZryteZeneBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ZZ_PLAY" />
+                <action android:name="ZZ_PAUSE" />
+                <action android:name="ZZ_SKIP" />
+                <action android:name="ZZ_PREVIOUS" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>

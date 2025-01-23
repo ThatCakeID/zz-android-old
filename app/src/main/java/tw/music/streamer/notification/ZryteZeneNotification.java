@@ -24,8 +24,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import tw.music.streamer.receiver.ZryteZeneBroadcastReceiver;
 import tw.music.streamer.service.ZryteZenePlay;
-import tw.music.streamer.StreamerActivity;
+import tw.music.streamer.StreamingActivity;
 
 public class ZryteZeneNotification {
 	
@@ -43,7 +44,7 @@ public class ZryteZeneNotification {
 			mr.createNotificationChannel(ch);
 		}
 
-		Intent openAppIntent = new Intent(a, StreamerActivity.class);
+		Intent openAppIntent = new Intent(a, StreamingActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		
 		Notification notification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
@@ -82,12 +83,12 @@ public class ZryteZeneNotification {
            	manager.createNotificationChannel(channel);
         }
 
-    	Intent playPauseIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", b ? "pause" : "resume"); //setAction(ZryteZenePlay.ACTION_BROADCAST).
-    	Intent previousIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", "previous");
-    	Intent nextIntent = new Intent(a, ZryteZenePlay.class).putExtra("action", "forward");
-		PendingIntent playPausePendingIntent = PendingIntent.getService(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-		PendingIntent previousPendingIntent = PendingIntent.getService(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-    	PendingIntent nextPendingIntent = PendingIntent.getService(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    	Intent playPauseIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(b ? ZryteZeneBroadcastReceiver.PAUSE : ZryteZeneBroadcastReceiver.PLAY);
+    	Intent previousIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.PREVIOUS);
+    	Intent nextIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.SKIP);
+		PendingIntent playPausePendingIntent = PendingIntent.getBroadcast(a, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent previousPendingIntent = PendingIntent.getBroadcast(a, 0, previousIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    	PendingIntent nextPendingIntent = PendingIntent.getBroadcast(a, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 		Notification nf;
 		if (f == null) {
@@ -101,6 +102,7 @@ public class ZryteZeneNotification {
         	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
         	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPausePendingIntent)
         	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
+			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
         	.build();
@@ -116,6 +118,7 @@ public class ZryteZeneNotification {
         	.addAction(android.R.drawable.ic_media_previous, "Previous", previousPendingIntent)
         	.addAction(b ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play, "Play/Pause", playPausePendingIntent)
         	.addAction(android.R.drawable.ic_media_next, "Next", nextPendingIntent)
+			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
         	.build();
