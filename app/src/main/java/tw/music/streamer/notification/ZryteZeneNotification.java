@@ -24,8 +24,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import tw.music.streamer.receiver.ZryteZeneBroadcastReceiver;
 import tw.music.streamer.service.ZryteZenePlay;
-import tw.music.streamer.StreamerActivity;
+import tw.music.streamer.StreamingActivity;
 
 public class ZryteZeneNotification {
 	
@@ -43,7 +44,7 @@ public class ZryteZeneNotification {
 			mr.createNotificationChannel(ch);
 		}
 
-		Intent openAppIntent = new Intent(a, StreamerActivity.class);
+		Intent openAppIntent = new Intent(a, StreamingActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		
 		Notification notification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
