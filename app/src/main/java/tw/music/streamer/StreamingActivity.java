@@ -214,7 +214,9 @@ public class StreamingActivity extends AppCompatActivity {
             public void onClick(View b) {
                 mp_base.setVisibility(View.GONE);
                 bg_drop.setVisibility(View.GONE);
-                zz.requestAction("stop");
+                Intent c = new Intent(getApplicationContext(), ZryteZenePlay.class);
+                stopService(c);
+                zz = new ZryteZeneAdaptor(getApplicationContext());
             }
         });
     }
