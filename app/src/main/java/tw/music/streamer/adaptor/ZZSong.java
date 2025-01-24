@@ -7,10 +7,11 @@ public class ZZSong {
     public static final String PATH = "https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/zrytezene%2Fsongs%2F";
 
     public String key, url_song, url_icon, url_cover, uploader_uid, uploader_name, song_name, song_artist, color1;
-    public boolean playing;
+    public boolean playing, cl;
 
     public ZZSong(DataSnapshot a) {
         playing = false;
+        cl = false;
         key = a.getKey();
         url_song = PATH + a.child("song").getValue(String.class);
         url_icon = PATH + a.child("icon").getValue(String.class);
