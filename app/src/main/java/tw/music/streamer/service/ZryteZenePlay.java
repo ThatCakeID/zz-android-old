@@ -86,7 +86,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	
 	private void initializePlayer() {
-		startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
+		//startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
 		sp = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
 		lm = sp.getString("fvsAsc", "");
 		msc = new MediaSessionCompat(getApplicationContext(), "ZryteZenePlay");
@@ -186,7 +186,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		} catch (Exception e) {
 			tellActivity("on-error", e.toString());
 		}
-		ZryteZeneSongsManager.download(getApplicationContext(), csp, sk);
+		if (sap.equals("-")) ZryteZeneSongsManager.download(getApplicationContext(), csp, sk);
 	}
 	
 	private void pauseSong() {

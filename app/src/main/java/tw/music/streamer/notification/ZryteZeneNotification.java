@@ -105,7 +105,7 @@ public class ZryteZeneNotification {
 			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
-        	.build();
+			.build();
 		} else {
 			nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID)
         	.setContentTitle(d)
@@ -121,7 +121,7 @@ public class ZryteZeneNotification {
 			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
-        	.build();
+			.build();
 		}
 		NotificationManager m = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
         if (m != null) {
