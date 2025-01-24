@@ -15,17 +15,17 @@ import java.io.InputStream;
 public class ZryteZeneSongsManager {
 
     public static void download(Context a, String b, String c) {
-        new DownloadSong(a, ZZSong.PATH + b, c).execute();
+        new DownloadSong(a, b, c).execute();
     }
 
-    public static File check(Context context, String key) {
+    public static String check(Context context, String key) {
         File songsCacheDir = new File(context.getFilesDir(), "songs-cache");
         if (!songsCacheDir.exists()) songsCacheDir.mkdirs();
         File song = new File(songsCacheDir, key);
         if (song.exists() && song.isFile()) {
-            return song;
+            return song.getAbsolutePath();
         } else {
-            return null;
+            return "-";
         }
     }
 
