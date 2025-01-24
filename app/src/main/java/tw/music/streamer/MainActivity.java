@@ -464,28 +464,6 @@ public class MainActivity extends AppCompatActivity {
         };
         prof_img.addChildEventListener(_prof_img_child_listener);
 
-        /*objectanim3.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator _param1) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator _param1) {
-                internetchecker.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "A", _internetchecker_request_listener);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator _param1) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator _param1) {
-
-            }
-        });*/
-
         _internetchecker_request_listener = new RequestNetwork.RequestListener() {
             @Override
             public void onResponse(String _param1, String _param2) {
@@ -500,12 +478,6 @@ public class MainActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    /*objectanim3.setTarget(linear4);
-                                    objectanim3.setPropertyName("translationY");
-                                    objectanim3.setFloatValues(SketchwareUtil.getDip(getApplicationContext(), -75), (float) (0));
-                                    objectanim3.setDuration(500);
-                                    objectanim3.setInterpolator(new DecelerateInterpolator());
-                                    objectanim3.start();*/
                                     internetchecker.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "A", _internetchecker_request_listener);
                                 }
                             });
@@ -527,12 +499,6 @@ public class MainActivity extends AppCompatActivity {
                     _isNoInternet = true;
                     textview4.setText("Please enable your internet!");
                     _randomEmoteUwU();
-                    /*objectanim3.setTarget(linear4);
-                    objectanim3.setPropertyName("translationY");
-                    objectanim3.setFloatValues((float) (0), SketchwareUtil.getDip(getApplicationContext(), -75));
-                    objectanim3.setDuration(500);
-                    objectanim3.setInterpolator(new DecelerateInterpolator());
-                    objectanim3.start();*/
                     internetchecker.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "A", _internetchecker_request_listener);
                 }
             }
@@ -635,7 +601,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeLogic() {
-        //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         try {
             packageInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
             textview6.setText(" " + packageInfo.versionName);
@@ -802,7 +767,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //_DarkMode();
     }
 
     @Override
