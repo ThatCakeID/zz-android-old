@@ -43,26 +43,26 @@ public class ZryteZeneNotification {
 		return notification;
 	}
 
-	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f) {
+	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f, NotificationManager g) {
 		if (f.equals("-")) {
-			updateWithMedia(a,b,c,d,e,null);
+			updateWithMedia(a,b,c,d,e,null,g);
 		} else {
 			Glide.with(a)
         		.asBitmap()
         		.load(f)
         		.into(new CustomTarget<Bitmap>() {
             		@Override
-            		public void onResourceReady(@NonNull Bitmap g, @NonNull Transition<? super Bitmap> h) {
-                		updateWithMedia(a,b,c,d,e,g);
+            		public void onResourceReady(@NonNull Bitmap h, @NonNull Transition<? super Bitmap> i) {
+                		updateWithMedia(a,b,c,d,e,h,g);
             		}
             		@Override
-            		public void onLoadCleared(@Nullable Drawable i) {
+            		public void onLoadCleared(@Nullable Drawable j) {
             		}
         	});
 		}
 	}
 
-	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
+	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f, NotificationManager g) {
     	Intent playPauseIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(b ? ZryteZeneBroadcastReceiver.PAUSE : ZryteZeneBroadcastReceiver.PLAY);
     	Intent previousIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.PREVIOUS);
     	Intent nextIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.SKIP);
@@ -103,10 +103,7 @@ public class ZryteZeneNotification {
         	.setOngoing(true)
 			.build();
 		}
-		NotificationManager m = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (m != null) {
-            m.notify(ZryteZenePlay.NOTIFICATION_ID, nf);
-        }
+        if (g != null) g.notify(ZryteZenePlay.NOTIFICATION_ID, nf);
 	}
 	
 }
