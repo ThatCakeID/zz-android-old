@@ -504,7 +504,7 @@ public class WizardActivity extends AppCompatActivity {
 
 
     private void _customNav(final String _color) {
-        getApplicationContext().getWindow().setNavigationBarColor(Color.parseColor(_color));
+        this.getWindow().setNavigationBarColor(Color.parseColor(_color));
     }
 
 
@@ -537,7 +537,7 @@ public class WizardActivity extends AppCompatActivity {
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getApplicationContext(), new String[]{android.Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK}, 1001);
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK}, 1001);
                 } else {
                     _nextSetup();
                 }
