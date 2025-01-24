@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -615,19 +617,20 @@ public class MainActivity extends AppCompatActivity {
         linear7.setVisibility(View.GONE);
         textview11.setVisibility(View.GONE);
         image_user.setColorFilter(0xFF2196F3, PorterDuff.Mode.MULTIPLY);
-        textview1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
+        textview1.setTypeface(tf, 0);
         textview2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
         textview3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-        textview4.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview5.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview6.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview7.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview8.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview9.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview10.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview11.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        einput_name.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        button1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
+        textview4.setTypeface(tf, 0);
+        textview5.setTypeface(tf, 0);
+        textview6.setTypeface(tf, 0);
+        textview7.setTypeface(tf, 0);
+        textview8.setTypeface(tf, 0);
+        textview9.setTypeface(tf, 0);
+        textview10.setTypeface(tf, 0);
+        textview11.setTypeface(tf, 0);
+        einput_name.setTypeface(tf, 0);
+        button1.setTypeface(tf, 0);
         _shape(SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), "#2196F3", "#FFFFFF", 0, button1);
         lineartm.setTranslationY(SketchwareUtil.getDip(getApplicationContext(), -75));
         if (data.getString("fvsAsc", "").equals("")) {
@@ -752,8 +755,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean _checkPermission() {
-        if (Build.VERSION.SDK_INT < 33) {
-            return !(androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            return (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK) == PackageManager.PERMISSION_GRANTED);
         } else {
             return true;
         }
@@ -892,44 +895,7 @@ public class MainActivity extends AppCompatActivity {
         s.setColor(Color.parseColor(_BGcolor));
         s.setStroke(sw.intValue(), Color.parseColor(_Scolor));
         _view.setBackground(s);
-    }
-
-
-    private void _DarkMode() {
-        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
-        if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
-            linear1.setBackgroundColor(0xFF252525);
-            linear2.setBackgroundColor(0xFF252525);
-            linear6.setBackgroundColor(0xFF252525);
-            einput_name.setTextColor(0xFFFFFFFF);
-            textview4.setTextColor(0xFFFFFFFF);
-            textview7.setTextColor(0xFFFFFFFF);
-            textview8.setTextColor(0xFFFFFFFF);
-            textview9.setTextColor(0xFFFFFFFF);
-            getWindow().setStatusBarColor(Color.parseColor("#252525"));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().getDecorView().setSystemUiVisibility(0);
-            }
-            _customNav("#252525");
-        } else {
-            linear1.setBackgroundColor(0xFFFFFFFF);
-            linear2.setBackgroundColor(0xFFFFFFFF);
-            linear6.setBackgroundColor(0xFFFFFFFF);
-            einput_name.setTextColor(0xFF000000);
-            textview4.setTextColor(0xFF000000);
-            textview7.setTextColor(0xFF000000);
-            textview8.setTextColor(0xFF000000);
-            textview9.setTextColor(0xFF000000);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            } else {
-                getWindow().setStatusBarColor(Color.parseColor("#BDBDBD"));
-            }
-            _customNav("#FFFFFF");
-        }
-    }
-
+    
 
     private void _chkChglog() {
         if (data.getString("lastVersion", "").equals("")) {
