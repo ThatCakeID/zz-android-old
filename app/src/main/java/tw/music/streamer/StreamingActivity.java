@@ -67,7 +67,7 @@ public class StreamingActivity extends AppCompatActivity {
         super.onCreate(a);
         setContentView(R.layout.stream_base);
         initVariables(getApplicationContext());
-        initFirebase();
+        //initFirebase();
         initLayout();
         initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
