@@ -43,6 +43,7 @@ public class ZryteZeneImageLoader {
         executorService = Executors.newFixedThreadPool(4);
         cacheDir = new File(context.getFilesDir(), "images-cache");
         if (!cacheDir.exists()) cacheDir.mkdirs();
+        preloadDiskCache();
     }
 
     public static synchronized ZryteZeneImageLoader getInstance(Context context) {
@@ -146,6 +147,24 @@ public class ZryteZeneImageLoader {
         if (files != null) {
             for (File file : files) {
                 file.delete();
+            }
+        }
+    }
+
+    private void preloadDiskCache() {
+        File[] cachedFiles = cacheDir.listFiles();
+        if (cachedFiles != null) {
+            for (File file : cachedFiles) {
+                executorService.execute(() -> {
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                        if (bitmap != null) {
+                            memoryCache.put(file.getName(), bitmap);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         }
     }
