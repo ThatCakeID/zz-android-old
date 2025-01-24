@@ -495,11 +495,43 @@ public class WizardActivity extends AppCompatActivity {
     }
 
     private void _nextSetup() {
-        data.edit().putString("setup", "1").commit();
-        data.edit().putString("license", "1").commit();
-        intent.setClass(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
+        currentSetup++;
+        if (currentSetup < 5) {
+            linear2.setVisibility(View.GONE);
+            linear6.setVisibility(View.GONE);
+            linear10.setVisibility(View.GONE);
+            linear17.setVisibility(View.GONE);
+            _fab.hide();
+            if (currentSetup==1) {
+                linear2.setVisibility(View.VISIBLE);
+                _customNav("#FFFFFF");
+                _BlackStatusBarIcons();
+                _fab.show();
+            }
+            if (currentSetup==2) {
+                linear6.setVisibility(View.VISIBLE);
+                _customNav("#FFFFFF");
+                getWindow().getDecorView().setSystemUiVisibility(0);
+                getWindow().setStatusBarColor(Color.parseColor("#3F51B5"));
+            }
+            if (currentSetup==3) {
+                linear10.setVisibility(View.VISIBLE);
+                _customNav("#FFFFFF");
+                getWindow().getDecorView().setSystemUiVisibility(0);
+                getWindow().setStatusBarColor(Color.parseColor("#2196F3"));
+            }
+            if (currentSetup==4) {
+                linear17.setVisibility(View.VISIBLE);
+                _customNav("#FFFFFF");
+                _BlackStatusBarIcons();
+            }
+        } else {
+            data.edit().putString("setup", "1").commit();
+            data.edit().putString("license", "1").commit();
+            intent.setClass(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
