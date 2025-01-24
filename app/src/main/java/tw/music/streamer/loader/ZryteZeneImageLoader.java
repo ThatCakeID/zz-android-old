@@ -56,13 +56,13 @@ public class ZryteZeneImageLoader {
     }
 
     public void load(String url, @Nullable BitmapCallback callback) {
-        Bitmap cachedBitmap = memoryCache.get(url);
+        Bitmap cachedBitmap = memoryCache.get(String.valueOf(url.hashCode()));
         if (cachedBitmap != null) {
             if (callback != null) callback.onBitmapLoaded(cachedBitmap);
             return;
         }
         executorService.execute(() -> {
-            Bitmap bitmap = loadFromDiskCache(url);
+            Bitmap bitmap = loadFromDiskCache(String.valueOf(url.hashCode()));
             if (bitmap == null) {
                 bitmap = loadFromNetwork(url);
                 if (bitmap != null) saveToDiskCache(url, bitmap);
@@ -76,14 +76,14 @@ public class ZryteZeneImageLoader {
 
     public void load(String url, ImageView imageView, @Nullable BitmapCallback callback) {
         imageView.setTag(url);
-        Bitmap cachedBitmap = memoryCache.get(url);
+        Bitmap cachedBitmap = memoryCache.get(String.valueOf(url.hashCode()));
         if (cachedBitmap != null) {
             imageView.setImageBitmap(cachedBitmap);
             if (callback != null) callback.onBitmapLoaded(cachedBitmap);
             return;
         }
         executorService.execute(() -> {
-            Bitmap bitmap = loadFromDiskCache(url);
+            Bitmap bitmap = loadFromDiskCache(String.valueOf(url.hashCode()));
             if (bitmap == null) {
                 bitmap = loadFromNetwork(url);
                 if (bitmap != null) saveToDiskCache(url, bitmap);
