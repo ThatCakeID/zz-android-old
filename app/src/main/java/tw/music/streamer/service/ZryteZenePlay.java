@@ -93,9 +93,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	private void initializePlayer() {
 		nc = new NotificationChannel(CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
-		ch.setSound(null, null);
-		ch.enableLights(false);
-		ch.enableVibration(false);
+		nc.setSound(null, null);
+		nc.enableLights(false);
+		nc.enableVibration(false);
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); // backup: NotificationManager.class
         if (nm != null) nm.createNotificationChannel(nc);
 		startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
