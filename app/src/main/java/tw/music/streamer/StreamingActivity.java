@@ -71,7 +71,7 @@ public class StreamingActivity extends AppCompatActivity {
         initLayout();
         initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
-        initFirebaseListener(getApplicationContext());
+        //initFirebaseListener(getApplicationContext());
         initBackgroundServices(getApplicationContext());
     }
 
