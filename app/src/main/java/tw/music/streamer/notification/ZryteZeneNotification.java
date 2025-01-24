@@ -51,7 +51,7 @@ public class ZryteZeneNotification {
 			Glide.with(a)
         		.asBitmap()
         		.load(f)
-				.diskCacheStrategy(DiskCacheStrategy.ALL);
+				.diskCacheStrategy(DiskCacheStrategy.ALL)
         		.into(new CustomTarget<Bitmap>() {
             		@Override
             		public void onResourceReady(@NonNull Bitmap h, @NonNull Transition<? super Bitmap> i) {
