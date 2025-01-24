@@ -59,6 +59,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	@Override
 	public void onDestroy() {
+		super.onDestroy();
 		unregisterReceiver(br);
 		if (mp!=null) {
 			mp.release();
@@ -68,7 +69,6 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 			msc.release();
 			msc = null;
 		}
-		super.onDestroy();
 		if (nm != null) nm.cancel(NOTIFICATION_ID);
 		if (pr != null) ha.removeCallbacks(pr);
 		stopForeground(true);
@@ -102,7 +102,6 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		sp = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
 		lm = sp.getString("fvsAsc", "");
 		msc = new MediaSessionCompat(getApplicationContext(), "ZryteZenePlay");
-		mp = new MediaPlayer();
 		br = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context a, Intent b) {
@@ -111,7 +110,6 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		};
 		ief = new IntentFilter(ACTION_BROADCAST);
 		registerReceiver(br, ief, Context.RECEIVER_NOT_EXPORTED);
-		applyMediaListener();
 		tellActivity("on-initialized");
 	}
 	
@@ -183,13 +181,10 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		sa = a.getStringExtra("artist");
 		sc = a.getStringExtra("cover");
 		sk = a.getStringExtra("key");
-		if (mp != null) {
-			mp.reset();
-		} else {
-			mp = new MediaPlayer();
-			mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			applyMediaListener();
-		}
+		if (mp != null) mp.release();
+		mp = new MediaPlayer();
+		mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		applyMediaListener();
 		try {
 			sap = ZryteZeneSongsManager.check(getApplicationContext(), sk);
 			mp.setDataSource(sap.equals("-") ? csp : sap);
