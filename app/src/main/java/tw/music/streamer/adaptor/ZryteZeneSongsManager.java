@@ -30,7 +30,7 @@ public class ZryteZeneSongsManager {
         private String firebaseUrl;
         private String fileName;
 
-        public FirebaseDownloadTask(Context a, String b, String c) {
+        public DownloadSong(Context a, String b, String c) {
             context = a;
             firebaseUrl = b;
             fileName = c;
