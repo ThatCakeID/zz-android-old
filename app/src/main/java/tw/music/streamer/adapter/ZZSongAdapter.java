@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import tw.music.streamer.R;
 import tw.music.streamer.adaptor.ZZSong;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import tw.music.streamer.loader.ZryteZeneImageLoader;
 
 public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHolder> {
 
@@ -38,7 +37,7 @@ public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHold
     public void onBindViewHolder(@NonNull ZZViewHolder h, final int p) {
         h.title.setText(data.get(p).song_name);
         h.artist.setText(data.get(p).song_artist);
-        Glide.with(h.title.getContext()).load(data.get(p).url_cover).diskCacheStrategy(DiskCacheStrategy.ALL).into(h.cover);
+        ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
         h.cover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View a) {
