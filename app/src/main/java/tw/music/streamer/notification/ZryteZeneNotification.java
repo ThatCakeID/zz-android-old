@@ -31,22 +31,8 @@ import tw.music.streamer.StreamingActivity;
 public class ZryteZeneNotification {
 	
 	public static Notification setup(Context a) {
-		NotificationChannel ch = new NotificationChannel(
-		ZryteZenePlay.CHANNEL_ID,
-		"ZryteZene Player",
-		NotificationManager.IMPORTANCE_LOW
-		);
-		ch.setSound(null, null);
-		ch.enableLights(false);
-		ch.enableVibration(false);
-		NotificationManager mr = a.getSystemService(NotificationManager.class);
-		if (mr != null) {
-			mr.createNotificationChannel(ch);
-		}
-
 		Intent openAppIntent = new Intent(a, StreamingActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-		
 		Notification notification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
 		.setContentTitle("ZryteZene")
 		.setContentText("Idle...")
@@ -77,12 +63,6 @@ public class ZryteZeneNotification {
 	}
 
 	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
-        NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
-        NotificationManager manager = a.getSystemService(NotificationManager.class);
-        if (manager != null) {
-           	manager.createNotificationChannel(channel);
-        }
-
     	Intent playPauseIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(b ? ZryteZeneBroadcastReceiver.PAUSE : ZryteZeneBroadcastReceiver.PLAY);
     	Intent previousIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.PREVIOUS);
     	Intent nextIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.SKIP);

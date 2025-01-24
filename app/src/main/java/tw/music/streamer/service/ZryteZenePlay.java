@@ -40,6 +40,8 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	private Handler ha = new Handler();
 	private boolean pd = false;
 	private MediaSessionCompat msc;
+	private NotificationChannel nc;
+	private NotificationManager nm;
 	
 	@Override
 	public void onCreate() {
@@ -66,6 +68,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 			msc = null;
 		}
 		super.onDestroy();
+		if (nm != null) nm.cancel(NOTIFICATION_ID);
+		if (pr != null) ha.removeCallbacks(pr);
+		stopForeground(true);
 	}
 	
 	@Nullable
@@ -86,7 +91,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	
 	private void initializePlayer() {
-		//startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
+		nc = new NotificationChannel(CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
+		ch.setSound(null, null);
+		ch.enableLights(false);
+		ch.enableVibration(false);
+        nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); // backup: NotificationManager.class
+        if (nm != null) nm.createNotificationChannel(nc);
+		startForeground(NOTIFICATION_ID, ZryteZeneNotification.setup(getApplicationContext()));
 		sp = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
 		lm = sp.getString("fvsAsc", "");
 		msc = new MediaSessionCompat(getApplicationContext(), "ZryteZenePlay");
@@ -107,7 +118,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	public void onPrepared(MediaPlayer a) {
 		a.start();
 		pd = true;
-		ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc);
+		ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc, nm);
 		tellActivity("on-prepared",a.getDuration());
 		ha.post(pr);
 	}
@@ -119,13 +130,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	
 	@Override
 	public void onCompletion(MediaPlayer a) {
-		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
+		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc, nm);
 		tellActivity("on-completion","1");
 	}
 	
 	@Override
 	public boolean onError(MediaPlayer a, int b, int c) {
-		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
+		ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc, nm);
 		tellActivity("on-error", String.format("Error(%s%s)", b, c));
 		return true;
 	}
@@ -193,7 +204,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (mp.isPlaying()) {
 			mp.pause();
-			ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc);
+			ZryteZeneNotification.update(getApplicationContext(), false, msc, sn, sa, sc, nm);
 			tellActivity("request-pause");
 		}
 	}
@@ -202,7 +213,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (isPrepared() && !mp.isPlaying()) {
 			mp.start();
-			ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc);
+			ZryteZeneNotification.update(getApplicationContext(), true, msc, sn, sa, sc, nm);
 			tellActivity("request-resume");
 		}
 	}
@@ -211,10 +222,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		if (mp==null) return;
 		if (mp.isPlaying()) {
 			mp.stop();
-			NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			if (notificationManager != null) {
-				notificationManager.cancel(NOTIFICATION_ID);
-			}
+			if (nm != null) nm.cancel(NOTIFICATION_ID);
 			ha.removeCallbacks(pr);
 			stopForeground(true);
 			tellActivity("request-stop");
@@ -243,7 +251,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	}
 	
 	private void resetMedia() {
-		mp = new MediaPlayer();
+		mp = null;
 		tellActivity("request-reset");
 	}
 	
