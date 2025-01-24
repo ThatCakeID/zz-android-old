@@ -216,7 +216,7 @@ public class StreamingActivity extends AppCompatActivity {
                 bg_drop.setVisibility(View.GONE);
                 zz.requestAction("stop");
             }
-        })
+        });
     }
 
     private void initLogic(final Context a) {
