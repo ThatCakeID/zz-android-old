@@ -216,6 +216,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 				notificationManager.cancel(NOTIFICATION_ID);
 			}
 			ha.removeCallbacks(pr);
+			stopForeground(true);
 			tellActivity("request-stop");
 		}
 	}
