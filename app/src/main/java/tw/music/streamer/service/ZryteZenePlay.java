@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import android.support.v4.media.session.MediaSessionCompat;
 
 import tw.music.streamer.notification.ZryteZeneNotification;
+import tw.music.streamer.adaptor.ZryteZeneSongsManager;
 
 public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 	
@@ -34,7 +35,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	private MediaPlayer mp;
 	private IntentFilter ief;
 	private SharedPreferences sp;
-	private String lm, act, csp, sn, sa, sc, sk;
+	private String lm, act, csp, sn, sa, sc, sk, sap;
 	private Intent ita;
 	private Handler ha = new Handler();
 	private boolean pd = false;
@@ -178,12 +179,14 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 			applyMediaListener();
 		}
 		try {
-			mp.setDataSource(csp);
+			sap = ZryteZeneSongsManager.check(getApplicationContext(), sk);
+			mp.setDataSource(sap.equals("-") ? csp : sap);
 			mp.prepareAsync();
 			tellActivity("request-play");
 		} catch (Exception e) {
 			tellActivity("on-error", e.toString());
 		}
+		ZryteZeneSongsManager.download(getApplicationContext(), csp, sk);
 	}
 	
 	private void pauseSong() {
