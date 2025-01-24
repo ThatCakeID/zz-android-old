@@ -21,7 +21,7 @@
         android:largeHeap="true">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".StreamingActivity"
             android:exported="true">
 
             <intent-filter>
@@ -91,7 +91,7 @@
             android:exported="true"/>
 
         <activity
-            android:name=".StreamingActivity"
+            android:name=".MainActivity"
             android:exported="false"/>
 
         <activity
