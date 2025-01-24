@@ -18,11 +18,15 @@ public class ZryteZeneSongsManager {
         new DownloadSong(a, ZZSong.PATH + b, c).execute();
     }
 
-    public static boolean check(Context context, String key) {
+    public static File check(Context context, String key) {
         File songsCacheDir = new File(context.getFilesDir(), "songs-cache");
         if (!songsCacheDir.exists()) songsCacheDir.mkdirs();
         File song = new File(songsCacheDir, key);
-        return song.exists() && song.isFile();
+        if (song.exists() && song.isFile()) {
+            return song;
+        } else {
+            return null;
+        }
     }
 
     public static class DownloadSong extends AsyncTask<Void, Void, Boolean> {
