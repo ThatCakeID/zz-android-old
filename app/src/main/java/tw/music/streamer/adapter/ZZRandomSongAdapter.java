@@ -16,6 +16,7 @@ import tw.music.streamer.R;
 import tw.music.streamer.adaptor.ZZSong;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapter.ZZViewHolder> {
 
@@ -36,7 +37,7 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
     public void onBindViewHolder(@NonNull ZZViewHolder h, int p) {
         h.title.setText(data.get(p).song_name);
         h.line.setBackgroundColor(Color.parseColor(data.get(p).color1));
-        Glide.with(h.title.getContext()).load(data.get(p).url_cover).into(h.cover);
+        Glide.with(h.title.getContext()).load(data.get(p).url_cover).diskCacheStrategy(DiskCacheStrategy.ALL).into(h.cover);
     }
 
     @Override

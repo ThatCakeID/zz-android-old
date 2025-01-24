@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
@@ -54,47 +55,57 @@
             android:exported="true"/>
 
         <activity
-            android:name=".DebugActivity"/>
+            android:name=".DebugActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".ThemesActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".ProfileActivity"/>
+            android:name=".ProfileActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".LogcatActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".ChgpicActivity"/>
+            android:name=".ChgpicActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".ThemesstrActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".CropActivity"/>
+            android:name=".CropActivity"
+            android:exported="true"/>
 
         <activity
-            android:name=".MessageActivity"/>
+            android:name=".MessageActivity"
+            android:exported="true"/>
 
         <activity
-            android:name=".StreamerActivity"/>
+            android:name=".StreamerActivity"
+            android:exported="true"/>
 
         <activity
-            android:name=".StreamingActivity"/>
+            android:name=".StreamingActivity"
+            android:exported="false"/>
 
         <activity
             android:name=".SwthomeActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:exported="true"/>
 
         <activity
-            android:name=".FilepickerActivity"/>
+            android:name=".FilepickerActivity"
+            android:exported="true"/>
 
         <activity
-            android:name=".UpdateappActivity"/>
+            android:name=".UpdateappActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".WizardActivity"
@@ -109,18 +120,19 @@
             android:exported="true"/>
 
         <activity
-            android:name=".LyricsActivity"/>
+            android:name=".LyricsActivity"
+            android:exported="true"/>
 
         <service
             android:name="tw.music.streamer.service.ZryteZenePlay"
             android:foregroundServiceType="mediaPlayback"
             android:icon="@drawable/ic_launcher"
             android:label="ZryteZene Background Service"
-            android:exported="true"/>
+            android:exported="false"/>
 
         <receiver
             android:name="tw.music.streamer.receiver.ZryteZeneBroadcastReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="ZZ_PLAY" />
                 <action android:name="ZZ_PAUSE" />

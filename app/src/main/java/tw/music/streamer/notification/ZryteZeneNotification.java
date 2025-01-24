@@ -23,6 +23,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import tw.music.streamer.receiver.ZryteZeneBroadcastReceiver;
 import tw.music.streamer.service.ZryteZenePlay;
@@ -31,22 +32,8 @@ import tw.music.streamer.StreamingActivity;
 public class ZryteZeneNotification {
 	
 	public static Notification setup(Context a) {
-		NotificationChannel ch = new NotificationChannel(
-		ZryteZenePlay.CHANNEL_ID,
-		"ZryteZene Player",
-		NotificationManager.IMPORTANCE_LOW
-		);
-		ch.setSound(null, null);
-		ch.enableLights(false);
-		ch.enableVibration(false);
-		NotificationManager mr = a.getSystemService(NotificationManager.class);
-		if (mr != null) {
-			mr.createNotificationChannel(ch);
-		}
-
 		Intent openAppIntent = new Intent(a, StreamingActivity.class);
     	PendingIntent openAppPendingIntent = PendingIntent.getActivity(a, 0, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-		
 		Notification notification = new Notification.Builder(a, ZryteZenePlay.CHANNEL_ID)
 		.setContentTitle("ZryteZene")
 		.setContentText("Idle...")
@@ -57,32 +44,27 @@ public class ZryteZeneNotification {
 		return notification;
 	}
 
-	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f) {
+	public static void update(Context a, boolean b, MediaSessionCompat c, String d, String e, String f, NotificationManager g) {
 		if (f.equals("-")) {
-			updateWithMedia(a,b,c,d,e,null);
+			updateWithMedia(a,b,c,d,e,null,g);
 		} else {
 			Glide.with(a)
         		.asBitmap()
         		.load(f)
+				.diskCacheStrategy(DiskCacheStrategy.ALL)
         		.into(new CustomTarget<Bitmap>() {
             		@Override
-            		public void onResourceReady(@NonNull Bitmap g, @NonNull Transition<? super Bitmap> h) {
-                		updateWithMedia(a,b,c,d,e,g);
+            		public void onResourceReady(@NonNull Bitmap h, @NonNull Transition<? super Bitmap> i) {
+                		updateWithMedia(a,b,c,d,e,h,g);
             		}
             		@Override
-            		public void onLoadCleared(@Nullable Drawable i) {
+            		public void onLoadCleared(@Nullable Drawable j) {
             		}
         	});
 		}
 	}
 
-	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f) {
-        NotificationChannel channel = new NotificationChannel(ZryteZenePlay.CHANNEL_ID, "ZryteZene Player", NotificationManager.IMPORTANCE_LOW);
-        NotificationManager manager = a.getSystemService(NotificationManager.class);
-        if (manager != null) {
-           	manager.createNotificationChannel(channel);
-        }
-
+	public static void updateWithMedia(Context a, boolean b, MediaSessionCompat c, String d, String e, Bitmap f, NotificationManager g) {
     	Intent playPauseIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(b ? ZryteZeneBroadcastReceiver.PAUSE : ZryteZeneBroadcastReceiver.PLAY);
     	Intent previousIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.PREVIOUS);
     	Intent nextIntent = new Intent(a, ZryteZeneBroadcastReceiver.class).setAction(ZryteZeneBroadcastReceiver.SKIP);
@@ -105,7 +87,7 @@ public class ZryteZeneNotification {
 			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
-        	.build();
+			.build();
 		} else {
 			nf = new NotificationCompat.Builder(a, ZryteZenePlay.CHANNEL_ID)
         	.setContentTitle(d)
@@ -121,12 +103,9 @@ public class ZryteZeneNotification {
 			.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         	.setPriority(NotificationCompat.PRIORITY_LOW)
         	.setOngoing(true)
-        	.build();
+			.build();
 		}
-		NotificationManager m = (NotificationManager) a.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (m != null) {
-            m.notify(ZryteZenePlay.NOTIFICATION_ID, nf);
-        }
+        if (g != null) g.notify(ZryteZenePlay.NOTIFICATION_ID, nf);
 	}
 	
 }

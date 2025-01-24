@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +53,7 @@ public class StreamingActivity extends AppCompatActivity {
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
     private TextView user_welcome, taptext1, taptext2, taptext3, taptext4, mp_title, mp_artist;
-    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, bg_drop;
+    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, mp_close, bg_drop;
     private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4, mp_base;
     private ProgressBar mp_bar;
 
@@ -131,7 +132,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
-                    Glide.with(z).load(b.child("url").getValue(String.class)).apply(RequestOptions.circleCropTransform()).into(user_icon);
+                    Glide.with(z).load(b.child("url").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).apply(RequestOptions.circleCropTransform()).into(user_icon);
                 }
             }
         });
@@ -157,6 +158,7 @@ public class StreamingActivity extends AppCompatActivity {
         mp_base = findViewById(R.id.zzmp1_base);
         mp_play = findViewById(R.id.zzmp1_play);
         mp_icon = findViewById(R.id.zzmp1_icon);
+        mp_close = findViewById(R.id.zzmp1_stop);
         mp_title = findViewById(R.id.zzmp1_title);
         mp_artist = findViewById(R.id.zzmp1_artist);
         tapbar1 = findViewById(R.id.sbmb1);
@@ -206,6 +208,16 @@ public class StreamingActivity extends AppCompatActivity {
                 } else {
                     zz.requestAction("resume");
                 }
+            }
+        });
+        mp_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                mp_base.setVisibility(View.GONE);
+                bg_drop.setVisibility(View.GONE);
+                Intent c = new Intent(getApplicationContext(), ZryteZenePlay.class);
+                stopService(c);
+                zz = new ZryteZeneAdaptor(getApplicationContext());
             }
         });
     }
@@ -283,7 +295,7 @@ public class StreamingActivity extends AppCompatActivity {
 		    }
 	    };
         IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
-		registerReceiver(zzreceiver, filr);
+		registerReceiver(zzreceiver, filr, Context.RECEIVER_NOT_EXPORTED);
         zz.requestAction("request-media");
     }
 
@@ -291,9 +303,9 @@ public class StreamingActivity extends AppCompatActivity {
         mp_artist.setText(zz_songs.get(a).song_artist);
         mp_title.setText(zz_songs.get(a).song_name);
         mp_play.setImageResource(R.drawable.ic_pause_white);
-        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).transform(new RoundedCorners(dip(5))).into(mp_icon);
+        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).diskCacheStrategy(DiskCacheStrategy.ALL).transform(new RoundedCorners(dip(5))).into(mp_icon);
         mp_base.setVisibility(View.VISIBLE);
-        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).into(bg_drop);
+        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).diskCacheStrategy(DiskCacheStrategy.ALL).into(bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
         zz.play(zz_songs.get(a));
     }
@@ -303,11 +315,12 @@ public class StreamingActivity extends AppCompatActivity {
             if (b.isSuccessful()) {
                 DataSnapshot c = b.getResult();
                 if (c.exists()) {
+                    bg_drop.setVisibility(View.VISIBLE);
                     mp_artist.setText(c.child("artist").getValue(String.class));
                     mp_title.setText(c.child("title").getValue(String.class));
-                    Glide.with(getApplicationContext()).load(c.child("icon").getValue(String.class)).transform(new RoundedCorners(dip(5))).into(mp_icon);
+                    Glide.with(getApplicationContext()).load(c.child("icon").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).transform(new RoundedCorners(dip(5))).into(mp_icon);
                     mp_base.setVisibility(View.VISIBLE);
-                    Glide.with(getApplicationContext()).load(c.child("cover").getValue(String.class)).into(bg_drop);
+                    Glide.with(getApplicationContext()).load(c.child("cover").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).into(bg_drop);
                     mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(c.child("color-bline").getValue(String.class))));
                 }
             }

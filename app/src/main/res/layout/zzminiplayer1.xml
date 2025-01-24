@@ -50,11 +50,20 @@
                 android:padding="1dp"/>
         </LinearLayout>
         <ImageView
+            android:id="@+id/zzmp1_stop"
+            android:layout_width="40dp"
+			android:layout_height="40dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_exit_white"
+            android:layout_marginRight="10dp"/>
+        <ImageView
             android:id="@+id/zzmp1_play"
             android:layout_width="40dp"
 			android:layout_height="40dp"
             android:padding="8dp"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_play_arrow_white"/>
     </LinearLayout>
 
     <ProgressBar
