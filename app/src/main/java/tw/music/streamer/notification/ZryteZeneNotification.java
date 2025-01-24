@@ -23,6 +23,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import tw.music.streamer.receiver.ZryteZeneBroadcastReceiver;
 import tw.music.streamer.service.ZryteZenePlay;
@@ -50,6 +51,7 @@ public class ZryteZeneNotification {
 			Glide.with(a)
         		.asBitmap()
         		.load(f)
+				.diskCacheStrategy(DiskCacheStrategy.ALL);
         		.into(new CustomTarget<Bitmap>() {
             		@Override
             		public void onResourceReady(@NonNull Bitmap h, @NonNull Transition<? super Bitmap> i) {
