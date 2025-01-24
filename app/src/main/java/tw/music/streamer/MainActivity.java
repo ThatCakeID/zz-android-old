@@ -895,7 +895,7 @@ public class MainActivity extends AppCompatActivity {
         s.setColor(Color.parseColor(_BGcolor));
         s.setStroke(sw.intValue(), Color.parseColor(_Scolor));
         _view.setBackground(s);
-    
+    }
 
     private void _chkChglog() {
         if (data.getString("lastVersion", "").equals("")) {
