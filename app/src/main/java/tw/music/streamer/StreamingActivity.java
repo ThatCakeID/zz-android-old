@@ -52,7 +52,7 @@ public class StreamingActivity extends AppCompatActivity {
     private LinearLayoutManager lm1;
     private GridLayoutManager lm2;
     private TextView user_welcome, taptext1, taptext2, taptext3, taptext4, mp_title, mp_artist;
-    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, bg_drop;
+    private ImageView user_icon, tapicon1, tapicon2, tapicon3, mp_play, mp_icon, mp_close, bg_drop;
     private LinearLayout menu_bar, tapbar1, tapbar2, tapbar3, tapbar4, mp_base;
     private ProgressBar mp_bar;
 
@@ -157,6 +157,7 @@ public class StreamingActivity extends AppCompatActivity {
         mp_base = findViewById(R.id.zzmp1_base);
         mp_play = findViewById(R.id.zzmp1_play);
         mp_icon = findViewById(R.id.zzmp1_icon);
+        mp_close = findViewById(R.id.zzmp1_stop);
         mp_title = findViewById(R.id.zzmp1_title);
         mp_artist = findViewById(R.id.zzmp1_artist);
         tapbar1 = findViewById(R.id.sbmb1);
@@ -208,6 +209,14 @@ public class StreamingActivity extends AppCompatActivity {
                 }
             }
         });
+        mp_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View b) {
+                mp_base.setVisibility(View.GONE);
+                bg_drop.setVisibility(View.GONE);
+                zz.requestAction("stop");
+            }
+        })
     }
 
     private void initLogic(final Context a) {
@@ -303,6 +312,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (b.isSuccessful()) {
                 DataSnapshot c = b.getResult();
                 if (c.exists()) {
+                    bg_drop.setVisibility(View.VISIBLE);
                     mp_artist.setText(c.child("artist").getValue(String.class));
                     mp_title.setText(c.child("title").getValue(String.class));
                     Glide.with(getApplicationContext()).load(c.child("icon").getValue(String.class)).transform(new RoundedCorners(dip(5))).into(mp_icon);
