@@ -37,8 +37,7 @@ public class ZZSongAdapter extends RecyclerView.Adapter<ZZSongAdapter.ZZViewHold
     public void onBindViewHolder(@NonNull ZZViewHolder h, final int p) {
         h.title.setText(data.get(p).song_name);
         h.artist.setText(data.get(p).song_artist);
-        //if (!data.get(p).cl) ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
-        data.get(p).cl = true;
+        ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
         h.cover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View a) {

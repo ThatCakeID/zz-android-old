@@ -67,16 +67,16 @@ public class StreamingActivity extends AppCompatActivity {
         super.onCreate(a);
         setContentView(R.layout.stream_base);
         initVariables(getApplicationContext());
-        //initFirebase();
+        initFirebase();
         initLayout();
         initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
-        //initFirebaseListener(getApplicationContext());
+        initFirebaseListener(getApplicationContext());
         initBackgroundServices(getApplicationContext());
     }
 
     private void initVariables(Context a) {
-        //ZryteZeneImageLoader.getInstance(a);
+        ZryteZeneImageLoader.getInstance(a);
         zz_songs = new ArrayList<>();
         zz_songs2 = new ArrayList<>();
         zz_click1 = new ZZOnClickListener() {
@@ -105,11 +105,7 @@ public class StreamingActivity extends AppCompatActivity {
                         zz_songs.add(new ZZSong(c));
                     }
                     ar_songs.notifyDataSetChanged();
-                } else {
-                    // songs empty
                 }
-            } else {
-                // error: task.getException().getMessage()
             }
         });
 
@@ -129,7 +125,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
-                    //ZryteZeneImageLoader.getInstance(z).load(b.child("url").getValue(String.class),user_icon);
+                    ZryteZeneImageLoader.getInstance(z).load(b.child("url").getValue(String.class),user_icon);
                 }
             }
         });
@@ -300,9 +296,9 @@ public class StreamingActivity extends AppCompatActivity {
         mp_artist.setText(zz_songs.get(a).song_artist);
         mp_title.setText(zz_songs.get(a).song_name);
         mp_play.setImageResource(R.drawable.ic_pause_white);
-        //ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_icon, mp_icon);
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_icon, mp_icon);
         mp_base.setVisibility(View.VISIBLE);
-        //ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_cover, bg_drop);
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_cover, bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
         zz.play(zz_songs.get(a));
     }
@@ -315,9 +311,9 @@ public class StreamingActivity extends AppCompatActivity {
                     bg_drop.setVisibility(View.VISIBLE);
                     mp_artist.setText(c.child("artist").getValue(String.class));
                     mp_title.setText(c.child("title").getValue(String.class));
-                    //ZryteZeneImageLoader.getInstance(getApplicationContext()).load(c.child("icon").getValue(String.class), mp_icon);
+                    ZryteZeneImageLoader.getInstance(getApplicationContext()).load(c.child("icon").getValue(String.class), mp_icon);
                     mp_base.setVisibility(View.VISIBLE);
-                    //ZryteZeneImageLoader.getInstance(getApplicationContext()).load(c.child("cover").getValue(String.class), bg_drop);
+                    ZryteZeneImageLoader.getInstance(getApplicationContext()).load(c.child("cover").getValue(String.class), bg_drop);
                     mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(c.child("color-bline").getValue(String.class))));
                 }
             }

@@ -36,8 +36,7 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
     public void onBindViewHolder(@NonNull ZZViewHolder h, int p) {
         h.title.setText(data.get(p).song_name);
         h.line.setBackgroundColor(Color.parseColor(data.get(p).color1));
-        //if (!data.get(p).cl) ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
-        data.get(p).cl = true;
+        ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
     }
 
     @Override
