@@ -74,12 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 nr = true;
                 welcome_text.setText("Failed to connect to ZryteZene, tap on the screen to retry");
             }
+        }).addOnFailureListener(e -> {
+            nr = true;
+            welcome_text.setText("Failed to connect to ZryteZene, tap on the screen to retry");
+            e.printStackTrace();
         });
     }
 
     private void onVersionRetrieved(DataSnapshot a) {
         if (a.exists()) {
-            welcome_text.setText(a.child("chatwords").getValue(String.class));
+            welcome_text.setText(a.child("chadwords").getValue(String.class));
             if (checkVersion(a)) {
                 if (checkAccount()) {
                     if (checkPermissions()) {
@@ -105,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkVersion(DataSnapshot a) {
-        return true;
+        return a.child("mobile").getValue(String.class).equals("1");
     }
 
     private boolean checkPermissions() {
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), a);
             startActivity(intent);
             finish();
-        }, 3000);
+        }, 2000);
     }
 
 }
