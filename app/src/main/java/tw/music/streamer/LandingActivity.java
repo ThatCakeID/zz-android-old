@@ -74,8 +74,8 @@ public class LandingActivity extends AppCompatActivity {
     private void initLogic(final Context a) {
         zzt1.setTypeface(ttf1, 0);
         zzt2.setTypeface(ttf2, 0);
-        roundCorner(btn_login, dip(20), Color.parseColor("#fcc2ff"));
-        roundCornerWithOutline(btn_register, dip(20), Color.WHITE, Color.parseColor("#c9d0ff"));
+        roundCorner(btn_login, dip(25), Color.parseColor("#fcc2ff"));
+        roundCornerWithOutline(btn_register, dip(25), Color.WHITE, Color.parseColor("#c9d0ff"));
         roundCorner(btn_discord, dip(15), Color.parseColor("#3b396e"));
         roundTopCorner(land_base, dip(12));
         btn_login.setElevation(3f);
