@@ -51,7 +51,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
-    implementation("com.google.android.material:material:1.13.0-SNAPSHOT")
+    implementation("com.google.android.material:material:1.13.0-alpha10")
     implementation("com.android.support:support-media-compat:28.0.0")
 }
 
