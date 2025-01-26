@@ -24,6 +24,7 @@ public class LandingActivity extends AppCompatActivity {
     protected void onCreate(Bundle a) {
         super.onCreate(a);
         setContentView(R.layout.landing);
+        zz_discord = Uri.parse(getIntent().getStringExtra("discord-server"));
         initVariables(getApplicationContext());
         initOnClick(getApplicationContext());
         initLogic(getApplicationContext());
@@ -39,7 +40,6 @@ public class LandingActivity extends AppCompatActivity {
         zzt3 = findViewById(R.id.zzt3);
         ttf1 = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
         ttf2 = Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf");
-        zz_discord = Uri.parse(getIntent().getStringExtra("discord-server"));
     }
 
     private void initOnClick(final Context a) {
