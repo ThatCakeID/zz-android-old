@@ -64,9 +64,7 @@ public class LandingActivity extends AppCompatActivity {
             public void onClick(View b) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(zz_discord);
-                if (i.resolveActivity(getPackageManager()) != null) {
-                    startActivity(i);
-                }
+                startActivity(i);
             }
         });
     }
