@@ -47,6 +47,10 @@
         </activity>
 
         <activity
+            android:name=".LandingActivity"
+            android:exported="false"/>
+
+        <activity
             android:name=".LoginActivity"
             android:exported="false"/>
 
