@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LandingActivity extends AppCompatActivity {
 
-    private TextView btn_login, btn_register, btn_discord, zzt1, zzt2;
+    private TextView btn_login, btn_register, btn_discord, zzt1, zzt2, zzt3;
     private LinearLayout land_base;
-    private Tyfeface ttf1, ttf2;
+    private Typeface ttf1, ttf2;
     private Uri zz_discord;
 
     @Override
