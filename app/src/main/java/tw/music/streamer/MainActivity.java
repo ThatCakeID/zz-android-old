@@ -9,11 +9,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.textview.MaterialTextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private TextView welcome_text, zz1, zz2;
+    private MaterialTextView welcome_text;
     private LinearLayout screen;
     private Typeface ttf1, ttf2;
     private boolean nr;
@@ -39,11 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initVariables(final Context a) {
         welcome_text = findViewById(R.id.wlctext);
-        zz1 = findViewById(R.id.zzt1);
-        zz2 = findViewById(R.id.zzt2);
         screen = findViewById(R.id.base);
-        ttf1 = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
-        ttf2 = Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf");
         nr = false;
     }
 
@@ -61,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLogic(final Context a) {
-        welcome_text.setTypeface(ttf1, 0);
-        zz1.setTypeface(ttf1, 0);
-        zz2.setTypeface(ttf1, 0);
         getVersion(a);
     }
 
