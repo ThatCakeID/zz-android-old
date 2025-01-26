@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         openActivity(PermissionsActivity.class);
                     }
                 } else {
-                    openActivity(LandingActivity.class);
+                    openActivity(LandingActivity.class, a.child("discord-server").getValue(String.class));
                 }
             } else {
                 openActivity(UpdateAppActivity.class);
@@ -126,8 +126,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openActivity(Class<?> a) {
+        openActivity(a, null);
+    }
+
+    private void openActivity(Class<?> a, String b) {
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(getApplicationContext(), a);
+            if (b!=null) intent.putExtra("discord-server", b);
             startActivity(intent);
             finish();
         }, 2000);
