@@ -10,21 +10,29 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal">
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/zzt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zryte"
-            android:textColor="#808080"
-            android:textSize="42sp" />
-        <TextView
+            android:textColor="#fcc2ff"
+            android:textSize="42sp"
+            android:shadowColor="#fcc2ff"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"/>
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/zzt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zene"
-            android:textColor="#808080"
+            android:textColor="#c9d0ff"
             android:textSize="42sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:shadowColor="#c9d0ff"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"/>
     </LinearLayout>
 
     <LinearLayout
@@ -33,7 +41,7 @@
         android:gravity="bottom|center_horizontal"
         android:orientation="vertical"
         android:paddingBottom="5dp">
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/wlctext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
