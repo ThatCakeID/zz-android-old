@@ -137,14 +137,13 @@
             app:iconSize="18dp"
             app:iconGravity="start"
             app:cornerRadius="15dp"/>
-		</LinearLayout>
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_weight="1"/>
 		<com.google.android.material.textview.MaterialTextView
-            android:fontFamily="@font/googlesans"
+        	android:fontFamily="@font/googlesans"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:padding="1dp"
