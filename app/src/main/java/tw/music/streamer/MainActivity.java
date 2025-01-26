@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView welcome_text, zz1, zz2;
     private LinearLayout screen;
-    private Typeface ttf1;
+    private Typeface ttf1, ttf2;
     private boolean nr;
 
     @Override
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         zz2 = findViewById(R.id.zzt2);
         screen = findViewById(R.id.base);
         ttf1 = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
+        ttf2 = Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf");
         nr = false;
     }
 
@@ -67,17 +68,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getVersion(final Context a) {
-        FirebaseDatabase.getInstance().getReference("zrytezene/version").get().addOnCompleteListener(b -> {
+        FirebaseDatabase.getInstance().getReference("zrytezene/version").get()
+        .addOnFailureListener(e -> {
+            nr = true;
+            welcome_text.setText("Failed to connect to ZryteZene, tap on the screen to retry");
+            e.printStackTrace();
+        }).addOnCompleteListener(b -> {
             if (b.isSuccessful()) {
                 onVersionRetrieved(b.getResult());
             } else {
                 nr = true;
                 welcome_text.setText("Failed to connect to ZryteZene, tap on the screen to retry");
             }
-        }).addOnFailureListener(e -> {
-            nr = true;
-            welcome_text.setText("Failed to connect to ZryteZene, tap on the screen to retry");
-            e.printStackTrace();
         });
     }
 
