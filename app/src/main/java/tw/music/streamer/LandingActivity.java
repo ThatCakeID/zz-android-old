@@ -66,6 +66,16 @@ public class LandingActivity extends AppCompatActivity {
 
     private void initLogic(final Context a) {
         roundTopCorner(land_base, dip(12));
+        roundCorner(btn_login, dip(20), Color.parseColor("#fcc2ff"));
+        roundCornerWithOutline(btn_register, dip(20), Color.WHITE, Color.parseColor("#c9d0ff"));
+        roundCorner(btn_discord, dip(15), Color.parseColor("#3b396e"));
+    }
+
+    private void roundCorner(View a, float b, int c) {
+        GradientDrawable d = new GradientDrawable();
+        d.setColor(c);
+        d.setCornerRadius(b);
+        a.setBackground(d);
     }
 
     private void roundCornerWithOutline(View a, float b, int c, int d) {
