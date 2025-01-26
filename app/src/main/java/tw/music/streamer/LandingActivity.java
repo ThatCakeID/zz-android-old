@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.net.Uri;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LandingActivity extends AppCompatActivity {
 
     private TextView btn_login, btn_register, btn_discord, zzt1, zzt2;
+    private LinearLayout land_base;
     private Tyfeface ttf1, ttf2;
     private Uri zz_discord;
 
@@ -30,6 +33,10 @@ public class LandingActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
         btn_discord = findViewById(R.id.btn_discord);
+        land_base = findViewById(R.id.land_base);
+        zzt1 = findViewById(R.id.zzt1);
+        zzt2 = findViewById(R.id.zzt2);
+        zzt3 = findViewById(R.id.zzt3);
         ttf1 = Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf");
         ttf2 = Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf");
         zz_discord = Uri.parse(getIntent().getStringExtra("discord-server"));
@@ -69,7 +76,11 @@ public class LandingActivity extends AppCompatActivity {
         zzt2.setTypeface(ttf2, 0);
         roundCorner(btn_login, dip(20), Color.parseColor("#fcc2ff"));
         roundCornerWithOutline(btn_register, dip(20), Color.WHITE, Color.parseColor("#c9d0ff"));
-        roundCorner(btn_discord, dip(10), Color.parseColor("#3b396e"));
+        roundCorner(btn_discord, dip(15), Color.parseColor("#3b396e"));
+        roundTopCorner(land_base, dip(12));
+        btn_login.setElevation(3f);
+        btn_register.setElevation(3f);
+        btn_discord.setElevation(3f);
     }
 
     private void roundCorner(View a, float b, int c) {
@@ -85,6 +96,17 @@ public class LandingActivity extends AppCompatActivity {
         e.setCornerRadius(b);
         e.setStroke(dip(2), d);
         a.setBackground(e);
+    }
+
+    private void roundTopCorner(View a, float b) {
+        GradientDrawable c = new GradientDrawable();
+        c.setColor(Color.WHITE);
+        c.setCornerRadii(new float[]{b, b, b, b, 0f, 0f, 0f, 0f});
+        a.setBackground(c);
+    }
+
+    private int dip(int a) {
+        return (int) (a * getApplicationContext().getResources().getDisplayMetrics().density);
     }
 
 }
