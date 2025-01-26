@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         openActivity(PermissionsActivity.class);
                     }
                 } else {
-                    openActivity(LoginActivity.class);
+                    openActivity(LandingActivity.class);
                 }
             } else {
                 openActivity(UpdateAppActivity.class);
