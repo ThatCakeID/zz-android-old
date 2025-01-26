@@ -12,6 +12,7 @@
         android:orientation="horizontal">
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/zzt1"
+            android:fontFamily="@font/googlesans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zryte"
@@ -23,6 +24,7 @@
             android:shadowRadius="4"/>
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/zzt2"
+            android:fontFamily="@font/googlesansbold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zene"
@@ -43,6 +45,7 @@
         android:paddingBottom="5dp">
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/wlctext"
+            android:fontFamily="@font/googlesans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="30dp"

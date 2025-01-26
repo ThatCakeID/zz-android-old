@@ -14,24 +14,35 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/zzt1"
+                android:fontFamily="@font/googlesans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Zryte"
                 android:textColor="#808080"
-                android:textSize="35sp"/>
-            <TextView
+                android:textSize="35sp"
+                android:shadowColor="#fcc2ff"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"/>
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/zzt2"
+                android:fontFamily="@font/googlesansbold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Zene"
                 android:textColor="#808080"
                 android:textSize="35sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:shadowColor="#c9d0ff"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"/>
         </LinearLayout>
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/zzt3"
+                android:fontFamily="@font/googlesans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -48,7 +59,8 @@
         android:gravity="center_horizontal"
         android:padding="20dp"
         android:orientation="vertical">
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
+            android:fontFamily="@font/googlesans"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="WELCOME!"
@@ -56,7 +68,8 @@
 			android:textStyle="bold"
 			android:textColor="#000000"
 			android:layout_marginTop="20dp"/>
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
+            android:fontFamily="@font/googlesans"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:paddingLeft="20dp"
@@ -67,34 +80,37 @@
 			android:text="Please log into your account to continue"
 			android:textSize="12sp"
 			android:textColor="#757575"/>
-		<TextView
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btn_login"
+            android:fontFamily="@font/googlesansbold"
 			android:layout_width="match_parent"
-			android:layout_height="50dp"
+			android:layout_height="40dp"
 			android:layout_marginLeft="20dp"
 			android:layout_marginTop="20dp"
 			android:layout_marginRight="20dp"
 			android:layout_marginBottom="10dp"
-			android:background="#00BCD4"
-			android:gravity="center_horizontal|center_vertical"
+			android:background="@drawable/login_shadow"
+            android:elevation="4dp"
 			android:text="LOGIN"
-			android:textSize="20sp"
-			android:textStyle="bold"
-			android:textColor="#FFFFFF"/>
-		<TextView
+			android:textSize="17sp"
+			android:textColor="#FFFFFF"
+            app:cornerRadius="20dp"/>
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btn_register"
+            android:fontFamily="@font/googlesansbold"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_marginLeft="20dp"
 			android:layout_marginTop="10dp"
 			android:layout_marginRight="20dp"
 			android:layout_marginBottom="20dp"
-			android:gravity="center_horizontal|center_vertical"
+            android:elevation="4dp"
 			android:text="REGISTER"
 			android:textSize="20sp"
 			android:textStyle="bold"
 			android:textColor="#c9d0ff"/>
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
+            android:fontFamily="@font/googlesans"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="20dp"
@@ -102,42 +118,36 @@
 			android:text="Having problem with your account\? ask anything on our Discord server!"
 			android:textSize="12sp"
 			android:textColor="#757575"/>
-		<LinearLayout
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btn_discord"
+            android:fontFamily="@font/googlesansbold"
 			android:layout_width="match_parent"
 			android:layout_height="30dp"
 			android:layout_marginLeft="20dp"
 			android:layout_marginTop="10dp"
 			android:layout_marginRight="20dp"
 			android:layout_marginBottom="10dp"
-			android:background="#283593"
-			android:gravity="center_horizontal|center_vertical"
-			android:orientation="horizontal">
-			<ImageView
-				android:layout_width="20dp"
-				android:layout_height="20dp"
-				android:layout_marginRight="10dp"
-				android:src="@drawable/discord"
-				android:scaleType="fitCenter"/>
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="JOIN DISCORD SERVER"
-				android:textSize="12sp"
-				android:textColor="#FFFFFF"/>
+			android:background="@drawable/discord_shadow"
+			android:text="JOIN DISCORD SERVER"
+			android:textSize="12sp"
+			android:textColor="#FFFFFF"
+            app:icon="@drawable/discord"
+            app:iconSize="18dp"
+            app:iconGravity="start"/>
 		</LinearLayout>
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_weight="1"/>
-		<TextView
+		<com.google.android.material.textview.MaterialTextView
+            android:fontFamily="@font/googlesans"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:padding="1dp"
 			android:text="Made with ♥️ by ThatCakeID Team"
-			android:textSize="10sp"
-			android:textColor="#000000"/>
+			android:textSize="9sp"
+			android:textColor="#808080"/>
     </LinearLayout>
 
 </RelativeLayout>
