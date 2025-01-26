@@ -99,16 +99,18 @@
 			android:id="@+id/btn_register"
             android:fontFamily="@font/googlesansbold"
 			android:layout_width="match_parent"
-			android:layout_height="50dp"
+			android:layout_height="40dp"
 			android:layout_marginLeft="20dp"
 			android:layout_marginTop="10dp"
 			android:layout_marginRight="20dp"
 			android:layout_marginBottom="20dp"
+            android:background="@drawable/register_shadow"
             android:elevation="4dp"
 			android:text="REGISTER"
 			android:textSize="20sp"
 			android:textStyle="bold"
-			android:textColor="#c9d0ff"/>
+			android:textColor="#c9d0ff"
+            app:cornerRadius="20dp"/>
 		<com.google.android.material.textview.MaterialTextView
             android:fontFamily="@font/googlesans"
 			android:layout_width="match_parent"
@@ -133,7 +135,8 @@
 			android:textColor="#FFFFFF"
             app:icon="@drawable/discord"
             app:iconSize="18dp"
-            app:iconGravity="start"/>
+            app:iconGravity="start"
+            app:cornerRadius="15dp"/>
 		</LinearLayout>
 		<LinearLayout
 			android:layout_width="wrap_content"

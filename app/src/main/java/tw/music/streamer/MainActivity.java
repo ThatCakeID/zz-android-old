@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private MaterialTextView welcome_text;
     private LinearLayout screen;
-    private Typeface ttf1, ttf2;
     private boolean nr;
 
     @Override
