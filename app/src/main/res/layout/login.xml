@@ -12,8 +12,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher"
-        android:layout_marginBottom="32dp"/>
+        android:src="@drawable/music"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,24 +29,32 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email">
+        android:hint="Email"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#fcc2ff">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textCursorDrawable="@color/primaryColor"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#fcc2ff">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textCursorDrawable="@color/primaryColor"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -53,9 +62,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
+        android:textColor="#c9d0ff"
         android:layout_marginTop="24dp"
-        app:cornerRadius="12dp"
-        app:backgroundTint="@color/primaryColor"/>
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="4dp"
+        app:cornerRadius="3dp"
+        app:backgroundTint="#ffffff"
+        app:strokeColor="#c9d0ff"
+        app:strokeWidth="2dp"/>
 
     <TextView
         android:id="@+id/tvSignUpPrompt"
