@@ -1,11 +1,16 @@
 package tw.music.streamer.loader;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.ImageView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.BitmapShader;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,6 +101,46 @@ public class ZryteZeneImageLoader {
         });
     }
 
+    public void loadWithCircularOutput(String url, ImageView imageView) {
+        imageView.setTag(url);
+        Bitmap cachedBitmap = memoryCache.get(String.valueOf("circular-" + url.hashCode()));
+        if (cachedBitmap != null) {
+            imageView.setImageBitmap(cachedBitmap);
+            return;
+        }
+        executorService.execute(() -> {
+            Bitmap bitmap = loadFromDiskCache(String.valueOf("circular-" + url.hashCode()));
+            if (bitmap == null) {
+                bitmap = createCircularBitmap(loadFromNetwork(url));
+                if (bitmap != null) saveToDiskCache("circular-" + url, bitmap);
+            }
+            final Bitmap resultBitmap = bitmap;
+            mainHandler.post(() -> {
+                if (imageView.getTag().equals(url) && resultBitmap != null) imageView.setImageBitmap(resultBitmap);
+            });
+        });
+    }
+
+    public void loadWithRoundOutput(String url, ImageView imageView, float round) {
+        imageView.setTag(url);
+        Bitmap cachedBitmap = createRoundedCornerBitmap(memoryCache.get(String.valueOf(url.hashCode())));
+        if (cachedBitmap != null) {
+            imageView.setImageBitmap(cachedBitmap);
+            return;
+        }
+        executorService.execute(() -> {
+            Bitmap bitmap = loadFromDiskCache(String.valueOf(url.hashCode()));
+            if (bitmap == null) {
+                bitmap = loadFromNetwork(url);
+                if (bitmap != null) saveToDiskCache(url, bitmap);
+            }
+            final Bitmap resultBitmap = createRoundedCornerBitmap(bitmap);
+            mainHandler.post(() -> {
+                if (imageView.getTag().equals(url) && resultBitmap != null) imageView.setImageBitmap(resultBitmap);
+            });
+        });
+    }
+
     private Bitmap loadFromNetwork(String urlString) {
         try {
             URL url = new URL(urlString);
@@ -168,4 +213,32 @@ public class ZryteZeneImageLoader {
             }
         }
     }
+
+    private Bitmap createCircularBitmap(Bitmap bitmap) {
+        if (bitmap == null) return null;
+        int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        float radius = size / 2f;
+        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        paint.setShader(shader);
+        canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, radius, paint);
+        if (!bitmap.isRecycled()) bitmap.recycle();
+        return output;
+    }
+
+    private Bitmap createRoundedCornerBitmap(Bitmap bitmap, float cornerRadius) {
+        if (bitmap == null) return null;
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        paint.setShader(shader);
+        RectF rect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
+        if (!bitmap.isRecycled()) bitmap.recycle();
+        return output;
+    }
+
 }
