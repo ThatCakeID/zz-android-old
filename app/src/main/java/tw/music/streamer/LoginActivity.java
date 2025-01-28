@@ -65,9 +65,9 @@ public class LoginActivity extends AppCompatActivity {
             zzPassword.setError("Password is required.");
             return;
         }
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(getApplicationContext(), task -> {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, task -> {
             if (task.isSuccessful()) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser user = auth.getCurrentUser();
                 Intent intent = new Intent(getApplicationContext(), StreamingActivity.class);
                 startActivity(intent);
                 finish();
