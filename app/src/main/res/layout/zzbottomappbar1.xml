@@ -3,7 +3,6 @@
 	android:id="@+id/sb_bottom_menu_bar"
     android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-    android:minHeight="80dp"
 	android:paddingTop="20dp"
 	android:background="#4D000000"
 	android:orientation="vertical">
