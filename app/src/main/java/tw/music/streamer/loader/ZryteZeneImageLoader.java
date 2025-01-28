@@ -121,7 +121,7 @@ public class ZryteZeneImageLoader {
         });
     }
 
-    public void loadWithRoundOutput(String url, ImageView imageView, float round) {
+    public void loadWithRoundOutput(String url, ImageView imageView, final float round) {
         imageView.setTag(url);
         Bitmap cachedBitmap = createRoundedCornerBitmap(memoryCache.get(String.valueOf(url.hashCode())));
         if (cachedBitmap != null) {
@@ -134,7 +134,7 @@ public class ZryteZeneImageLoader {
                 bitmap = loadFromNetwork(url);
                 if (bitmap != null) saveToDiskCache(url, bitmap);
             }
-            final Bitmap resultBitmap = createRoundedCornerBitmap(bitmap);
+            final Bitmap resultBitmap = createRoundedCornerBitmap(bitmap, round);
             mainHandler.post(() -> {
                 if (imageView.getTag().equals(url) && resultBitmap != null) imageView.setImageBitmap(resultBitmap);
             });
