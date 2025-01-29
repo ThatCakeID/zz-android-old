@@ -81,12 +81,12 @@ public class StreamingActivity extends AppCompatActivity {
         zz_songs2 = new ArrayList<>();
         zz_click1 = new ZZOnClickListener() {
             public void onItemClicked(int a) {
-                playFromZZSongs(a);
+                playFromZZSongs(zz_songs.get(a));
             }
         };
         zz_click2 = new ZZOnClickListener() {
             public void onItemClicked(int a) {
-                playFromZZRandomSongs(a);
+                playFromZZSongs(zz_songs2.get(a));
             }
         };
         ra_songs = new ZZRandomSongAdapter(zz_songs2, zz_click2);
@@ -297,26 +297,15 @@ public class StreamingActivity extends AppCompatActivity {
         zz.requestAction("request-media");
     }
 
-    private void playFromZZSongs(int a) {
-        mp_artist.setText(zz_songs.get(a).song_artist);
-        mp_title.setText(zz_songs.get(a).song_name);
+    private void playFromZZSongs(ZZSong a) {
+        mp_artist.setText(a.song_artist);
+        mp_title.setText(a.song_name);
         mp_play.setImageResource(R.drawable.ic_pause_white);
-        ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(zz_songs.get(a).url_icon, mp_icon, dip(4));
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(a.url_icon, mp_icon, dip(4));
         mp_base.setVisibility(View.VISIBLE);
-        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_cover, bg_drop);
-        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
-        zz.play(zz_songs.get(a));
-    }
-
-    private void playFromZZRandomSongs(int a) {
-        mp_artist.setText(zz_songs2.get(a).song_artist);
-        mp_title.setText(zz_songs2.get(a).song_name);
-        mp_play.setImageResource(R.drawable.ic_pause_white);
-        ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(zz_songs2.get(a).url_icon, mp_icon, dip(4));
-        mp_base.setVisibility(View.VISIBLE);
-        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs2.get(a).url_cover, bg_drop);
-        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs2.get(a).color1)));
-        zz.play(zz_songs2.get(a));
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(a.url_cover, bg_drop);
+        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(a.color1)));
+        zz.play(a);
     }
 
     private void loadSongFromKey(String a) {
