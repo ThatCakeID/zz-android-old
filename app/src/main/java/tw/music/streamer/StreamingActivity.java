@@ -41,7 +41,7 @@ import tw.music.streamer.loader.ZryteZeneImageLoader;
 public class StreamingActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private DatabaseReference db_song, db_drsong;
+    private DatabaseReference db_song, db_drsong, me_db;
     private StorageReference fs_music;
     private BroadcastReceiver zzreceiver;
 
@@ -99,6 +99,7 @@ public class StreamingActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db_song = FirebaseDatabase.getInstance().getReference("zrytezene/songs");
         db_drsong = FirebaseDatabase.getInstance().getReference("zrytezene/daily-random-songs");
+        me_db = FirebaseDatabase.getInstance().getReference("profile/text/" + auth.getCurrentUser().getUid());
     }
 
     private void initFirebaseListener(final Context z) {
@@ -248,6 +249,8 @@ public class StreamingActivity extends AppCompatActivity {
                             zz.setDuration(intent.getIntExtra("data",0)/1000);
                             mp_bar.setProgress(0);
                             mp_bar.setMax(zz.getDuration());
+                            zz.setKey(intent.getStringExtra("key"));
+                            updateLastSongPlayed();
                         } else if (m.equals("on-reqmedia")) {
                             int b = intent.getIntExtra("status",0);
                             if (b > 0) {
@@ -323,6 +326,10 @@ public class StreamingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void updateLastSongPlayed() {
+        me_db.child("last-song-key").setValue(zz.getKey());
     }
 
     private void openMenuBar(int a, boolean b) {
