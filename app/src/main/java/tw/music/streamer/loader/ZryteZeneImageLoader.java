@@ -123,7 +123,7 @@ public class ZryteZeneImageLoader {
 
     public void loadWithRoundOutput(String url, ImageView imageView, final float round) {
         imageView.setTag(url);
-        Bitmap cachedBitmap = createRoundedCornerBitmap(memoryCache.get(String.valueOf(url.hashCode())));
+        Bitmap cachedBitmap = createRoundedCornerBitmap(memoryCache.get(String.valueOf(url.hashCode())), round);
         if (cachedBitmap != null) {
             imageView.setImageBitmap(cachedBitmap);
             return;
