@@ -13,7 +13,7 @@ public class ZryteZeneAdaptor {
     private int cd, bu, d;
     private ArrayList<String> e;
     private Context ctx;
-    private String sp, n;
+    private String sp, n, sk;
 
     public ZryteZeneAdaptor(Context a) {
         isr = false;
@@ -72,6 +72,14 @@ public class ZryteZeneAdaptor {
 
     public int getBufferingUpdate() {
         return bu;
+    }
+
+    public void setKey(String a) {
+        sk = a;
+    }
+
+    public String getKey() {
+        return sk;
     }
 
     public void clear() {
