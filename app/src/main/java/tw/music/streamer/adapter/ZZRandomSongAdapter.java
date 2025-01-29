@@ -37,6 +37,12 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
         h.title.setText(data.get(p).song_name);
         h.line.setBackgroundColor(Color.parseColor(data.get(p).color1));
         ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
+        h.cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View a) {
+                callListener(p);
+            }
+        });
     }
 
     @Override
@@ -54,6 +60,12 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
             title = i.findViewById(R.id.sli2_title);
             cover = i.findViewById(R.id.sli2_cover);
             line = i.findViewById(R.id.sli2_bottom_line);
+        }
+    }
+
+    public void callListener(int a) {
+        if (listener!=null) {
+            listener.onItemClicked(a);
         }
     }
 }
