@@ -20,9 +20,11 @@ import tw.music.streamer.loader.ZryteZeneImageLoader;
 public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapter.ZZViewHolder> {
 
     private ArrayList<ZZSong> data;
+    private ZZOnClickListener listener;
 
-    public ZZRandomSongAdapter(ArrayList<ZZSong> a) {
+    public ZZRandomSongAdapter(ArrayList<ZZSong> a, ZZOnClickListener b) {
         data = a;
+        listener = b;
     }
 
     @NonNull
