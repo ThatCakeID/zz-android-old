@@ -58,7 +58,7 @@ public class StreamingActivity extends AppCompatActivity {
     private ZryteZeneAdaptor zz;
     private ZZRandomSongAdapter ra_songs;
     private ZZSongAdapter ar_songs;
-    private ZZOnClickListener zz_click1;
+    private ZZOnClickListener zz_click1, zz_click2;
 
     private int openMenu = 0;
 
@@ -84,7 +84,12 @@ public class StreamingActivity extends AppCompatActivity {
                 playFromZZSongs(a);
             }
         };
-        ra_songs = new ZZRandomSongAdapter(zz_songs2);
+        zz_click2 = new ZZOnClickListener() {
+            public void onItemClicked(int a) {
+                playFromZZRandomSongs(a);
+            }
+        };
+        ra_songs = new ZZRandomSongAdapter(zz_songs2, zz_click2);
         ar_songs = new ZZSongAdapter(zz_songs, zz_click1);
         lm1 = new LinearLayoutManager(a, LinearLayoutManager.HORIZONTAL, false);
         lm2 = new GridLayoutManager(a, 2);
@@ -301,6 +306,17 @@ public class StreamingActivity extends AppCompatActivity {
         ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs.get(a).url_cover, bg_drop);
         mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
         zz.play(zz_songs.get(a));
+    }
+
+    private void playFromZZRandomSongs(int a) {
+        mp_artist.setText(zz_songs2.get(a).song_artist);
+        mp_title.setText(zz_songs2.get(a).song_name);
+        mp_play.setImageResource(R.drawable.ic_pause_white);
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(zz_songs2.get(a).url_icon, mp_icon, dip(4));
+        mp_base.setVisibility(View.VISIBLE);
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(zz_songs2.get(a).url_cover, bg_drop);
+        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs2.get(a).color1)));
+        zz.play(zz_songs2.get(a));
     }
 
     private void loadSongFromKey(String a) {
