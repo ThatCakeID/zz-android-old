@@ -20,6 +20,8 @@
         		android:layout_width="match_parent"
 				android:layout_height="35dp"
 				android:orientation="horizontal"
+				android:layout_marginTop="12dp"
+				android:layout_marginBottom="8dp"
         		android:gravity="left|center_horizontal">
 				<TextView
 					android:id="@+id/profile_name"
@@ -31,8 +33,7 @@
 					android:textSize="12sp"
 					android:textStyle="bold"
 					android:textColor="#BDBDBD"
-					android:singleLine="true"
-					android:layout_marginBottom="8dp"/>
+					android:singleLine="true"/>
 				<ImageView
             		android:id="@+id/search"
             		android:layout_width="35dp"
