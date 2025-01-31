@@ -35,7 +35,7 @@ public class ZZChatAdapter extends RecyclerView.Adapter<ZZChatAdapter.ZZViewHold
         h.name.setText(data.get(p).name);
         h.signature.setText(data.get(p).timestamp + " - listening to " + data.get(p).last_song);
         h.msg.setText(data.get(p).message);
-        ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).photo, h.pp);
+        ZryteZeneImageLoader.getInstance(h.name.getContext()).load(data.get(p).photo, h.pp);
     }
 
     @Override
