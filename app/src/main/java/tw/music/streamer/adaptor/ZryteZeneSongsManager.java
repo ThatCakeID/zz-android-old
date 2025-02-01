@@ -53,6 +53,7 @@ public class ZryteZeneSongsManager {
                 storageRef.getFile(tempFile).addOnSuccessListener(taskSnapshot -> {
                     try {
                         InputStream input = context.getContentResolver().openInputStream(android.net.Uri.fromFile(tempFile));
+                        if (songFile.exists()) songFile.delete();
                         FileOutputStream output = new FileOutputStream(songFile);
                         byte[] buffer = new byte[4096];
                         int length;
