@@ -10,6 +10,7 @@ public class PermissionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle a) {
         super.onCreate(a);
+        setContentView(R.layout.zzprofile);
     }
 
 }
