@@ -12,7 +12,7 @@
         android:id="@+id/profile_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_profile_placeholder"
+        android:src="@drawable/ic_launcher"
         android:contentDescription="Profile Photo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         android:text="Last Played: Shape of You"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:drawableStart="@drawable/ic_music_note"
+        android:drawableStart="@drawable/ic_album_white"
         android:drawablePadding="8dp"
         app:layout_constraintTop_toBottomOf="@id/total_music_uploaded"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +120,7 @@
                 android:text="About"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:drawableStart="@drawable/ic_info"
+                android:drawableStart="@drawable/ic_navigate_next"
                 android:drawablePadding="8dp"/>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
