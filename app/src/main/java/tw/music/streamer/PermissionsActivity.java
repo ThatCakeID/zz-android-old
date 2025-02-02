@@ -22,8 +22,8 @@ public class PermissionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.permissions);
-        permission1TextView = findViewById(R.id.pm1text);
-        permission2TextView = findViewById(R.id.pm2text);
+        pm1 = findViewById(R.id.pm1text);
+        pm2 = findViewById(R.id.pm2text);
         checkPermissions();
         requestPermissionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
