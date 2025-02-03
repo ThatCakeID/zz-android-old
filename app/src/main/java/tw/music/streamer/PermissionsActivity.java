@@ -1,6 +1,7 @@
 package tw.music.streamer;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Build;
@@ -29,14 +30,32 @@ public class PermissionsActivity extends AppCompatActivity {
         requestPermissionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestPermissions();
+                if (checkPerm1() && checkPerm2()) {
+                    Intent intent = new Intent(getApplicationContext(), StreamingActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    requestPermissions();
+                }
             }
         });
     }
 
     private void checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) pm1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK) == PackageManager.PERMISSION_GRANTED) pm2.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+        if (checkPerm1()) pm1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+        if (checkPerm2()) pm2.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+    }
+
+    private boolean checkPerm1() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean checkPerm2() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            return ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return true;
+        }
     }
 
     private void requestPermissions() {
