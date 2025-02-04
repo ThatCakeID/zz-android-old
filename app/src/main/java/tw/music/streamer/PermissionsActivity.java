@@ -18,7 +18,7 @@ public class PermissionsActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 100;
     private TextView pm1, pm2;
-    private MaterialButton requestPermissionsButton;
+    private MaterialButton rqpb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,9 @@ public class PermissionsActivity extends AppCompatActivity {
         setContentView(R.layout.permissions);
         pm1 = findViewById(R.id.pm1text);
         pm2 = findViewById(R.id.pm2text);
+        rqpb = findViewById(R.id.pmbutton);
         checkPermissions();
-        requestPermissionsButton.setOnClickListener(new View.OnClickListener() {
+        rqpb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkPerm1() && checkPerm2()) {
