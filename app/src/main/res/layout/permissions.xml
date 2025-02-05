@@ -25,7 +25,7 @@
         android:backgroundTint="#757575"
         app:cardCornerRadius="20dp"
         app:strokeColor="@color/white"
-        app:strokeWidth="2dp">
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
