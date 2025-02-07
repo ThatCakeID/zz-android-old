@@ -19,6 +19,7 @@
 			<LinearLayout
         		android:layout_width="match_parent"
 				android:layout_height="35dp"
+				android:layout_marginTop="20dp"
 				android:orientation="horizontal"
         		android:gravity="left|center_vertical">
 				<TextView
