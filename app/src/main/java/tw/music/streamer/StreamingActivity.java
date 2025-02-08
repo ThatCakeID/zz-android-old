@@ -300,6 +300,11 @@ public class StreamingActivity extends AppCompatActivity {
         zz.requestAction("request-media");
     }
 
+    private void saveSongsMetadata() {
+        Gson temp = new Gson();
+        zz.requestAction("load-songs");
+    }
+
     private void playFromZZSongs(ZZSong a) {
         mp_artist.setText(a.song_artist);
         mp_title.setText(a.song_name);
