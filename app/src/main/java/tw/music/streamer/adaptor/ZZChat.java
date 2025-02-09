@@ -5,6 +5,7 @@ import com.google.firebase.database.DataSnapshot;
 public class ZZChat {
 
     public String key, name, message, last_song, timestamp, photo;
+    public int time;
 
     public ZZChat(DataSnapshot a) {
         key = a.getKey();
