@@ -42,6 +42,12 @@ public class PermissionsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+	public void onStart() {
+		super.onStart();
+		checkPermissions();
+	}
+
     private void checkPermissions() {
         if (checkPerm1()) pm1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
         if (checkPerm2()) pm2.setTextColor(getResources().getColor(android.R.color.holo_green_light));
