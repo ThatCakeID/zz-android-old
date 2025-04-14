@@ -301,7 +301,7 @@ public class StreamingActivity extends AppCompatActivity {
     }
 
     private void saveSongsMetadata() {
-        Gson temp = new Gson();
+        //Gson temp = new Gson();
         zz.requestAction("load-songs");
     }
 
