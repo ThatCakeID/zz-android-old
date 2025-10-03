@@ -21,11 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -41,11 +36,12 @@ import tw.music.streamer.adapter.ZZSongAdapter;
 import tw.music.streamer.adapter.ZZOnClickListener;
 import tw.music.streamer.adapter.ZZRandomSongAdapter;
 import tw.music.streamer.service.ZryteZenePlay;
+import tw.music.streamer.loader.ZryteZeneImageLoader;
 
 public class StreamingActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private DatabaseReference db_song, db_drsong;
+    private DatabaseReference db_song, db_drsong, me_db;
     private StorageReference fs_music;
     private BroadcastReceiver zzreceiver;
 
@@ -62,7 +58,7 @@ public class StreamingActivity extends AppCompatActivity {
     private ZryteZeneAdaptor zz;
     private ZZRandomSongAdapter ra_songs;
     private ZZSongAdapter ar_songs;
-    private ZZOnClickListener zz_click1;
+    private ZZOnClickListener zz_click1, zz_click2;
 
     private int openMenu = 0;
 
@@ -80,14 +76,20 @@ public class StreamingActivity extends AppCompatActivity {
     }
 
     private void initVariables(Context a) {
+        ZryteZeneImageLoader.getInstance(a);
         zz_songs = new ArrayList<>();
         zz_songs2 = new ArrayList<>();
         zz_click1 = new ZZOnClickListener() {
             public void onItemClicked(int a) {
-                playFromZZSongs(a);
+                playFromZZSongs(zz_songs.get(a));
             }
         };
-        ra_songs = new ZZRandomSongAdapter(zz_songs2);
+        zz_click2 = new ZZOnClickListener() {
+            public void onItemClicked(int a) {
+                playFromZZSongs(zz_songs2.get(a));
+            }
+        };
+        ra_songs = new ZZRandomSongAdapter(zz_songs2, zz_click2);
         ar_songs = new ZZSongAdapter(zz_songs, zz_click1);
         lm1 = new LinearLayoutManager(a, LinearLayoutManager.HORIZONTAL, false);
         lm2 = new GridLayoutManager(a, 2);
@@ -97,6 +99,7 @@ public class StreamingActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db_song = FirebaseDatabase.getInstance().getReference("zrytezene/songs");
         db_drsong = FirebaseDatabase.getInstance().getReference("zrytezene/daily-random-songs");
+        me_db = FirebaseDatabase.getInstance().getReference("profile/text/" + auth.getCurrentUser().getUid());
     }
 
     private void initFirebaseListener(final Context z) {
@@ -108,11 +111,7 @@ public class StreamingActivity extends AppCompatActivity {
                         zz_songs.add(new ZZSong(c));
                     }
                     ar_songs.notifyDataSetChanged();
-                } else {
-                    // songs empty
                 }
-            } else {
-                // error: task.getException().getMessage()
             }
         });
 
@@ -132,7 +131,7 @@ public class StreamingActivity extends AppCompatActivity {
             if (a.isSuccessful()) {
                 DataSnapshot b = a.getResult();
                 if (b.exists() && b.hasChild("url")) {
-                    Glide.with(z).load(b.child("url").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).apply(RequestOptions.circleCropTransform()).into(user_icon);
+                    ZryteZeneImageLoader.getInstance(z).loadWithCircularOutput(b.child("url").getValue(String.class),user_icon);
                 }
             }
         });
@@ -250,6 +249,8 @@ public class StreamingActivity extends AppCompatActivity {
                             zz.setDuration(intent.getIntExtra("data",0)/1000);
                             mp_bar.setProgress(0);
                             mp_bar.setMax(zz.getDuration());
+                            zz.setKey(intent.getStringExtra("key"));
+                            updateLastSongPlayed();
                         } else if (m.equals("on-reqmedia")) {
                             int b = intent.getIntExtra("status",0);
                             if (b > 0) {
@@ -299,15 +300,20 @@ public class StreamingActivity extends AppCompatActivity {
         zz.requestAction("request-media");
     }
 
-    private void playFromZZSongs(int a) {
-        mp_artist.setText(zz_songs.get(a).song_artist);
-        mp_title.setText(zz_songs.get(a).song_name);
+    private void saveSongsMetadata() {
+        //Gson temp = new Gson();
+        zz.requestAction("load-songs");
+    }
+
+    private void playFromZZSongs(ZZSong a) {
+        mp_artist.setText(a.song_artist);
+        mp_title.setText(a.song_name);
         mp_play.setImageResource(R.drawable.ic_pause_white);
-        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_icon).diskCacheStrategy(DiskCacheStrategy.ALL).transform(new RoundedCorners(dip(5))).into(mp_icon);
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(a.url_icon, mp_icon, dip(4));
         mp_base.setVisibility(View.VISIBLE);
-        Glide.with(getApplicationContext()).load(zz_songs.get(a).url_cover).diskCacheStrategy(DiskCacheStrategy.ALL).into(bg_drop);
-        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(zz_songs.get(a).color1)));
-        zz.play(zz_songs.get(a));
+        ZryteZeneImageLoader.getInstance(getApplicationContext()).load(a.url_cover, bg_drop);
+        mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(a.color1)));
+        zz.play(a);
     }
 
     private void loadSongFromKey(String a) {
@@ -318,13 +324,17 @@ public class StreamingActivity extends AppCompatActivity {
                     bg_drop.setVisibility(View.VISIBLE);
                     mp_artist.setText(c.child("artist").getValue(String.class));
                     mp_title.setText(c.child("title").getValue(String.class));
-                    Glide.with(getApplicationContext()).load(c.child("icon").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).transform(new RoundedCorners(dip(5))).into(mp_icon);
+                    ZryteZeneImageLoader.getInstance(getApplicationContext()).loadWithRoundOutput(c.child("icon").getValue(String.class), mp_icon, dip(4));
                     mp_base.setVisibility(View.VISIBLE);
-                    Glide.with(getApplicationContext()).load(c.child("cover").getValue(String.class)).diskCacheStrategy(DiskCacheStrategy.ALL).into(bg_drop);
+                    ZryteZeneImageLoader.getInstance(getApplicationContext()).load(c.child("cover").getValue(String.class), bg_drop);
                     mp_bar.setProgressTintList(ColorStateList.valueOf(Color.parseColor(c.child("color-bline").getValue(String.class))));
                 }
             }
         });
+    }
+
+    private void updateLastSongPlayed() {
+        me_db.child("last-song-key").setValue(zz.getKey());
     }
 
     private void openMenuBar(int a, boolean b) {

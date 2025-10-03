@@ -268,6 +268,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		ita = new Intent(ACTION_UPDATE);
 		ita.putExtra("update", a);
 		ita.putExtra("data", b);
+		ita.putExtra("key", sk);
 		sendBroadcast(ita);
 	}
 	

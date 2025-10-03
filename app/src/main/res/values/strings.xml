@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name" translatable="false">ZryteZene</string>
+    <string name="bottomsheet_drag_handle_clicked">Bottom sheet handle clicked</string>
 </resources>

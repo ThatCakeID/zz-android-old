@@ -43,23 +43,16 @@ repositories {
 
 dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.5.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.media:media:1.7.0")
-    implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
+    implementation("androidx.media:media:1.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation("com.google.firebase:firebase-auth:22.1.1")
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.android.gms:play-services-tasks:18.0.2")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.google.android.material:material:1.13.0-alpha10")
     implementation("com.android.support:support-media-compat:28.0.0")
-
 }
 
 apply(plugin = "com.google.gms.google-services")

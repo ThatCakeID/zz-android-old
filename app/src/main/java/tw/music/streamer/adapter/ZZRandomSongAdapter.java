@@ -15,15 +15,16 @@ import java.util.ArrayList;
 import tw.music.streamer.R;
 import tw.music.streamer.adaptor.ZZSong;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import tw.music.streamer.loader.ZryteZeneImageLoader;
 
 public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapter.ZZViewHolder> {
 
     private ArrayList<ZZSong> data;
+    private ZZOnClickListener listener;
 
-    public ZZRandomSongAdapter(ArrayList<ZZSong> a) {
+    public ZZRandomSongAdapter(ArrayList<ZZSong> a, ZZOnClickListener b) {
         data = a;
+        listener = b;
     }
 
     @NonNull
@@ -37,7 +38,13 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
     public void onBindViewHolder(@NonNull ZZViewHolder h, int p) {
         h.title.setText(data.get(p).song_name);
         h.line.setBackgroundColor(Color.parseColor(data.get(p).color1));
-        Glide.with(h.title.getContext()).load(data.get(p).url_cover).diskCacheStrategy(DiskCacheStrategy.ALL).into(h.cover);
+        ZryteZeneImageLoader.getInstance(h.title.getContext()).load(data.get(p).url_cover, h.cover);
+        h.cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View a) {
+                callListener(p);
+            }
+        });
     }
 
     @Override
@@ -55,6 +62,12 @@ public class ZZRandomSongAdapter extends RecyclerView.Adapter<ZZRandomSongAdapte
             title = i.findViewById(R.id.sli2_title);
             cover = i.findViewById(R.id.sli2_cover);
             line = i.findViewById(R.id.sli2_bottom_line);
+        }
+    }
+
+    public void callListener(int a) {
+        if (listener!=null) {
+            listener.onItemClicked(a);
         }
     }
 }
